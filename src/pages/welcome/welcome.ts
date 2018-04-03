@@ -43,7 +43,9 @@ export class WelcomePage {
             position: 'bottom'
           });
           toast.present();
-  
+          
+          this.navCtrl.push('LoginPage');
+          
          }).catch((error) => {
            console.log('Error getting location', error);
          });
