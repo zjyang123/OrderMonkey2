@@ -1,0 +1,15 @@
+<ion-content scroll="false">
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <div class="splash-intro">
+      {{ 'ORDER_MONKEY_WELCOME_INTRO' | translate }}
+    </div>
+    <div style="padding: 20px;">
+      <button ion-button block (click)="barcodeScan()" class="login">{{ 'QRSCANNER' | translate }}</button>
+    </div>
+   <p style="color:white;">
+     Terms & Agreements
+   </p>
+  </div>
+</ion-content>
