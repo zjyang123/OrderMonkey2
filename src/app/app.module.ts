@@ -15,6 +15,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
+import { LoginModalPageModule } from '../pages/login-modal/login-modal.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -43,6 +44,7 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    LoginModalPageModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, ModalController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LoginModalPage } from '../login-modal/login-modal';
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -21,7 +22,8 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, 
               private barcodeScanner: BarcodeScanner,
               private geolocation: Geolocation,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              private modalCtrl: ModalController
   ) { }
 
   login() {
@@ -29,6 +31,10 @@ export class WelcomePage {
   }
 
   barcodeScan() {
+    //this.navCtrl.push('LoginPage');
+    let modal = this.modalCtrl.create(LoginModalPage);
+    modal.present();
+
     this.barcodeScanner.scan().then(barcodeData => {
       if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
         this.geolocation.getCurrentPosition().then((resp) => {
@@ -45,7 +51,7 @@ export class WelcomePage {
           toast.present();
           
           this.navCtrl.push('LoginPage');
-          
+
          }).catch((error) => {
            console.log('Error getting location', error);
          });
