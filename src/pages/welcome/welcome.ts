@@ -47,13 +47,6 @@ export class WelcomePage {
          }).catch((error) => {
            console.log('Error getting location', error);
          });
-      } else {
-          let toast = this.toastCtrl.create({
-            message: 'Cancelled',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
       }
      }).catch(err => {
       this.status = err;
