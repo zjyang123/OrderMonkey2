@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -22,8 +21,7 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, 
               private barcodeScanner: BarcodeScanner,
               private geolocation: Geolocation,
-              private toastCtrl: ToastController,
-              private splashScreen: SplashScreen
+              private toastCtrl: ToastController
   ) { }
 
   login() {
@@ -49,6 +47,13 @@ export class WelcomePage {
          }).catch((error) => {
            console.log('Error getting location', error);
          });
+      } else {
+          let toast = this.toastCtrl.create({
+            message: 'Cancelled',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
       }
      }).catch(err => {
       this.status = err;
