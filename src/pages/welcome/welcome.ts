@@ -32,9 +32,9 @@ export class WelcomePage {
   }
 
   barcodeScan() {
-    //this.navCtrl.push('LoginPage');
-    let modal = this.modalCtrl.create(LoginModalPage);
-    modal.present();
+    this.navCtrl.push('LoginPage');
+    // let modal = this.modalCtrl.create(LoginModalPage);
+    // modal.present();
 
     this.barcodeScanner.scan().then(barcodeData => {
       if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
@@ -50,8 +50,6 @@ export class WelcomePage {
             position: 'bottom'
           });
           toast.present();
-          
-          this.navCtrl.push('LoginPage');
 
          }).catch((error) => {
            console.log('Error getting location', error);

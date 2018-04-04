@@ -8,7 +8,14 @@
 
 
 <ion-content>
-  <form (submit)="doLogin()">
+    <ion-card>
+        <ion-card-header>Login</ion-card-header>
+        <ion-card-content>
+          <button ion-button color="primary" full (click)="goToMainPage()">Login</button><br/>
+          <button ion-button color="primary" full (click)="goToMainPage()">Skip for now</button>
+        </ion-card-content>
+      </ion-card>
+  <!-- <form (submit)="doLogin()">
     <ion-list>
 
       <ion-item>
@@ -16,14 +23,14 @@
         <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <!--
+      
       Want to use a Username instead of an Email? Here you go:
 
       <ion-item>
         <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
         <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
       </ion-item>
-      -->
+      
 
       <ion-item>
         <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
@@ -35,5 +42,5 @@
       </div>
 
     </ion-list>
-  </form>
+  </form> -->
 </ion-content>
