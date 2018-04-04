@@ -32,10 +32,6 @@ export class WelcomePage {
   }
 
   barcodeScan() {
-    this.navCtrl.push('LoginPage');
-    // let modal = this.modalCtrl.create(LoginModalPage);
-    // modal.present();
-
     this.barcodeScanner.scan().then(barcodeData => {
       if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
         this.geolocation.getCurrentPosition().then((resp) => {
