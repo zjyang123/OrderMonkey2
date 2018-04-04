@@ -44,4 +44,24 @@ page-welcome {
       background-color: rgb(220, 220, 220);
     }
   }
+
+  .scroll-content {
+    background: #1e1e1e;
+  }
+
+  ion-navbar .toolbar-background {
+      background: transparent;
+  }
+
+  ion-content .scroll-content {
+      margin-top:0px !important;
+  }
+
+  ion-title {
+    color:white;
+  }
+
+  .button-color { 
+    color: #1e1e1e
+  }
 }

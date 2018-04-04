@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, PopoverController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +25,7 @@ export class WelcomePage {
               private toastCtrl: ToastController,
               private splashScreen: SplashScreen
   ) { }
+
 
   login() {
     this.navCtrl.push('LoginPage');
