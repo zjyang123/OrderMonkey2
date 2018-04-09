@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, Platform } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 
@@ -31,7 +31,8 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public loginService: LoginService,
-    private storage: Storage
+    private storage: Storage,
+    public platform: Platform
   
   ) {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -60,9 +61,9 @@ export class LoginPage {
       this.storage.set('user_id', this.userID);
 
       if (this.userData != false) {
-        this.navCtrl.setRoot('WelcomePage'); 
+        this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
       } else {
-        console.log(this.responseData.test)
+        // console.log(this.responseData.test)
       }
     }, (err) => {
       this.responseData = err;
@@ -71,6 +72,6 @@ export class LoginPage {
   }
 
   welcomeScreen() {
-    this.navCtrl.setRoot('WelcomePage');    
+    this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
   }
 }

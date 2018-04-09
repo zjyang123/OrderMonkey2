@@ -37,22 +37,22 @@ export class WelcomePage {
   ) {
     this.storage.get('token').then((val) => {
       this.loginCheck.token = val;
-    });
-    this.storage.get('user_id').then((val) => {
-      this.loginCheck.user_id = val;
-    });
-    
-    this.loginService.authTokenCheck(this.loginCheck).then((result) => {
-      this.responseData = result;
-      this.isLoggedIn = this.responseData.token;
+      this.storage.get('user_id').then((val) => {
+        this.loginCheck.user_id = val;
+        this.loginService.authTokenCheck(this.loginCheck).then((result) => {
+          this.responseData = result;
+          this.isLoggedIn = this.responseData.loginCheck;
 
-      console.log(this.isLoggedIn)
-    }, (err) => {
-      this.responseData = err;
-      //write something for error conditions
-    });
 
-    
+          // this.storage.set('token', null);
+          // this.storage.set('user_id', null);
+          // this.isLoggedIn = false;
+        }, (err) => {
+          this.responseData = err;
+          //write something for error conditions
+        });
+      });
+    });  
   }
 
 
@@ -90,6 +90,10 @@ export class WelcomePage {
      }).catch(err => {
       this.status = err;
      });
+  }
+
+  test() {
+    this.navCtrl.push('LoginPage');
   }
 
 }

@@ -30,7 +30,6 @@ export class LoginService {
             this.http.post(this.authTokenCheckUrl, JSON.stringify(tokenCheck), { headers: headers })
                 .subscribe( res => {
                     resolve(res.json());
-                    console.log(tokenCheck)
                 }, (err) => {
                     reject(err);
                 });

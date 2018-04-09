@@ -67,6 +67,8 @@
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\"",
 
   "QRSCANNER": "Scan Table QR Code",
-  "ORDER_MONKEY_WELCOME_INTRO": "The next generation of food ordering from the tip of your fingers!"
+  "ORDER_MONKEY_WELCOME_INTRO": "The next generation of food ordering from the tip of your fingers!",
+
+  "ACCOUNT_LOGIN": "Account Login"
 
 }
