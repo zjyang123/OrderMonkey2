@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
 import { LoginService } from '../../app/service/login.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -21,18 +20,20 @@ export class LoginPage {
   loginForm: FormGroup;
 
   public responseData;
+  public userData;
+  public token;
+  public userID;
 
   // Our translated text strings
   public loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private storage: Storage
   
   ) {
-
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
@@ -44,31 +45,32 @@ export class LoginPage {
 
   }
 
-  // Attempt to login in through our User service
-  // doLogin() {
-  //   this.user.login(this.account).subscribe((resp) => {
-  //     this.navCtrl.push(MainPage);
-  //   }, (err) => {
-  //     this.navCtrl.push(MainPage);
-  //     // Unable to log in
-  //     let toast = this.toastCtrl.create({
-  //       message: this.loginErrorString,
-  //       duration: 3000,
-  //       position: 'top'
-  //     });
-  //     toast.present();
-  //   });
-  // }
-  public testReturn;
   login() {
-    this.type = 'loginService';
+    this.type = 'login';
+    this.credentials.username = this.loginForm.value.username;
+    this.credentials.password = this.loginForm.value.password;
+
     this.loginService.loginPost(this.credentials, this.type).then((result) => {
       this.responseData = result;
-      this.testReturn = this.responseData.msg;
+      this.userData = this.responseData.userData;
+      this.token = this.responseData.token;
+      this.userID = this.responseData.user_id;
 
+      this.storage.set('token', this.token);
+      this.storage.set('user_id', this.userID);
+
+      if (this.userData != false) {
+        this.navCtrl.setRoot('WelcomePage'); 
+      } else {
+        console.log(this.responseData.test)
+      }
     }, (err) => {
       this.responseData = err;
       //write something for error conditions
     });
+  }
+
+  welcomeScreen() {
+    this.navCtrl.setRoot('WelcomePage');    
   }
 }

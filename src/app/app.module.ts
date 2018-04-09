@@ -16,7 +16,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
-import { LoginModalPageModule } from '../pages/login-modal/login-modal.module';
 import { LoginService } from './service/login.service';
 
 // The translate loader needs to know where to load i18n files
@@ -46,7 +45,6 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
-    LoginModalPageModule,
     HttpClientModule,
     HttpModule,
     TranslateModule.forRoot({

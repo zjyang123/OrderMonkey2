@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, PopoverController, ModalController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
-import { LoginModalPage } from '../login-modal/login-modal';
+import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
+
+import { LoginService } from '../../app/service/login.service';
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -19,12 +21,39 @@ export class WelcomePage {
   public status;
   public geoCordLong;
   public geoCordLat;
+  public loginCheck = {
+    'user_id': '',
+    'token': ''
+  };
+  public responseData;
+  public isLoggedIn = false;
+
   constructor(public navCtrl: NavController, 
               private barcodeScanner: BarcodeScanner,
               private geolocation: Geolocation,
               private toastCtrl: ToastController,
-              private modalCtrl: ModalController
-  ) { }
+              public loginService: LoginService,
+              public storage: Storage
+  ) {
+    this.storage.get('token').then((val) => {
+      this.loginCheck.token = val;
+    });
+    this.storage.get('user_id').then((val) => {
+      this.loginCheck.user_id = val;
+    });
+    
+    this.loginService.authTokenCheck(this.loginCheck).then((result) => {
+      this.responseData = result;
+      this.isLoggedIn = this.responseData.token;
+
+      console.log(this.isLoggedIn)
+    }, (err) => {
+      this.responseData = err;
+      //write something for error conditions
+    });
+
+    
+  }
 
 
   login() {

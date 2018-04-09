@@ -46,6 +46,9 @@ export class MyApp {
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen) {
+    
+    
+    
     this.splashScreen.show();
     
     platform.ready().then(() => {

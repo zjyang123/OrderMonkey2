@@ -8,20 +8,19 @@
 
 
 <ion-content>
-    <ion-card>
-        <ion-card-header>Login</ion-card-header>
-        <ion-card-content>
-          <form [formGroup]="loginForm">
-            <ion-label color="primary">Username</ion-label>
-            <ion-input placeholder="Username" formControlName="username"></ion-input>
-            <ion-label color="primary">Password</ion-label>
-            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-          </form>
-            <p>---</p>
-          <button ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Login</button><br/>
-          <button ion-button color="primary" full (click)="goToMainPage()">Skip for now</button>
-        </ion-card-content>
-      </ion-card>
-
-      <p>{{ testReturn }}</p>
+  <ion-card>
+    <ion-card-header>Login</ion-card-header>
+    <ion-card-content>
+      <p class="helper-block" *ngIf="userData == false">Invalid Username and Password!</p>
+      <form [formGroup]="loginForm">
+        <ion-label color="primary">Username</ion-label>
+        <ion-input placeholder="Username" formControlName="username"></ion-input>
+        <ion-label color="primary">Password</ion-label>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Login</button>
+      </form>
+      <br/>
+      <button ion-button color="primary" full (click)="welcomeScreen()">Skip for now</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
