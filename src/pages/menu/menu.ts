@@ -18,14 +18,25 @@ export class MenuPage {
 
   rootPage: any = 'ContentPage';
 
-  pages: PageList;
+  menuList: PageList;
 
   constructor(public navCtrl: NavController) {
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Sign in', component: 'LoginPage' },
-      { title: 'Signup', component: 'SignupPage' }
+    this.menuList = [
+      { title: 'Logout', component: 'LogoutPage' },
+      { title: 'Tutorial', component: 'TutorialPage' },
+      { title: 'Welcome', component: 'WelcomePage' },
+      { title: 'Tabs', component: 'TabsPage' },
+      { title: 'Cards', component: 'CardsPage' },
+      { title: 'Content', component: 'ContentPage' },
+      { title: 'Login', component: 'LoginPage' },
+      { title: 'Signup', component: 'SignupPage' },
+      { title: 'Master Detail', component: 'ListMasterPage' },
+      { title: 'Menu', component: 'MenuPage' },
+      { title: 'Settings', component: 'SettingsPage' },
+      { title: 'Search', component: 'SearchPage' }
     ];
+
   }
 
   ionViewDidLoad() {
