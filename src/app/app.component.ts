@@ -17,7 +17,7 @@ type PageList = PageItem[]
   templateUrl: 'app.html'
 })
 export class MyApp {
-
+  @ViewChild(Nav) nav: Nav;
 
   menuList: PageList;
   rootPage = FirstRunPage;
