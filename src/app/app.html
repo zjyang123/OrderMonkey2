@@ -4,8 +4,8 @@
             <button menuClose ion-item *ngFor="let m of menuList" (click)="openPage(m)">
                 {{m.title}}
             </button>
-            <button menuClose ion-item (click)="test()">
-                HOHO
+            <button menuClose ion-item (click)="logout()">
+                {{ logoutButton.title }}
             </button>
         </ion-list>
     </ion-content>
