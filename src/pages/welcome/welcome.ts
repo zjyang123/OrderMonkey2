@@ -42,11 +42,6 @@ export class WelcomePage {
         this.loginService.authTokenCheck(this.loginCheck).then((result) => {
           this.responseData = result;
           this.isLoggedIn = this.responseData.loginCheck;
-
-
-          // this.storage.set('token', null);
-          // this.storage.set('user_id', null);
-          // this.isLoggedIn = false;
         }, (err) => {
           this.responseData = err;
           //write something for error conditions

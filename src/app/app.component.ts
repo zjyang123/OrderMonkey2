@@ -79,6 +79,6 @@ export class MyApp {
   }
 
   logout() {
-    this.nav.setRoot('LogoutPage', {}, { animate: true, direction: 'forward' });
+    this.nav.push('LogoutPage', {}, { animate: true, direction: 'forward' });
   }
 }
