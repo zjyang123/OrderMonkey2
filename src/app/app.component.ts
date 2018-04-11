@@ -8,7 +8,7 @@ import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
 
 interface PageItem {
-  title: string
+  title: string,
   component: any
 }
 type PageList = PageItem[]
@@ -79,6 +79,10 @@ export class MyApp {
   openPage(page: PageItem) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+<<<<<<< HEAD
     this.nav.setRoot(page.component,{},{animate: true, direction: 'forward'});
+=======
+    this.nav.setRoot(page.component, {}, { animate: true, direction: 'forward' });
+>>>>>>> fd7b02dbe566195daba0e23f5346c99972796958
   }
 }
