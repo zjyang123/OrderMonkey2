@@ -22,6 +22,7 @@ export class MyApp {
   menuList: PageList;
   logoutButton: any;
   rootPage = FirstRunPage;
+  menu: string;
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.logoutButton = {title: 'Logout', component: 'LogoutPage'};
@@ -78,7 +79,14 @@ export class MyApp {
     this.nav.setRoot(page.component, {}, { animate: true, direction: 'forward' });
   }
 
+  openMenu(menuTitle:string) {
+    this.nav.setRoot('MenuListMasterPage', {}, { animate: true, direction: 'forward' });
+    console.log(menuTitle);
+    this.menu = menuTitle;    
+  }
+
   logout() {
     this.nav.push('LogoutPage', {}, { animate: true, direction: 'forward' });
+    
   }
 }
