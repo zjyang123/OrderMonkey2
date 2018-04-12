@@ -26,7 +26,7 @@ export class WelcomePage {
     'token': ''
   };
   public responseData;
-  public isLoggedIn = false;
+  isLoggedIn: boolean = false;
 
   constructor(public navCtrl: NavController, 
               private barcodeScanner: BarcodeScanner,
@@ -35,6 +35,10 @@ export class WelcomePage {
               public loginService: LoginService,
               public storage: Storage
   ) {
+  }
+
+  ionViewWillEnter() {
+    this.isLoggedIn = false;
     this.storage.get('token').then((val) => {
       this.loginCheck.token = val;
       this.storage.get('user_id').then((val) => {
@@ -49,7 +53,6 @@ export class WelcomePage {
       });
     });  
   }
-
 
   login() {
     this.navCtrl.push('LoginPage');
