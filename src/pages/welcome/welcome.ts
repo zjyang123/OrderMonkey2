@@ -38,7 +38,6 @@ export class WelcomePage {
   }
 
   ionViewWillEnter() {
-    this.isLoggedIn = false;
     this.storage.get('token').then((val) => {
       this.loginCheck.token = val;
       this.storage.get('user_id').then((val) => {

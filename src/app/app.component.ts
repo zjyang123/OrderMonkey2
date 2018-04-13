@@ -79,10 +79,8 @@ export class MyApp {
     this.nav.setRoot(page.component, {}, { animate: true, direction: 'forward' });
   }
 
-  openMenu(menuTitle:string) {
-    this.nav.setRoot('MenuListMasterPage', {}, { animate: true, direction: 'forward' });
-    console.log(menuTitle);
-    this.menu = menuTitle;    
+  openMenu(menuTitle:string, menuComponent:string) {
+    this.nav.setRoot('MenuListMasterPage', {menuTitle: menuTitle, menuComponent: menuComponent}, { animate: true, direction: 'forward' });
   }
 
   logout() {
