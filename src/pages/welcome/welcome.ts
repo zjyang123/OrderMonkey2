@@ -86,7 +86,15 @@ export class WelcomePage {
               position: 'bottom'
             });
             toast.present();
-          })
+          }, (err) => {
+            this.responseData = err;
+            let toast = this.toastCtrl.create({
+              message: this.responseData,
+              duration: 5000,
+              position: 'bottom'
+            });
+            //write something for error conditions
+          });
 
 
          }).catch((error) => {
