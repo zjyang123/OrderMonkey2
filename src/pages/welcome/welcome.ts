@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
+import { UserCommunication } from '../../app/service/usercom.service';
 
 /**
  * The Welcome Page is a splash page that quickly describes the app,
@@ -26,14 +27,20 @@ export class WelcomePage {
     'token': ''
   };
   public responseData;
-  isLoggedIn: boolean = false;
+  public scanResponse;
+  public scanSendResponse = {
+    qrcode: '',
+    clientID: ''
+  };
+  isLoggedIn: boolean = true;
 
   constructor(public navCtrl: NavController, 
               private barcodeScanner: BarcodeScanner,
               private geolocation: Geolocation,
               private toastCtrl: ToastController,
               public loginService: LoginService,
-              public storage: Storage
+              public storage: Storage,
+              public userCommunication: UserCommunication
   ) {
   }
 
@@ -61,17 +68,26 @@ export class WelcomePage {
     this.barcodeScanner.scan().then(barcodeData => {
       if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
         this.geolocation.getCurrentPosition().then((resp) => {
-          this.status = barcodeData.text;
+          this.scanResponse = barcodeData.text
+          const qrcode = this.scanResponse.split('/')[0];
+          const clientID = this.scanResponse.split('/')[1];
+          this.scanSendResponse.qrcode = qrcode;
+          this.scanSendResponse.clientID = clientID;
+          // this.status = barcodeData.text;
           this.geoCordLong =  resp.coords.longitude;
           this.geoCordLat =  resp.coords.latitude;
-  
-          const alertMSG = 'BarCode: ' + this.status + 'Long: ' + this.geoCordLong + 'Lat: ' + this.geoCordLat;
-          let toast = this.toastCtrl.create({
-            message: alertMSG,
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
+
+          this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+            this.responseData = result;
+            const alertMSG = this.responseData.tableExist;
+            let toast = this.toastCtrl.create({
+              message: alertMSG,
+              duration: 5000,
+              position: 'bottom'
+            });
+            toast.present();
+          })
+
 
          }).catch((error) => {
            console.log('Error getting location', error);
@@ -88,9 +104,4 @@ export class WelcomePage {
       this.status = err;
      });
   }
-
-  test() {
-    this.navCtrl.push('LoginPage');
-  }
-
 }

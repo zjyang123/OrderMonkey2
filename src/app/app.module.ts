@@ -17,6 +17,7 @@ import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
 import { LoginService } from './service/login.service';
+import { UserCommunication } from './service/usercom.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -76,6 +77,7 @@ export function provideSettings(storage: Storage) {
     SplashScreen,
     StatusBar,
     LoginService,
+    UserCommunication,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
