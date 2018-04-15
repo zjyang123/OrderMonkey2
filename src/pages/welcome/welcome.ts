@@ -76,8 +76,8 @@ export class WelcomePage {
           this.geoCordLong = resp.coords.longitude;
           this.geoCordLat = resp.coords.latitude;
 
-          const testLong = -114.085056// test cords
           const testLat = 50.900444// test cords
+          const testLong = -114.085056// test cords
 
           this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, testLat, testLong).then((distance) => {
 
