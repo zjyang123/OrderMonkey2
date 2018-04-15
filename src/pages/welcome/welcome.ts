@@ -76,15 +76,15 @@ export class WelcomePage {
           this.geoCordLong = resp.coords.longitude;
           this.geoCordLat = resp.coords.latitude;
 
-          const testLong = 50.900444// test cords
-          const testLat = -114.085056// test cords
+          const testLong = -114.085056// test cords
+          const testLat = 50.900444// test cords
 
           this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, testLat, testLong).then((distance) => {
 
             this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
               this.responseData = result;
               // const alertMSG = this.responseData.tableExist + ' with client id of: ' + clientID + 'you are this close:' + distance;
-              const alertMSG = this.geoCordLong;
+              const alertMSG = 'Distance: ' + distance + 'km'
               let toast = this.toastCtrl.create({
                 message: alertMSG,
                 duration: 5000,
