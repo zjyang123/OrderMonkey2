@@ -83,7 +83,8 @@ export class WelcomePage {
 
             this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
               this.responseData = result;
-              const alertMSG = this.responseData.tableExist + ' with client id of: ' + clientID + 'you are this close:' + distance;
+              // const alertMSG = this.responseData.tableExist + ' with client id of: ' + clientID + 'you are this close:' + distance;
+              const alertMSG = this.geoCordLong;
               let toast = this.toastCtrl.create({
                 message: alertMSG,
                 duration: 5000,
