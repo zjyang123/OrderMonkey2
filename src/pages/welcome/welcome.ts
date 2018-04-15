@@ -34,13 +34,13 @@ export class WelcomePage {
   };
   isLoggedIn: boolean = true;
 
-  constructor(public navCtrl: NavController, 
-              private barcodeScanner: BarcodeScanner,
-              private geolocation: Geolocation,
-              private toastCtrl: ToastController,
-              public loginService: LoginService,
-              public storage: Storage,
-              public userCommunication: UserCommunication
+  constructor(public navCtrl: NavController,
+    private barcodeScanner: BarcodeScanner,
+    private geolocation: Geolocation,
+    private toastCtrl: ToastController,
+    public loginService: LoginService,
+    public storage: Storage,
+    public userCommunication: UserCommunication
   ) {
   }
 
@@ -57,7 +57,7 @@ export class WelcomePage {
           //write something for error conditions
         });
       });
-    });  
+    });
   }
 
   login() {
@@ -73,36 +73,42 @@ export class WelcomePage {
           const clientID = this.scanResponse.split('/')[1];
           this.scanSendResponse.qrcode = qrcode;
           this.scanSendResponse.clientID = clientID;
-          this.geoCordLong =  resp.coords.longitude;
-          this.geoCordLat =  resp.coords.latitude;
+          this.geoCordLong = resp.coords.longitude;
+          this.geoCordLat = resp.coords.latitude;
 
-          this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
-            this.responseData = result;
-            const alertMSG = this.responseData.tableExist+' with client id of: '+ clientID;
-            let toast = this.toastCtrl.create({
-              message: alertMSG,
-              duration: 5000,
-              position: 'bottom'
+          const testLong = 50.900444// test cords
+          const testLat = -114.085056// test cords
+
+          this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, testLat, testLong).then((distance) => {
+
+            this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+              this.responseData = result;
+              const alertMSG = this.responseData.tableExist + ' with client id of: ' + clientID + 'you are this close:' + distance;
+              let toast = this.toastCtrl.create({
+                message: alertMSG,
+                duration: 5000,
+                position: 'bottom'
+              });
+              toast.present();
+            }, (err) => {
+              this.responseData = err;
+              //write something for error conditions
             });
-            toast.present();
-          }, (err) => {
-            this.responseData = err;
-            //write something for error conditions
           });
 
-         }).catch((error) => {
+        }).catch((error) => {
           this.responseData = error;
-         });
+        });
       } else {
-          let toast = this.toastCtrl.create({
-            message: 'Cancelled',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
+        let toast = this.toastCtrl.create({
+          message: 'Cancelled',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
       }
-     }).catch(err => {
+    }).catch(err => {
       this.responseData = err;
-     });
+    });
   }
 }

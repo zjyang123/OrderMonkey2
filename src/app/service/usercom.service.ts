@@ -22,6 +22,23 @@ export class UserCommunication {
 
         })
     }
+    
+    geolocationService(lat1, long1, lat2, long2) {
+        return new Promise((resolve, reject) => {
+            var R = 6371; // Radius of the earth in km
+            var dLat = this.convertToRad(lat2-lat1);
+            var dLon = this.convertToRad(long2-long1);
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(this.convertToRad(lat1)) * Math.cos(this.convertToRad(lat2)) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2); 
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            var d = R * c; // Distance in km
+            resolve(d);
+        });
+    }
 
-
+    convertToRad(degrees) {
+        const radianNumber = degrees * Math.PI / 180;
+        return radianNumber;
+    }
 }
