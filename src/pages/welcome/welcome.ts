@@ -77,6 +77,13 @@ export class WelcomePage {
           this.geoCordLong =  resp.coords.longitude;
           this.geoCordLat =  resp.coords.latitude;
 
+          let toast = this.toastCtrl.create({
+            message: this.geoCordLong,
+            duration: 5000,
+            position: 'bottom'
+          });
+          toast.present();
+
           this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
             this.responseData = result;
             const alertMSG = this.responseData.tableExist;
@@ -98,7 +105,7 @@ export class WelcomePage {
 
 
          }).catch((error) => {
-           console.log('Error getting location', error);
+          this.responseData = error;
          });
       } else {
           let toast = this.toastCtrl.create({
@@ -109,7 +116,7 @@ export class WelcomePage {
           toast.present();
       }
      }).catch(err => {
-      this.status = err;
+      this.responseData = err;
      });
   }
 }
