@@ -1,4 +1,5 @@
-import { Component, ViewChild, animate } from '@angular/core';
+import { animate, Component, ViewChild } from '@angular/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,7 +15,10 @@ interface PageItem {
 type PageList = PageItem[]
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [
+    ScreenOrientation
+  ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -24,8 +28,13 @@ export class MyApp {
   rootPage = FirstRunPage;
   menu: string;
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.logoutButton = {title: 'Logout', component: 'LogoutPage'};
+  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
+
+    // Set orientation to portrait only works in productio mode-->>>>>> disable when develope mode
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    ///////////
+
+    this.logoutButton = { title: 'Logout', component: 'LogoutPage' };
     this.menuList = [
       { title: 'Tutorial', component: 'TutorialPage' },
       { title: 'Welcome', component: 'WelcomePage' }, // will be removed
@@ -34,9 +43,9 @@ export class MyApp {
       { title: 'Settings', component: 'SettingsPage' },
       { title: 'Search', component: 'SearchPage' }
     ];
-    
+
     this.splashScreen.show();
-    
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -79,12 +88,12 @@ export class MyApp {
     this.nav.setRoot(page.component, {}, { animate: true, direction: 'forward' });
   }
 
-  openMenu(menuTitle:string, menuComponent:string) {
-    this.nav.setRoot('MenuListMasterPage', {menuTitle: menuTitle, menuComponent: menuComponent}, { animate: true, direction: 'forward' });
+  openMenu(menuTitle: string, menuComponent: string) {
+    this.nav.setRoot('MenuListMasterPage', { menuTitle: menuTitle, menuComponent: menuComponent }, { animate: true, direction: 'forward' });
   }
 
   logout() {
     this.nav.push('LogoutPage', {}, { animate: true, direction: 'forward' });
-    
+
   }
 }
