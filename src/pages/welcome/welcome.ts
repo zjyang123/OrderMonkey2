@@ -73,20 +73,12 @@ export class WelcomePage {
           const clientID = this.scanResponse.split('/')[1];
           this.scanSendResponse.qrcode = qrcode;
           this.scanSendResponse.clientID = clientID;
-          // this.status = barcodeData.text;
           this.geoCordLong =  resp.coords.longitude;
           this.geoCordLat =  resp.coords.latitude;
 
-          let toast = this.toastCtrl.create({
-            message: this.geoCordLong,
-            duration: 5000,
-            position: 'bottom'
-          });
-          toast.present();
-
           this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
             this.responseData = result;
-            const alertMSG = this.responseData.tableExist;
+            const alertMSG = this.responseData.tableExist+' with client id of: '+ clientID;
             let toast = this.toastCtrl.create({
               message: alertMSG,
               duration: 5000,
@@ -95,14 +87,8 @@ export class WelcomePage {
             toast.present();
           }, (err) => {
             this.responseData = err;
-            let toast = this.toastCtrl.create({
-              message: this.responseData,
-              duration: 5000,
-              position: 'bottom'
-            });
             //write something for error conditions
           });
-
 
          }).catch((error) => {
           this.responseData = error;
