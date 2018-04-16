@@ -20,7 +20,7 @@
     </div>
     <div style="padding: 20px;">
       <button ion-button block (click)="barcodeScan()" class="login">{{ 'QRSCANNER' | translate }}</button>
-      <button ion-button block (click)="test()" class="login">test</button>
+      <!-- <button ion-button block (click)="test()" class="login">test</button> -->
       <div *ngIf="!isLoggedIn; then loginbuttonblock">
       </div>
       <ng-template #loginbuttonblock>
