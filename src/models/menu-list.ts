@@ -1,9 +1,9 @@
 export interface MenuListModel {
-    pageName: string;
-    pageDisplayName: string;
-    component1?: string;
-    component2?: string;
-    component3?: string;
-    component4?: string;
-    component5?: string;
+    title: string;
+    componentName: string;
+    componentid1?: string;
+    componentid2?: string;
+    componentid3?: string;
+    componentid4?: string;
+    componentid5?: string;
 }

@@ -31,17 +31,18 @@ export class MyApp {
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
 
     // Set orientation to portrait only works in productio mode-->>>>>> disable when develope mode
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     ///////////
 
     this.logoutButton = { title: 'Logout', component: 'LogoutPage' };
     this.menuList = [
       { title: 'Tutorial', component: 'TutorialPage' },
-      { title: 'Welcome', component: 'WelcomePage' }, // will be removed
-      { title: 'Tabs', component: 'TabsPage' },
-      { title: 'Master Detail', component: 'ListMasterPage' },
-      { title: 'Settings', component: 'SettingsPage' },
-      { title: 'Search', component: 'SearchPage' }
+      { title: 'Breakfast Menu', component: 'BreakfastPage' }, // will be removed
+      { title: 'Lunch Menu', component: 'LunchPage' },
+      { title: 'Dinner', component: 'DinnerPage' },
+      { title: 'Drinks and Dessert', component: 'DrinksPage' },
+      { title: 'Search', component: 'SearchPage' },
+      { title: 'Account Settings', component: 'AccountPage' }
     ];
 
     this.splashScreen.show();
