@@ -18,6 +18,7 @@ import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
 import { LoginService } from './service/login.service';
 import { UserCommunication } from './service/usercom.service';
+import { NotificationBarService } from './service/notificationbar.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -83,7 +84,8 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     QRScanner,
     BarcodeScanner,
-    Geolocation
+    Geolocation,
+    NotificationBarService
   ]
 })
 export class AppModule { }

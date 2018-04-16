@@ -31,7 +31,7 @@ export class MyApp {
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
 
     // Set orientation to portrait only works in productio mode-->>>>>> disable when develope mode
-    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     ///////////
 
     this.logoutButton = { title: 'Logout', component: 'LogoutPage' };
