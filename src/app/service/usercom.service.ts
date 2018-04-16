@@ -23,6 +23,7 @@ export class UserCommunication {
         })
     }
     
+    // calculating direct distance via haversine formula
     geolocationService(lat1, long1, lat2, long2) {
         return new Promise((resolve, reject) => {
             var R = 6371; // Radius of the earth in km
@@ -37,6 +38,7 @@ export class UserCommunication {
         });
     }
 
+    // conversion between degrees and radians
     convertToRad(degrees) {
         const radianNumber = degrees * Math.PI / 180;
         return radianNumber;

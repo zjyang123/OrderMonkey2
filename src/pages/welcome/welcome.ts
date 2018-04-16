@@ -82,23 +82,26 @@ export class WelcomePage {
           const testLat = 50.885800// test cords
           const testLong = -114.089385// test cords
 
-          this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, testLat, testLong).then((distance) => {
+          this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+            this.responseData = result;
+            const geoCordReturn = this.responseData.geocord;
+            const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
+            const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
 
-            this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
-              this.responseData = result;
-              // const alertMSG = this.responseData.tableExist + ' with client id of: ' + clientID + 'you are this close:' + distance;
-              const alertMSG = 'Distance: ' + distance + 'km'
+            this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
+              const alertMSG = 'Distance: ' + distance + 'm...' + 'table active: '+this.responseData.tableExist + '...Is active?: ' + this.responseData.tableActive;
               let toast = this.toastCtrl.create({
                 message: alertMSG,
                 duration: 5000,
                 position: 'bottom'
               });
               toast.present();
-            }, (err) => {
-              this.responseData = err;
-              //write something for error conditions
             });
+          }, (err) => {
+            this.responseData = err;
+            //write something for error conditions
           });
+
 
         }).catch((error) => {
           this.responseData = error;
