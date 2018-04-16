@@ -42,7 +42,8 @@ export class MyApp {
       { title: 'Dinner', component: 'DinnerPage' },
       { title: 'Drinks and Dessert', component: 'DrinksPage' },
       { title: 'Search', component: 'SearchPage' },
-      { title: 'Account Settings', component: 'AccountPage' }
+      { title: 'Account Settings', component: 'AccountPage' },
+      { title: 'Tabs', component: 'TabsPage' }
     ];
 
     this.splashScreen.show();
@@ -90,7 +91,13 @@ export class MyApp {
   }
 
   openMenu(menuTitle: string, menuComponent: string) {
-    this.nav.setRoot('MenuListMasterPage', { menuTitle: menuTitle, menuComponent: menuComponent }, { animate: true, direction: 'forward' });
+    if (menuComponent === 'TutorialPage') {
+      this.nav.setRoot('TutorialPage', {}, { animate: true, direction: 'forward' });
+    } else if (menuComponent === 'AccountPage') {
+      this.nav.setRoot('AccountPage', {}, { animate: true, direction: 'forward' });
+    } else {
+      this.nav.setRoot('MenuListMasterPage', { menuTitle: menuTitle, menuComponent: menuComponent }, { animate: true, direction: 'forward' });
+    }
   }
 
   logout() {
