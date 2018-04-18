@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, ToastController, LoadingController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
+import { LoadingSpinnerService } from '../../app/service/loading.service';
 
 @IonicPage()
 @Component({
@@ -24,10 +25,9 @@ export class LoginPage {
   public userData;
   public facebookUserData = {
     userid: '',
-    email: '', 
+    email: '',
     first_name: '',
     last_name: '',
-    username: '',
     accessToken: ''
   };
   public token;
@@ -37,13 +37,13 @@ export class LoginPage {
   public loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public toastCtrl: ToastController,
     public translateService: TranslateService,
     public loginService: LoginService,
     private storage: Storage,
     public platform: Platform,
-    public facebook: Facebook
-  
+    public facebook: Facebook,
+    public loadingCtrl: LoadingController
+
   ) {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
@@ -82,38 +82,39 @@ export class LoginPage {
   }
 
   public loginStatus;
-  public facebookToken;
-  public facebookUserID;
   fbLogin() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please Wait... :)'
+    });
     this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      loading.present();
       this.loginStatus = response;
-      this.facebook.api('me?fields=id,name,email,first_name,last_name', []).then(profile => {
+      this.facebook.api('me?fields=id,email,first_name,last_name', []).then(profile => {
         this.facebookUserData.userid = profile['id'];
         this.facebookUserData.email = profile['email'];
         this.facebookUserData.first_name = profile['first_name'];
         this.facebookUserData.last_name = profile['last_name'];
-        this.facebookUserData.username = profile['name'];
 
         this.facebook.getLoginStatus().then(authResponse => {
           this.loginStatus = authResponse;
         });
-
         if (response.status === 'connected') {
           this.facebookUserData.accessToken = this.loginStatus.authResponse.accessToken;
-          // this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
           // TODO: store to database
           // this.loginService.facebookLoginPost().then((result)  => {
 
           // });
-          alert(
-            'User ID: ' + this.facebookUserData.userid + '\n' +
-            'Email: ' + this.facebookUserData.email + '\n' +
-            'Fname: ' + this.facebookUserData.first_name + '\n' +
-            'Lname: ' + this.facebookUserData.last_name + '\n' +
-            'UserName: ' + this.facebookUserData.last_name + '\n'
-          );
+          // alert(
+          //   'User ID: ' + this.facebookUserData.userid + '\n' +
+          //   'Email: ' + this.facebookUserData.email + '\n' +
+          //   'Fname: ' + this.facebookUserData.first_name + '\n' +
+          //   'Lname: ' + this.facebookUserData.last_name + '\n'
+          // );
 
-          alert('Token: \n' + this.facebookUserData.accessToken)
+          // alert('Token: \n' + this.facebookUserData.accessToken);
+
+          this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+          loading.dismiss();
 
         } else if (response.status === 'not_authorized') {
           alert('Please Authorize Your Account to Connect with Order Monkey!');
@@ -123,9 +124,9 @@ export class LoginPage {
 
       });
     })
-    .catch(e => {
-      alert('Error logging into Facebook' + e)
-    });
+      .catch(e => {
+        alert('Error logging into Facebook' + e)
+      });
   }
 
   welcomeScreen() {
