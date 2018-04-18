@@ -94,9 +94,12 @@ export class LoginPage {
           username: profile['name']
         }
 
-        this.loginStatus = response;
+        
 
       });
+    })
+    .catch(e => {
+      this.loginStatus = 'Error logging into Facebook' + e;
     });
   }
 
