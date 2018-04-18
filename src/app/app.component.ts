@@ -53,7 +53,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       //this.splashScreen.show();
-      //this.splashScreen.hide();
+      this.splashScreen.hide();
     });
     this.initTranslate();
   }

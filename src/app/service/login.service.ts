@@ -6,6 +6,7 @@ import { Headers, Http } from '@angular/http';
 @Injectable()
 export class LoginService {
     public loginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/';
+    public facebookLoginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/facebookLogin';
     public authTokenCheckUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/authTokenCheck';
     constructor (
         public http: Http
@@ -15,6 +16,19 @@ export class LoginService {
         return new Promise((resolve, reject) => {
             const header = new Headers();
             this.http.post(this.loginUrl + type, JSON.stringify(credentials), { headers: header })
+                .subscribe( res => {
+                    resolve(res.json());
+                }, (err) => {
+                    reject(err);
+                });
+
+        })
+    }
+
+    facebookLoginPost(credentials) {
+        return new Promise((resolve, reject) => {
+            const header = new Headers();
+            this.http.post(this.loginUrl, JSON.stringify(credentials), { headers: header })
                 .subscribe( res => {
                     resolve(res.json());
                 }, (err) => {

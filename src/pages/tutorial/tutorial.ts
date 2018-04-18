@@ -22,14 +22,6 @@ export class TutorialPage {
 
   constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform, public splashScreen: SplashScreen) {
     this.dir = platform.dir();
-
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.splashScreen.show();
-      //this.splashScreen.hide();
-    });
-
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
       "TUTORIAL_SLIDE2_TITLE",

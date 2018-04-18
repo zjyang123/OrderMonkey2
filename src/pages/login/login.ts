@@ -23,11 +23,12 @@ export class LoginPage {
   public responseData;
   public userData;
   public facebookUserData = {
-    id: '',
+    userid: '',
     email: '', 
-    first_name: '', 
-    picture: '', 
-    username: ''
+    first_name: '',
+    last_name: '',
+    username: '',
+    accessToken: ''
   };
   public token;
   public userID;
@@ -80,26 +81,50 @@ export class LoginPage {
     });
   }
 
-
   public loginStatus;
+  public facebookToken;
+  public facebookUserID;
   fbLogin() {
     this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
       this.loginStatus = response;
-      this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
-        this.facebookUserData = {
-          id: profile['id'],
-          email: profile['email'], 
-          first_name: profile['first_name'], 
-          picture: profile['picture_large']['data']['url'], 
-          username: profile['name']
-        }
+      this.facebook.api('me?fields=id,name,email,first_name,last_name', []).then(profile => {
+        this.facebookUserData.userid = profile['id'];
+        this.facebookUserData.email = profile['email'];
+        this.facebookUserData.first_name = profile['first_name'];
+        this.facebookUserData.last_name = profile['last_name'];
+        this.facebookUserData.username = profile['name'];
 
-        
+        this.facebook.getLoginStatus().then(authResponse => {
+          this.loginStatus = authResponse;
+        });
+
+        if (response.status === 'connected') {
+          this.facebookUserData.accessToken = this.loginStatus.authResponse.accessToken;
+          // this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+          // TODO: store to database
+          // this.loginService.facebookLoginPost().then((result)  => {
+
+          // });
+          alert(
+            'User ID: ' + this.facebookUserData.userid + '\n' +
+            'Email: ' + this.facebookUserData.email + '\n' +
+            'Fname: ' + this.facebookUserData.first_name + '\n' +
+            'Lname: ' + this.facebookUserData.last_name + '\n' +
+            'UserName: ' + this.facebookUserData.last_name + '\n'
+          );
+
+          alert('Token: \n' + this.facebookUserData.accessToken)
+
+        } else if (response.status === 'not_authorized') {
+          alert('Please Authorize Your Account to Connect with Order Monkey!');
+        } else {
+          alert('Failed to Use Facebook Login!');
+        }
 
       });
     })
     .catch(e => {
-      this.loginStatus = 'Error logging into Facebook' + e;
+      alert('Error logging into Facebook' + e)
     });
   }
 
