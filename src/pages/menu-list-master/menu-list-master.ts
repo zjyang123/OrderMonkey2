@@ -49,7 +49,7 @@ export class MenuListMasterPage {
     
     this.b = 0;
     this.c = 0;
-    this.c = CATEGORY_LIST[this.c].componentid.length;
+    this.c = CATEGORY_LIST.length;
 
     while (this.b<this.c) {
       console.log(MENU_LIST[this.i].componentid[this.b] === CATEGORY_LIST[this.b].componentid);
