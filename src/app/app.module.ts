@@ -1,9 +1,10 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
+import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,8 +18,8 @@ import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
 import { LoginService } from './service/login.service';
-import { UserCommunication } from './service/usercom.service';
 import { NotificationBarService } from './service/notificationbar.service';
+import { UserCommunication } from './service/usercom.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -85,7 +86,8 @@ export function provideSettings(storage: Storage) {
     QRScanner,
     BarcodeScanner,
     Geolocation,
-    NotificationBarService
+    NotificationBarService,
+    Facebook
   ]
 })
 export class AppModule { }

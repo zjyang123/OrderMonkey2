@@ -24,6 +24,7 @@
         "@ionic-native/barcode-scanner": "^4.6.0",
         "@ionic-native/camera": "4.3.3",
         "@ionic-native/core": "4.6.0",
+        "@ionic-native/facebook": "^4.7.0",
         "@ionic-native/geolocation": "^4.6.0",
         "@ionic-native/qr-scanner": "^4.6.0",
         "@ionic-native/screen-orientation": "^4.7.0",
@@ -33,6 +34,7 @@
         "@ngx-translate/core": "8.0.0",
         "@ngx-translate/http-loader": "^2.0.0",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-facebook4": "^1.10.1",
         "cordova-plugin-geolocation": "^4.0.1",
         "cordova-plugin-qrscanner": "^2.5.0",
         "cordova-plugin-screen-orientation": "^3.0.1",
@@ -57,7 +59,11 @@
                 "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
             },
             "cordova-plugin-splashscreen": {},
-            "cordova-plugin-screen-orientation": {}
+            "cordova-plugin-screen-orientation": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "215438025885995",
+                "APP_NAME": "com.ordermonkey.userapp"
+            }
         }
     }
 }

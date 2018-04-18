@@ -15,9 +15,18 @@
         <ion-label color="primary">Password</ion-label>
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
         <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Login</button>
+        <button type="submit" ion-button color="secondary" full (click)="fbLogin()">Login With Facebook</button>
       </form>
       <br/>
-      <button ion-button color="primary" full (click)="welcomeScreen()">Skip for now</button>
+      <p>
+        {{ facebookUserData.id }} and {{ facebookUserData.email }}
+      </p>
+      <p>
+        login status: {{ loginStatus }}
+      </p>
+      <div style="text-align: center;">
+        <a (click)="welcomeScreen()">Skip for now</a>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

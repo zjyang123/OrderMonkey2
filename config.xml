@@ -95,4 +95,9 @@
     </edit-config>
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.10.1">
+        <variable name="APP_ID" value="215438025885995" />
+        <variable name="APP_NAME" value="com.ordermonkey.userapp" />
+    </plugin>
+    <widget id="com.devdactic.academytest" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 </widget>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, Platform, ToastController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 
@@ -21,6 +22,13 @@ export class LoginPage {
 
   public responseData;
   public userData;
+  public facebookUserData = {
+    id: '',
+    email: '', 
+    first_name: '', 
+    picture: '', 
+    username: ''
+  };
   public token;
   public userID;
 
@@ -32,7 +40,8 @@ export class LoginPage {
     public translateService: TranslateService,
     public loginService: LoginService,
     private storage: Storage,
-    public platform: Platform
+    public platform: Platform,
+    public facebook: Facebook
   
   ) {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -68,6 +77,25 @@ export class LoginPage {
     }, (err) => {
       this.responseData = err;
       //write something for error conditions
+    });
+  }
+
+
+  public loginStatus;
+  fbLogin() {
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
+        this.facebookUserData = {
+          id: profile['id'],
+          email: profile['email'], 
+          first_name: profile['first_name'], 
+          picture: profile['picture_large']['data']['url'], 
+          username: profile['name']
+        }
+
+        this.loginStatus = response;
+
+      });
     });
   }
 
