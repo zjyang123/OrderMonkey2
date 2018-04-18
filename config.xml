@@ -97,7 +97,7 @@
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
     <plugin name="cordova-plugin-facebook4" spec="^1.10.1">
         <variable name="APP_ID" value="215438025885995" />
-        <variable name="APP_NAME" value="com.ordermonkey.userapp" />
+        <variable name="APP_NAME" value="OrderMonkey" />
     </plugin>
     <widget >
 </widget>
