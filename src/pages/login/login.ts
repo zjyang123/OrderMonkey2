@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, Platform, ToastController, LoadingController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
-import { LoadingSpinnerService } from '../../app/service/loading.service';
 
 @IonicPage()
 @Component({
@@ -104,14 +103,14 @@ export class LoginPage {
           // this.loginService.facebookLoginPost().then((result)  => {
 
           // });
-          // alert(
-          //   'User ID: ' + this.facebookUserData.userid + '\n' +
-          //   'Email: ' + this.facebookUserData.email + '\n' +
-          //   'Fname: ' + this.facebookUserData.first_name + '\n' +
-          //   'Lname: ' + this.facebookUserData.last_name + '\n'
-          // );
+          alert(
+            'User ID: ' + this.facebookUserData.userid + '\n' +
+            'Email: ' + this.facebookUserData.email + '\n' +
+            'Fname: ' + this.facebookUserData.first_name + '\n' +
+            'Lname: ' + this.facebookUserData.last_name + '\n'
+          );
 
-          // alert('Token: \n' + this.facebookUserData.accessToken);
+          alert('Token: \n' + this.facebookUserData.accessToken);
 
           this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
           loading.dismiss();
