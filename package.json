@@ -62,7 +62,7 @@
             "cordova-plugin-screen-orientation": {},
             "cordova-plugin-facebook4": {
                 "APP_ID": "215438025885995",
-                "APP_NAME": "com.ordermonkey.userapp"
+                "APP_NAME": "OrderMonkey"
             }
         }
     }
