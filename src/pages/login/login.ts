@@ -84,6 +84,7 @@ export class LoginPage {
   public loginStatus;
   fbLogin() {
     this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.loginStatus = response;
       this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
         this.facebookUserData = {
           id: profile['id'],
