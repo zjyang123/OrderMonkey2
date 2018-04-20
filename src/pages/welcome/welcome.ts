@@ -43,10 +43,10 @@ export class WelcomePage {
   getLoginStatus() {
     this.storage.get('accountType').then((val) => {
       if (val == 'facebook') {
-        this.storage.get('fb_data').then((val) => {
-          this.loginService.facebookLoginPost(val).then((result) => {
+        this.storage.get('fb_token').then((val) => {
+          this.loginService.authTokenCheckFacebook(val).then((result) => {
             this.responseData = result;
-            this.isLoggedIn = this.responseData.loginCheck;
+            this.isLoggedIn = this.responseData.data.is_valid;
             if (this.isLoggedIn) {
               this.menuCtrl.swipeEnable(true);
             }
@@ -57,7 +57,7 @@ export class WelcomePage {
         });
       } else {
         this.storage.get('native_data').then((val) => {
-          this.loginService.authTokenCheck(val).then((result) => {
+          this.loginService.authTokenCheckNative(val).then((result) => {
             this.responseData = result;
             this.isLoggedIn = this.responseData.loginCheck;
             if (this.isLoggedIn) {
@@ -95,7 +95,7 @@ export class WelcomePage {
 
         if (distance > 50) {
           const alertMSG = 'Distance: ' + distance + 'm...' + 'table exist: ' + this.responseData.tableExist + '...Is active?: ' + this.responseData.tableActive;
-          this.notificationBar.notificationbarTask(alertMSG, 5000, 'bottom');
+          this.notificationBar.notificationbarTask(alertMSG, 3000, 'bottom');
 
         } else {
           if (this.responseData.tableExist) {

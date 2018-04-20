@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Platform, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, ToastController, LoadingController, MenuController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 
@@ -39,7 +39,9 @@ export class LoginPage {
   // Our translated text strings
   public loginErrorString: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
     public translateService: TranslateService,
     public loginService: LoginService,
     private storage: Storage,
@@ -48,6 +50,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController
 
   ) {
+    this.menuCtrl.swipeEnable(false);
+
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
@@ -109,11 +113,15 @@ export class LoginPage {
           this.facebookUserData.token = this.loginStatus.authResponse.accessToken;
           this.storage.set('accountType', 'facebook');
           this.storage.set('fb_data', this.facebookUserData);
+          this.storage.set('fb_token', this.facebookUserData.token);
           
           // TODO: store to database
-          // this.loginService.facebookLoginPost().then((result)  => {
+          this.loginService.facebookLoginPost(this.facebookUserData).then((result)  => {
 
-          // });
+          }, (err) => {
+            alert(err)
+            //write something for error conditions
+          });
           // alert(
           //   'User ID: ' + this.facebookUserData.userid + '\n' +
           //   'Email: ' + this.facebookUserData.email + '\n' +

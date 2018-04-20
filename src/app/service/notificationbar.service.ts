@@ -12,7 +12,8 @@ export class NotificationBarService {
         let toast = this.toastCtrl.create({
             message: msg,
             duration: duration,
-            position: position
+            position: position,
+            cssClass: "toastStyle"
           });
           toast.present();
     }

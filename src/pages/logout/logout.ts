@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LogoutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { NotificationBarService } from '../../app/service/notificationbar.service';
 
 @IonicPage()
 @Component({
@@ -16,15 +12,35 @@ import { Storage } from '@ionic/storage';
 })
 export class LogoutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public storage: Storage,
+    public facebook: Facebook,
+    public notificationBar: NotificationBarService
+  ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LogoutPage');
+    // console.log('ionViewDidLoad LogoutPage');
   }
 
   logout() {
-    this.storage.clear();
-    this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+    this.storage.get('accountType').then((val) => {
+      if (val == 'facebook') {
+        this.facebook.logout().then(() => {
+          this.storage.clear();
+          this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+        }, (err)=> {
+          alert(err)
+        });
+      } else {
+        this.storage.clear();
+        this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+      }
+    });
+
+    this.notificationBar.notificationbarTask('You have logged out!', 3000, 'bottom');
+    
   }
 }
