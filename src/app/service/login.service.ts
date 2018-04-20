@@ -25,10 +25,10 @@ export class LoginService {
         })
     }
 
-    facebookLoginPost(credentials) {
+    facebookLoginPost(fb_data) {
         return new Promise((resolve, reject) => {
             const header = new Headers();
-            this.http.post(this.loginUrl, JSON.stringify(credentials), { headers: header })
+            this.http.post(this.loginUrl, JSON.stringify(fb_data), { headers: header })
                 .subscribe( res => {
                     resolve(res.json());
                 }, (err) => {
@@ -38,10 +38,10 @@ export class LoginService {
         })
     }
 
-    authTokenCheck(tokenCheck) {
+    authTokenCheck(native_data) {
         return new Promise((resolve, reject) => {
             const headers = new Headers();
-            this.http.post(this.authTokenCheckUrl, JSON.stringify(tokenCheck), { headers: headers })
+            this.http.post(this.authTokenCheckUrl, JSON.stringify(native_data), { headers: headers })
                 .subscribe( res => {
                     resolve(res.json());
                 }, (err) => {

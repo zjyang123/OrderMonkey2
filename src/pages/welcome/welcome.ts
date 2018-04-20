@@ -2,18 +2,12 @@ import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, ToastController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 import { NotificationBarService } from '../../app/service/notificationbar.service';
 import { UserCommunication } from '../../app/service/usercom.service';
 
-/**
- * The Welcome Page is a splash page that quickly describes the app,
- * and then directs the user to create an account or log in.
- * If you'd like to immediately put the user onto a login/signup page,
- * we recommend not using the Welcome page.
-*/
 @IonicPage()
 @Component({
   selector: 'page-welcome',
@@ -23,19 +17,17 @@ export class WelcomePage {
   public status;
   public geoCordLong;
   public geoCordLat;
-  public loginCheck = {
-    'user_id': '',
-    'token': ''
-  };
   public responseData;
   public scanResponse;
   public scanSendResponse = {
     qrcode: '',
     clientID: ''
   };
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = false;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
     private barcodeScanner: BarcodeScanner,
     private geolocation: Geolocation,
     private toastCtrl: ToastController,
@@ -44,22 +36,43 @@ export class WelcomePage {
     public userCommunication: UserCommunication,
     public notificationBar: NotificationBarService
   ) {
+    this.menuCtrl.swipeEnable(false);
+    this.getLoginStatus();
   }
 
-  ionViewWillEnter() {
-    this.storage.get('token').then((val) => {
-      this.loginCheck.token = val;
-      this.storage.get('user_id').then((val) => {
-        this.loginCheck.user_id = val;
-        this.loginService.authTokenCheck(this.loginCheck).then((result) => {
-          this.responseData = result;
-          this.isLoggedIn = this.responseData.loginCheck;
-        }, (err) => {
-          this.responseData = err;
-          //write something for error conditions
+  getLoginStatus() {
+    this.storage.get('accountType').then((val) => {
+      if (val == 'facebook') {
+        this.storage.get('fb_data').then((val) => {
+          this.loginService.facebookLoginPost(val).then((result) => {
+            this.responseData = result;
+            this.isLoggedIn = this.responseData.loginCheck;
+            if (this.isLoggedIn) {
+              this.menuCtrl.swipeEnable(true);
+            }
+          }, (err) => {
+            alert(err)
+            //write something for error conditions
+          });
         });
-      });
+      } else {
+        this.storage.get('native_data').then((val) => {
+          this.loginService.authTokenCheck(val).then((result) => {
+            this.responseData = result;
+            this.isLoggedIn = this.responseData.loginCheck;
+            if (this.isLoggedIn) {
+              this.menuCtrl.swipeEnable(true);
+            }
+          }, (err) => {
+            alert(err)
+            //write something for error conditions
+          });
+        });
+
+      }
+
     });
+
   }
 
   login() {
@@ -126,9 +139,9 @@ export class WelcomePage {
             const geoCordReturn = this.responseData.geocord;
             const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
             const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
-      
+
             this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
-      
+
               if (distance > 50) {
                 const alertMSG = 'Distance: ' + distance + 'm...' + 'table exist: ' + this.responseData.tableExist + '...Is active?: ' + this.responseData.tableActive;
                 this.notificationBar.notificationbarTask(alertMSG, 5000, 'bottom');

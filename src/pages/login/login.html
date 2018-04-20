@@ -1,26 +1,30 @@
 <ion-header>
-    <ion-navbar transparent>
+    <ion-navbar>
       <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>Login</ion-card-header>
+
     <ion-card-content>
       <p class="helper-block" *ngIf="userData == false">Invalid Username and Password!</p>
       <form [formGroup]="loginForm">
         <ion-label color="primary">Username</ion-label>
-        <ion-input placeholder="Username" formControlName="username"></ion-input>
+        <ion-input type="email" placeholder="Username" formControlName="username"></ion-input>
         <ion-label color="primary">Password</ion-label>
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-        <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Login</button>
-        <button type="submit" ion-button color="secondary" full (click)="fbLogin()">Login With Facebook</button>
+        <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Log In</button>
+
+        <button type="submit" ion-button color="facebook" full (click)="fbLogin()">
+          <ion-icon style="padding-right: 5px;" name="logo-facebook"></ion-icon> Facebook Log In
+        </button>
+
       </form>
       <br/>
       <div style="text-align: center;">
-        <a (click)="welcomeScreen()">Skip for now</a>
+        Don't have an account?
+        <a (click)="welcomeScreen()">Sign Up!</a>
       </div>
     </ion-card-content>
-  </ion-card>
+
 </ion-content>

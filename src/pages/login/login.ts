@@ -23,11 +23,15 @@ export class LoginPage {
   public responseData;
   public userData;
   public facebookUserData = {
-    userid: '',
+    user_id: '',
     email: '',
     first_name: '',
     last_name: '',
-    accessToken: ''
+    token: ''
+  };
+  public nativeUserData = {
+    token: '',
+    user_id: ''
   };
   public token;
   public userID;
@@ -52,10 +56,12 @@ export class LoginPage {
       'username': new FormControl(null, Validators.required),
       'password': new FormControl(null, Validators.required)
     });
-
   }
 
   login() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please Wait... :)'
+    });
     this.type = 'login';
     this.credentials.username = this.loginForm.value.username;
     this.credentials.password = this.loginForm.value.password;
@@ -65,14 +71,16 @@ export class LoginPage {
       this.userData = this.responseData.userData;
       this.token = this.responseData.token;
       this.userID = this.responseData.user_id;
-
-      this.storage.set('token', this.token);
-      this.storage.set('user_id', this.userID);
+      this.nativeUserData.token = this.token;
+      this.nativeUserData.user_id = this.userID;
 
       if (this.userData != false) {
+        this.storage.set('accountType', 'native');
+        this.storage.set('native_data', this.nativeUserData);
         this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+        loading.dismiss();
       } else {
-        // console.log(this.responseData.test)
+        loading.dismiss();
       }
     }, (err) => {
       this.responseData = err;
@@ -89,7 +97,7 @@ export class LoginPage {
       loading.present();
       this.loginStatus = response;
       this.facebook.api('me?fields=id,email,first_name,last_name', []).then(profile => {
-        this.facebookUserData.userid = profile['id'];
+        this.facebookUserData.user_id = profile['id'];
         this.facebookUserData.email = profile['email'];
         this.facebookUserData.first_name = profile['first_name'];
         this.facebookUserData.last_name = profile['last_name'];
@@ -98,19 +106,22 @@ export class LoginPage {
           this.loginStatus = authResponse;
         });
         if (response.status === 'connected') {
-          this.facebookUserData.accessToken = this.loginStatus.authResponse.accessToken;
+          this.facebookUserData.token = this.loginStatus.authResponse.accessToken;
+          this.storage.set('accountType', 'facebook');
+          this.storage.set('fb_data', this.facebookUserData);
+          
           // TODO: store to database
           // this.loginService.facebookLoginPost().then((result)  => {
 
           // });
-          alert(
-            'User ID: ' + this.facebookUserData.userid + '\n' +
-            'Email: ' + this.facebookUserData.email + '\n' +
-            'Fname: ' + this.facebookUserData.first_name + '\n' +
-            'Lname: ' + this.facebookUserData.last_name + '\n'
-          );
+          // alert(
+          //   'User ID: ' + this.facebookUserData.userid + '\n' +
+          //   'Email: ' + this.facebookUserData.email + '\n' +
+          //   'Fname: ' + this.facebookUserData.first_name + '\n' +
+          //   'Lname: ' + this.facebookUserData.last_name + '\n'
+          // );
 
-          alert('Token: \n' + this.facebookUserData.accessToken);
+          // alert('Token: \n' + this.facebookUserData.accessToken);
 
           this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
           loading.dismiss();

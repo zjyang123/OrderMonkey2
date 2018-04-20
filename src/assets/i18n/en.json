@@ -42,7 +42,7 @@
 
   "WELCOME_TITLE": "Welcome",
 
-  "LOGIN_TITLE": "Sign in",
+  "LOGIN_TITLE": "Log In",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
   "LOGIN_BUTTON": "Sign in",
   "SIGNUP_TITLE": "Sign up",
@@ -66,7 +66,7 @@
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\"",
 
-  "QRSCANNER": "Scan Table QR Code",
+  "QRSCANNER": "Scan Table",
   "ORDER_MONKEY_WELCOME_INTRO": "The next generation of food ordering from the tip of your fingers!",
 
   "ACCOUNT_LOGIN": "Account Login"
