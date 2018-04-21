@@ -161,7 +161,6 @@ export class WelcomePage {
                     this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
                   }
                 }
-                loading.dismiss();
               });
             }, (err) => {
               this.notificationBar.notificationbarTask(err, 1500, 'bottom');
@@ -175,7 +174,9 @@ export class WelcomePage {
         } else {
           this.notificationBar.notificationbarTask('Cancelled', 1500, 'bottom');
         }
+        loading.dismiss();
       }).catch(err => {
+        loading.dismiss();
         this.responseData = err;
         this.notificationBar.notificationbarTask(err, 1500, 'bottom');
       });

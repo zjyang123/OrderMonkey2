@@ -92,7 +92,6 @@ export class LoginPage {
     });
     loading.present().then(()=> {
       this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
-        
         this.loginStatus = response;
         this.facebook.api('me?fields=id,email,first_name,last_name', []).then(profile => {
           this.facebookUserData.user_id = profile['id'];
@@ -117,7 +116,6 @@ export class LoginPage {
             });
   
             this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
-            loading.dismiss();
   
           } else if (response.status === 'not_authorized') {
             alert('Please Authorize Your Account to Connect with Order Monkey!');
@@ -126,10 +124,12 @@ export class LoginPage {
           }
   
         });
-      })
-        .catch(e => {
-          alert('Error logging into Facebook' + e)
-        });
+        loading.dismiss();
+      }).catch(e => {
+        loading.dismiss();
+        alert('Error logging into Facebook' + e)
+      });
+
     })
   }
 
