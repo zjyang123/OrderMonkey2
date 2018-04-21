@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Platform, ToastController, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, LoadingController, MenuController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 
@@ -63,9 +63,6 @@ export class LoginPage {
   }
 
   login() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please Wait... :)'
-    });
     this.type = 'login';
     this.credentials.username = this.loginForm.value.username;
     this.credentials.password = this.loginForm.value.password;
@@ -77,14 +74,10 @@ export class LoginPage {
       this.userID = this.responseData.user_id;
       this.nativeUserData.token = this.token;
       this.nativeUserData.user_id = this.userID;
-
       if (this.userData != false) {
         this.storage.set('accountType', 'native');
         this.storage.set('native_data', this.nativeUserData);
         this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
-        loading.dismiss();
-      } else {
-        loading.dismiss();
       }
     }, (err) => {
       this.responseData = err;
@@ -95,7 +88,7 @@ export class LoginPage {
   public loginStatus;
   fbLogin() {
     let loading = this.loadingCtrl.create({
-      content: 'Please Wait... :)'
+      content: ''
     });
     this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
       loading.present();
@@ -147,7 +140,7 @@ export class LoginPage {
       });
   }
 
-  welcomeScreen() {
-    this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+  signup() {
+    this.navCtrl.push('SignupPage');
   }
 }

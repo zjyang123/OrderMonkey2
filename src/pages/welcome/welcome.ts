@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
-import { IonicPage, MenuController, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, ToastController, LoadingController } from 'ionic-angular';
 
 import { LoginService } from '../../app/service/login.service';
 import { NotificationBarService } from '../../app/service/notificationbar.service';
@@ -34,10 +34,17 @@ export class WelcomePage {
     public loginService: LoginService,
     public storage: Storage,
     public userCommunication: UserCommunication,
-    public notificationBar: NotificationBarService
+    public notificationBar: NotificationBarService,
+    public loadingCtrl: LoadingController
   ) {
     this.menuCtrl.swipeEnable(false);
-    this.getLoginStatus();
+    let loading = this.loadingCtrl.create({
+      content: ''
+    });
+    loading.present().then(() => {
+      this.getLoginStatus();
+      loading.dismiss();
+    })
   }
 
   getLoginStatus() {

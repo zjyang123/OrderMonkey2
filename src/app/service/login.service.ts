@@ -8,6 +8,8 @@ export class LoginService {
     public loginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/';
     public facebookLoginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/facebookLogin';
     public authTokenCheckUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/authTokenCheckNative';
+    private appSecret = '82099123889ef2f8b5c556aaff9070f5';
+    private appID = '215438025885995';
     constructor (
         public http: Http
     ) {}
@@ -54,7 +56,7 @@ export class LoginService {
     authTokenCheckFacebook(token) {
         return new Promise((resolve, reject) => {
             const headers = new Headers();
-            this.http.get('https://graph.facebook.com/debug_token?input_token=' + token + '&access_token=215438025885995|82099123889ef2f8b5c556aaff9070f5')
+            this.http.get('https://graph.facebook.com/debug_token?input_token=' + token + '&access_token=' + this.appID + '|' + this.appSecret)
                 .subscribe(res => {
                     resolve(res.json());
                 }, (err) => {

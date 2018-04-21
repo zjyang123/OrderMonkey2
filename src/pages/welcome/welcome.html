@@ -1,11 +1,10 @@
 <ion-header no-shadow>
   <ion-navbar transparent>
-    <div *ngIf="isLoggedIn; then menublock"></div>
-    <ng-template #menublock>
+    <div *ngIf="isLoggedIn"> 
       <button menuToggle style="opacity: 0.5;" ion-button round icon-only>
         <ion-icon color="light" name="menu"></ion-icon>
       </button>
-    </ng-template>
+    </div>
     <ion-title>
     </ion-title>
   </ion-navbar>
@@ -24,15 +23,13 @@
         {{ 'QRSCANNER' | translate }}
       </button>
       <!-- <button ion-button block (click)="test()" class="login">test</button> -->
-      <div *ngIf="!isLoggedIn; then loginbuttonblock">
+      <div *ngIf="!isLoggedIn" ng-cloak>
+          <p style="color:#ffffff">----- or -----</p>
+          <button ion-button block (click)="login()" class="login">
+            <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
+            {{ 'ACCOUNT_LOGIN' | translate }}
+          </button>
       </div>
-      <ng-template #loginbuttonblock>
-        <p style="color:#ffffff">----- or -----</p>
-        <button ion-button block (click)="login()" class="login">
-          <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
-          {{ 'ACCOUNT_LOGIN' | translate }}
-        </button>
-      </ng-template>
     </div>
     <p style="color:white;">
       Terms & Agreements
