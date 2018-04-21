@@ -11,7 +11,9 @@
 </ion-header>
 
 <ion-content scroll="false">
-  <div class="splash-bg"></div>
+  <div class="splash-bg">
+    <div class="layer"></div>
+  </div>
   <div class="splash-info">
     <div class="splash-logo"></div>
     <div class="splash-intro" style="padding: 40px;">
@@ -23,8 +25,7 @@
         {{ 'QRSCANNER' | translate }}
       </button>
       <!-- <button ion-button block (click)="test()" class="login">test</button> -->
-      <div *ngIf="!isLoggedIn" ng-cloak>
-          <p style="color:#ffffff">----- or -----</p>
+      <div *ngIf="!isLoggedIn">
           <button ion-button block (click)="login()" class="login">
             <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
             {{ 'ACCOUNT_LOGIN' | translate }}
@@ -32,7 +33,7 @@
       </div>
     </div>
     <p style="color:white;">
-      Terms & Agreements
+        <a (click)="terms()">{{ 'TERMS_PRIVACY1' | translate }}</a>
     </p>
 
   </div>

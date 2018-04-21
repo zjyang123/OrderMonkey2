@@ -15,6 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+// FORM INPUT FORMATTING
 form p {
     margin: 0 0 3em 0;
     position: relative;
@@ -69,3 +70,17 @@ form p {
     background-color: rgba(255, 255, 255, 1);
     font-size: 14px;
     }
+    // FORM INPUT FORMATTING END
+
+    // HELPER BLOCK ERROR MSG FORMATTING
+    .helper-block, .error-block{
+        text-align: center;
+        color: #c74646
+    }
+
+    .error-block{
+        text-align: left;
+        color: #c74646
+    }
+
+    // HELPER BLOCK ERROR MSG FORMATTING END

@@ -100,7 +100,7 @@ export class WelcomePage {
 
       this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
 
-        if (distance > 50) {
+        if (distance > 4000) {
           const alertMSG = 'Distance: ' + distance + 'm...' + 'table exist: ' + this.responseData.tableExist + '...Is active?: ' + this.responseData.tableActive;
           this.notificationBar.notificationbarTask(alertMSG, 3000, 'bottom');
 
@@ -124,57 +124,61 @@ export class WelcomePage {
   }
 
   barcodeScan() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
-        this.geolocation.getCurrentPosition().then((resp) => {
-          this.scanResponse = barcodeData.text
-          const qrcode = this.scanResponse.split('/')[0];
-          const clientID = this.scanResponse.split('/')[1];
-          this.scanSendResponse.qrcode = qrcode;
-          this.scanSendResponse.clientID = clientID;
-          this.geoCordLong = resp.coords.longitude;
-          this.geoCordLat = resp.coords.latitude;
-
-          // this.geoCordLat = 50.900444// test cords
-          // this.geoCordLong = -114.085056// test cords
-
-          const testLat = 50.885800// test cords
-          const testLong = -114.089385// test cords
-
-          this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
-            this.responseData = result;
-            const geoCordReturn = this.responseData.geocord;
-            const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
-            const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
-
-            this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
-
-              if (distance > 50) {
-                const alertMSG = 'Distance: ' + distance + 'm...' + 'table exist: ' + this.responseData.tableExist + '...Is active?: ' + this.responseData.tableActive;
-                this.notificationBar.notificationbarTask(alertMSG, 5000, 'bottom');
-              } else {
-                if (this.responseData.tableExist) {
-                  this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+    let loading = this.loadingCtrl.create({
+      content: ''
+    });
+    loading.present().then(()=> {
+      this.barcodeScanner.scan().then(barcodeData => {
+        if (barcodeData.format == 'QR_CODE' && !barcodeData.cancelled) {
+          this.geolocation.getCurrentPosition().then((resp) => {
+            this.scanResponse = barcodeData.text
+            const qrcode = this.scanResponse.split('/')[0];
+            const clientID = this.scanResponse.split('/')[1];
+            this.scanSendResponse.qrcode = qrcode;
+            this.scanSendResponse.clientID = clientID;
+            this.geoCordLong = resp.coords.longitude;
+            this.geoCordLat = resp.coords.latitude;
+  
+            // this.geoCordLat = 50.900444// test cords
+            // this.geoCordLong = -114.085056// test cords
+  
+            const testLat = 50.885800// test cords
+            const testLong = -114.089385// test cords
+  
+            this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+              this.responseData = result;
+              const geoCordReturn = this.responseData.geocord;
+              const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
+              const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
+  
+              this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
+                if (distance > 120) {
+                  this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
                 } else {
-                  this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 5000, 'bottom');
+                  if (this.responseData.tableExist) {
+                    this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                  } else {
+                    this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
+                  }
                 }
-              }
+                loading.dismiss();
+              });
+            }, (err) => {
+              this.notificationBar.notificationbarTask(err, 1500, 'bottom');
+              //write something for error conditions
             });
-          }, (err) => {
-            this.notificationBar.notificationbarTask(err, 5000, 'bottom');
-            //write something for error conditions
+  
+          }).catch((error) => {
+            this.responseData = error;
+            this.notificationBar.notificationbarTask(error, 1500, 'bottom');
           });
-
-        }).catch((error) => {
-          this.responseData = error;
-          this.notificationBar.notificationbarTask(error, 5000, 'bottom');
-        });
-      } else {
-        this.notificationBar.notificationbarTask('Cancelled', 5000, 'bottom');
-      }
-    }).catch(err => {
-      this.responseData = err;
-      this.notificationBar.notificationbarTask(err, 5000, 'bottom');
+        } else {
+          this.notificationBar.notificationbarTask('Cancelled', 1500, 'bottom');
+        }
+      }).catch(err => {
+        this.responseData = err;
+        this.notificationBar.notificationbarTask(err, 1500, 'bottom');
+      });
     });
   }
 }

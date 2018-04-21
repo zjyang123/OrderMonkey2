@@ -42,13 +42,6 @@
 
   "WELCOME_TITLE": "Welcome",
 
-  "LOGIN_TITLE": "Log In",
-  "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
-  "LOGIN_BUTTON": "Sign in",
-  "SIGNUP_TITLE": "Sign up",
-  "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
-  "SIGNUP_BUTTON": "Sign up",
-
   "LIST_MASTER_TITLE": "Items",
 
   "ITEM_CREATE_TITLE": "New Item",
@@ -66,9 +59,33 @@
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\"",
 
+
+  "LOGIN_EMAIL": "Email",
+  "LOGIN_PASSWORD": "Password",
+  "LOGIN_BUTTON": "Log In",
+  "LOGIN_FACEBOOK": "Facebook Log In",
+  "LOGIN_TITLE": "Log In",
+  "LOGIN_NOACCOUNT": "Don't have an account?",
+  "LOGIN_SIGNUP": "Sign up here!",
+
+
+  "SIGNUP_TITLE": "Sign Up",
+  "SIGNUP_BUTTON": "Sign Up!",
+  "SIGNUP_EMAIL": "Email",
+  "SIGNUP_PASSWORD1": "Password",
+  "SIGNUP_PASSWORD2": "Confirm Password",
+  "SIGNUP_EMAIL_ERRORMSG": "Please enter an valid email address",
+  "SIGNUP_PASSWORD1_ERRORMSG": "Enter a password longer than 6 characters",
+  "SIGNUP_PASSWORD2_ERRORMSG": "Your passwords do not match",
+
+  
   "QRSCANNER": "Scan Table",
   "ORDER_MONKEY_WELCOME_INTRO": "The next generation of food ordering from the tip of your fingers!",
 
-  "ACCOUNT_LOGIN": "Account Login"
+  "ACCOUNT_LOGIN": "Account Login",
+  "TERMS_PRIVACY1": "Terms & Privacy Policy",
+  "TERMS_PRIVACY2": "Agreement"
+
+
 
 }

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar transparent>
     <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -8,23 +8,24 @@
   <p class="helper-block" *ngIf="userData == false">Invalid Username and Password!</p>
   <form [formGroup]="loginForm">
     <p>
-      <label for="Email" class="floatLabel">Email</label>
+      <label for="Email" class="floatLabel">{{ 'LOGIN_EMAIL' | translate }}</label>
       <input type="email" formControlName="username">
     </p>
     <p>
-      <label for="password" class="floatLabel">Password</label>
+      <label for="password" class="floatLabel">{{ 'LOGIN_PASSWORD' | translate }}</label>
       <input type="password" formControlName="password">
     </p>
     <div style="margin-top:-14px; padding-bottom: 14px;">
-      <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">Log In</button>
+      <button type="submit" ion-button color="primary" full (click)="login()" [disabled]="!loginForm.valid">{{ 'LOGIN_BUTTON' | translate }}</button>
     </div>
     <button type="submit" ion-button color="facebook" full (click)="fbLogin()">
-      <ion-icon style="padding-right: 5px;" name="logo-facebook"></ion-icon> Facebook Log In
+      <ion-icon style="padding-right: 5px;" name="logo-facebook"></ion-icon> 
+      {{ 'LOGIN_FACEBOOK' | translate }}
     </button>
   </form>
   <br/>
   <div style="text-align: center;">
-    Don't have an account?
-    <a (click)="signup()">Sign Up Here!</a>
+      {{ 'LOGIN_NOACCOUNT' | translate }}
+    <a (click)="signup()">{{ 'LOGIN_SIGNUP' | translate }}</a>
   </div>
 </ion-content>

@@ -90,54 +90,47 @@ export class LoginPage {
     let loading = this.loadingCtrl.create({
       content: ''
     });
-    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
-      loading.present();
-      this.loginStatus = response;
-      this.facebook.api('me?fields=id,email,first_name,last_name', []).then(profile => {
-        this.facebookUserData.user_id = profile['id'];
-        this.facebookUserData.email = profile['email'];
-        this.facebookUserData.first_name = profile['first_name'];
-        this.facebookUserData.last_name = profile['last_name'];
-
-        this.facebook.getLoginStatus().then(authResponse => {
-          this.loginStatus = authResponse;
-        });
-        if (response.status === 'connected') {
-          this.facebookUserData.token = this.loginStatus.authResponse.accessToken;
-          this.storage.set('accountType', 'facebook');
-          this.storage.set('fb_data', this.facebookUserData);
-          this.storage.set('fb_token', this.facebookUserData.token);
-          
-          // TODO: store to database
-          this.loginService.facebookLoginPost(this.facebookUserData).then((result)  => {
-
-          }, (err) => {
-            alert(err)
-            //write something for error conditions
+    loading.present().then(()=> {
+      this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+        
+        this.loginStatus = response;
+        this.facebook.api('me?fields=id,email,first_name,last_name', []).then(profile => {
+          this.facebookUserData.user_id = profile['id'];
+          this.facebookUserData.email = profile['email'];
+          this.facebookUserData.first_name = profile['first_name'];
+          this.facebookUserData.last_name = profile['last_name'];
+  
+          this.facebook.getLoginStatus().then(authResponse => {
+            this.loginStatus = authResponse;
           });
-          // alert(
-          //   'User ID: ' + this.facebookUserData.userid + '\n' +
-          //   'Email: ' + this.facebookUserData.email + '\n' +
-          //   'Fname: ' + this.facebookUserData.first_name + '\n' +
-          //   'Lname: ' + this.facebookUserData.last_name + '\n'
-          // );
-
-          // alert('Token: \n' + this.facebookUserData.accessToken);
-
-          this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
-          loading.dismiss();
-
-        } else if (response.status === 'not_authorized') {
-          alert('Please Authorize Your Account to Connect with Order Monkey!');
-        } else {
-          alert('Failed to Use Facebook Login!');
-        }
-
-      });
+          if (response.status === 'connected') {
+            this.facebookUserData.token = this.loginStatus.authResponse.accessToken;
+            this.storage.set('accountType', 'facebook');
+            this.storage.set('fb_data', this.facebookUserData);
+            this.storage.set('fb_token', this.facebookUserData.token);
+            
+            this.loginService.facebookLoginPost(this.facebookUserData).then((result)  => {
+  
+            }, (err) => {
+              alert(err)
+              //write something for error conditions
+            });
+  
+            this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+            loading.dismiss();
+  
+          } else if (response.status === 'not_authorized') {
+            alert('Please Authorize Your Account to Connect with Order Monkey!');
+          } else {
+            alert('Failed to Use Facebook Login!');
+          }
+  
+        });
+      })
+        .catch(e => {
+          alert('Error logging into Facebook' + e)
+        });
     })
-      .catch(e => {
-        alert('Error logging into Facebook' + e)
-      });
   }
 
   signup() {

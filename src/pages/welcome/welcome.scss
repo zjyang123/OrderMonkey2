@@ -1,7 +1,8 @@
 page-welcome {
   .splash-bg {
     position: relative;
-    background: url('../assets/img/welcome.png') no-repeat transparent;
+    background: url('../assets/img/welcome.jpg') no-repeat transparent;
+    background-color: rgba(83, 83, 83, 0.2);
     background-size: cover;
     height: 100%;
     z-index: 1;
@@ -13,6 +14,16 @@ page-welcome {
     from { background-position: 0 0; }
     to { background-position: 100% 0; }
   }
+
+  .layer {
+    background-color: rgba(49, 49, 49, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
 
   .splash-info {
     position: relative;
