@@ -1,12 +1,15 @@
 import { animate, Component, ViewChild } from '@angular/core';
+import { Facebook } from '@ionic-native/facebook';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
+import { NotificationBarService } from './service/notificationbar.service';
 
 interface PageItem {
   title: string,
@@ -28,7 +31,17 @@ export class MyApp {
   rootPage = FirstRunPage;
   menu: string;
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
+  constructor(
+    private translate: TranslateService, 
+    platform: Platform, settings: Settings, 
+    private config: Config, 
+    private statusBar: StatusBar, 
+    public splashScreen: SplashScreen, 
+    private screenOrientation: ScreenOrientation,
+    public storage: Storage,
+    public facebook: Facebook,
+    public notificationBar: NotificationBarService
+  ) {
 
     // Set orientation to portrait only works in productio mode-->>>>>> disable when develope mode
     // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
@@ -101,7 +114,21 @@ export class MyApp {
   }
 
   logout() {
-    this.nav.push('LogoutPage', {}, { animate: true, direction: 'forward' });
+    this.storage.get('accountType').then((val) => {
+      if (val == 'facebook') {
+        this.facebook.logout().then(() => {
+          this.storage.clear();
+          this.nav.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+        }, (err)=> {
+          alert(err)
+        });
+      } else {
+        this.storage.clear();
+        this.nav.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+      }
+    });
 
+    this.notificationBar.notificationbarTask('You have logged out!', 3000, 'bottom');
+    
   }
 }
