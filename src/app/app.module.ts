@@ -4,11 +4,13 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
+import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TapticEngine } from '@ionic-native/taptic-engine';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,6 +19,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
+import { DeviceService } from './service/device.service';
 import { LoginService } from './service/login.service';
 import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
@@ -78,6 +81,8 @@ export function provideSettings(storage: Storage) {
     Camera,
     SplashScreen,
     StatusBar,
+    Device,
+    TapticEngine,
     LoginService,
     UserCommunication,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
@@ -87,6 +92,7 @@ export function provideSettings(storage: Storage) {
     BarcodeScanner,
     Geolocation,
     NotificationBarService,
+    DeviceService,
     Facebook
   ]
 })

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar transparent>
     <ion-title>Signup</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
     <p>
       <label for="Email" class="floatLabel">Email</label>
       <input type="email" formControlName="username">
-      <span *ngIf="signupForm.get('username').invalid && signupForm.get('username').touched" class="error-block">Please enter an valid email</span>
+      <span *ngIf="signupForm.get('username').invalid && signupForm.get('username').touched" class="error-block">Please enter an valid email address</span>
     </p>
     <p>
       <label for="password" class="floatLabel">Password</label>
@@ -24,13 +24,13 @@
     </p>
     <div class="styled-input-container styled-input--square" style="margin-top:-14px;">
       <div class="styled-input-single">
-        <input type="checkbox" name="fieldset-6" id="checkbox2-example-one">
+        <input type="checkbox" name="fieldset-6" id="checkbox2-example-one" (change)="termCheckBox($event)">
         <label for="checkbox2-example-one"></label>
         <p class="label-check-format" style="padding-left: 10px;">Terms & Privacy Policy Agreement</p>
       </div>
     </div>
     <div style="margin-top:-10px;">
-      <button type="submit" ion-button color="primary" full (click)="signup()" [disabled]="!signupForm.valid">Sign Up!</button>
+      <button type="submit" ion-button color="primary" full (click)="signup()" [disabled]="!signupForm.valid || !termsIsChecked">Sign Up!</button>
     </div>
   </form>
 </ion-content>
