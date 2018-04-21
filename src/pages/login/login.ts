@@ -109,11 +109,11 @@ export class LoginPage {
             this.storage.set('fb_token', this.facebookUserData.token);
             
             this.loginService.facebookLoginPost(this.facebookUserData).then((result)  => {
-              this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
             }, (err) => {
               alert(err)
               //write something for error conditions
             });
+            this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
 
           } else if (response.status === 'not_authorized') {
             alert('Please Authorize Your Account to Connect with Order Monkey!');
