@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 
@@ -19,7 +19,12 @@ export class SignupPage {
 
   public signupForm;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public menuCtrl: MenuController
+  ) {
+    this.menuCtrl.swipeEnable(false);
     this.signupForm = new FormGroup({
       'username': new FormControl(null, Validators.required),
       'password1': new FormControl(null, Validators.required),
