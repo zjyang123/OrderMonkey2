@@ -114,14 +114,15 @@ export class LoginPage {
               //write something for error conditions
             });
             this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
-
+            loading.dismiss();
           } else if (response.status === 'not_authorized') {
             alert('Please Authorize Your Account to Connect with Order Monkey!');
+            loading.dismiss();
           } else {
             alert('Failed to Use Facebook Login!');
+            loading.dismiss();
           }
         });
-        loading.dismiss();
       }).catch(e => {
         loading.dismiss();
         alert('Error logging into Facebook' + e)

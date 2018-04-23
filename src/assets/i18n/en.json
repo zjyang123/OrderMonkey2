@@ -71,10 +71,15 @@
 
   "SIGNUP_TITLE": "Sign Up",
   "SIGNUP_BUTTON": "Sign Up!",
+  "SIGNUP_FNAME": "First Name",
+  "SIGNUP_LNAME": "Last Name",
   "SIGNUP_EMAIL": "Email",
   "SIGNUP_PASSWORD1": "Password",
   "SIGNUP_PASSWORD2": "Confirm Password",
-  "SIGNUP_EMAIL_ERRORMSG": "Please enter an valid email address",
+  "SIGNUP_FNAME_ERRORMSG": "Please enter a valid first name",
+  "SIGNUP_LNAME_ERRORMSG": "Please enter a valid last name",
+  "SIGNUP_EMAIL_ERRORMSG": "Please enter a valid email address",
+  "SIGNUP_EMAIL2_ERRORMSG": "Email address already in use",
   "SIGNUP_PASSWORD1_ERRORMSG": "Enter a password longer than 6 characters",
   "SIGNUP_PASSWORD2_ERRORMSG": "Your passwords do not match",
 

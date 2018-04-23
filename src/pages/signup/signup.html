@@ -4,42 +4,61 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <form [formGroup]="signupForm">
-    <p>
-      <label for="Email" class="floatLabel">{{ 'SIGNUP_EMAIL' | translate }}</label>
-      <input type="email" formControlName="username">
-      <span *ngIf="signupForm.get('username').invalid && signupForm.get('username').touched" class="error-block">
-          {{ 'SIGNUP_EMAIL_ERRORMSG' | translate }}
-      </span>
-    </p>
-    <p>
-      <label for="password" class="floatLabel">{{ 'SIGNUP_PASSWORD1' | translate }}</label>
-      <input type="password" formControlName="password1">
-      <span *ngIf="signupForm.get('password1').invalid && signupForm.get('password1').touched" class="error-block">
-          {{ 'SIGNUP_PASSWORD1_ERRORMSG' | translate }}
-      </span>
-    </p>
-    <p>
-      <label for="confirm_password" class="floatLabel">{{ 'SIGNUP_PASSWORD2' | translate }}</label>
-      <input type="password" formControlName="password2">
-      <span *ngIf="signupForm.get('password2').invalid && signupForm.get('password2').touched" class="error-block">
-        <span *ngIf="signupForm.get('password2').errors['passwordNotMatch']" class="error-block">
-            {{ 'SIGNUP_PASSWORD2_ERRORMSG' | translate }}
+<ion-content padding no-bounce>
+    <form [formGroup]="signupForm">
+      <p>
+        <label for="Fname" class="floatLabel">{{ 'SIGNUP_FNAME' | translate }}</label>
+        <input type="text" formControlName="fname">
+        <span *ngIf="signupForm.get('fname').invalid && signupForm.get('fname').touched" class="error-block">
+          {{ 'SIGNUP_FNAME_ERRORMSG' | translate }}
         </span>
-      </span>
-    </p>
-    <div class="styled-input-container styled-input--square" style="margin-top:-14px;">
-      <div class="styled-input-single">
-        <input type="checkbox" name="fieldset-6" id="checkbox2-example-one" (change)="termCheckBox($event)">
-        <label for="checkbox2-example-one"></label>
-        <p class="label-check-format" style="padding-left: 10px;">
-          <a (click)="terms()">{{ 'TERMS_PRIVACY1' | translate }}</a> {{ 'TERMS_PRIVACY2' | translate }}
-        </p>
+      </p>
+      <p>
+        <label for="Lname" class="floatLabel">{{ 'SIGNUP_LNAME' | translate }}</label>
+        <input type="text" formControlName="lname">
+        <span *ngIf="signupForm.get('lname').invalid && signupForm.get('lname').touched" class="error-block">
+          {{ 'SIGNUP_LNAME_ERRORMSG' | translate }}
+        </span>
+      </p>
+      <p>
+        <label for="Email" class="floatLabel">{{ 'SIGNUP_EMAIL' | translate }}</label>
+        <input type="email" formControlName="username">
+        <span *ngIf="signupForm.get('username').invalid && signupForm.get('username').touched" class="error-block">
+          <span *ngIf="signupForm.get('username').errors['emailNotValid']" class="error-block">
+            {{ 'SIGNUP_EMAIL2_ERRORMSG' | translate }}
+          </span>
+          <span *ngIf="signupForm.get('username').errors['required'] || signupForm.get('username').errors['pattern']" class="error-block">
+            {{ 'SIGNUP_EMAIL_ERRORMSG' | translate }}
+          </span>
+        </span>
+      </p>
+      <p>
+        <label for="password" class="floatLabel">{{ 'SIGNUP_PASSWORD1' | translate }}</label>
+        <input type="password" formControlName="password">
+        <span *ngIf="signupForm.get('password').invalid && signupForm.get('password').touched" class="error-block">
+          {{ 'SIGNUP_PASSWORD1_ERRORMSG' | translate }}
+        </span>
+      </p>
+      <p>
+        <label for="confirm_password" class="floatLabel">{{ 'SIGNUP_PASSWORD2' | translate }}</label>
+        <input type="password" formControlName="password2">
+        <span *ngIf="signupForm.get('password2').invalid && signupForm.get('password2').touched" class="error-block">
+          <span *ngIf="signupForm.get('password2').errors['passwordNotMatch']" class="error-block">
+            {{ 'SIGNUP_PASSWORD2_ERRORMSG' | translate }}
+          </span>
+        </span>
+      </p>
+      <div class="styled-input-container styled-input--square" style="margin-top:-14px;">
+        <div class="styled-input-single">
+          <input type="checkbox" name="fieldset-6" id="checkbox2-example-one" (change)="termCheckBox($event)">
+          <label for="checkbox2-example-one"></label>
+          <p class="label-check-format" style="padding-left: 10px;">
+            <a (click)="terms()">{{ 'TERMS_PRIVACY1' | translate }}</a> {{ 'TERMS_PRIVACY2' | translate }}
+          </p>
+        </div>
       </div>
-    </div>
-    <div style="margin-top:-10px;">
-      <button type="submit" ion-button color="primary" full (click)="signup()" [disabled]="!signupForm.valid || !termsIsChecked">{{ 'SIGNUP_BUTTON' | translate }}</button>
-    </div>
-  </form>
+      <div style="margin-top:-10px;">
+        <button type="submit" ion-button color="primary" full (click)="signup()" [disabled]="!signupForm.valid || !termsIsChecked">{{ 'SIGNUP_BUTTON' | translate }}</button>
+      </div>
+    </form>
 </ion-content>

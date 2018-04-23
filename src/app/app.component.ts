@@ -118,13 +118,13 @@ export class MyApp {
       if (val == 'facebook') {
         this.facebook.logout().then(() => {
           this.storage.clear();
-          this.nav.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+          this.nav.setRoot('WelcomePage');
         }, (err)=> {
           alert(err)
         });
       } else {
         this.storage.clear();
-        this.nav.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
+        this.nav.setRoot('WelcomePage');
       }
     });
 

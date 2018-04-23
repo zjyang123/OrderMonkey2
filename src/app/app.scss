@@ -28,7 +28,8 @@ form p {
     margin: 0;
     }
     form input[type="email"],
-    form input[type="password"] {
+    form input[type="password"],
+    form input[type="text"] {
     /* Remove First */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -41,7 +42,8 @@ form p {
     border-radius: 2px;
     }
     form input[type="email"]:focus,
-    form input[type="password"]:focus {
+    form input[type="password"]:focus,
+    form input[type="text"]:focus {
     background: #fff;
     border-color: rgb(184, 184, 184);
     }

@@ -6,13 +6,29 @@ import { Headers, Http } from '@angular/http';
 @Injectable()
 export class LoginService {
     public loginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/';
+    public signupUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/signupNative';
     public facebookLoginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/facebookLogin';
     public authTokenCheckUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/authTokenCheckNative';
     private appSecret = '82099123889ef2f8b5c556aaff9070f5';
     private appID = '215438025885995';
     constructor (
         public http: Http
-    ) {}
+    ) {
+
+    }
+
+    signupPost(credentials) {
+        return new Promise((resolve, reject) => {
+            const header = new Headers();
+            this.http.post(this.signupUrl, JSON.stringify(credentials), { headers: header })
+                .subscribe( res => {
+                    resolve(res.json());
+                }, (err) => {
+                    reject(err);
+                });
+
+        })
+    }
 
     loginPost(credentials, type) {
         return new Promise((resolve, reject) => {
