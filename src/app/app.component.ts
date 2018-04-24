@@ -117,6 +117,7 @@ export class MyApp {
     this.storage.get('accountType').then((val) => {
       if (val == 'facebook') {
         this.facebook.logout().then(() => {
+          // FOR FURTURE, INSTEAD OF CLEARING ALL CLEAR ONLY NEEDED STORAGE PARAMETERS
           this.storage.clear();
           this.nav.setRoot('WelcomePage');
         }, (err)=> {

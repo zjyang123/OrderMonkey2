@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Camera } from '@ionic-native/camera';
 import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -78,7 +77,6 @@ export function provideSettings(storage: Storage) {
     Api,
     Items,
     User,
-    Camera,
     SplashScreen,
     StatusBar,
     Device,

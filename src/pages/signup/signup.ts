@@ -82,6 +82,7 @@ export class SignupPage {
     }
 
     if (this.userDevice == 'ios') {
+      this.iOSTaptic.impact({ style: 'medium' } );
       this.iOSTaptic.selection();
     } else if (this.userDevice == 'android') {
       // haptic feedback for android.......

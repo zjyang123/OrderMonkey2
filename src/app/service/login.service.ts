@@ -48,7 +48,7 @@ export class LoginService {
             const header = new Headers();
             this.http.post(this.facebookLoginUrl, JSON.stringify(fb_data), { headers: header })
                 .subscribe( res => {
-                    resolve(res.json());
+                    resolve(res);
                 }, (err) => {
                     reject(err);
                 });

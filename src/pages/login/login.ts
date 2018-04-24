@@ -36,6 +36,7 @@ export class LoginPage {
   public token;
   public userID;
 
+  public loginStatus;
   // Our translated text strings
   public loginErrorString: string;
 
@@ -85,7 +86,6 @@ export class LoginPage {
     });
   }
 
-  public loginStatus;
   fbLogin() {
     let loading = this.loadingCtrl.create({
       content: ''
@@ -108,11 +108,8 @@ export class LoginPage {
             this.storage.set('fb_data', this.facebookUserData);
             this.storage.set('fb_token', this.facebookUserData.token);
             
-            this.loginService.facebookLoginPost(this.facebookUserData).then((result)  => {
-            }, (err) => {
-              alert(err)
-              //write something for error conditions
-            });
+            this.loginService.facebookLoginPost(this.facebookUserData);
+            
             this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
             loading.dismiss();
           } else if (response.status === 'not_authorized') {
