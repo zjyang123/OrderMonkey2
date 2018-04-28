@@ -2,7 +2,9 @@
 
   <ion-navbar>
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
-
+    <button menuToggle ion-button round icon-only>
+      <ion-icon color="primary" name="menu"></ion-icon>
+    </button>
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="add"></ion-icon>
