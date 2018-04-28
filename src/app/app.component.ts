@@ -115,22 +115,18 @@ export class MyApp {
 
   logout() {
     this.storage.get('accountType').then((val) => {
-      // if (val == 'facebook') {
-      //   this.facebook.logout().then(() => {
-      //     // FOR FURTURE, INSTEAD OF CLEARING ALL CLEAR ONLY NEEDED STORAGE PARAMETERS
-      //     this.storage.clear();
-      //     this.nav.setRoot('WelcomePage');
-      //   }, (err)=> {
-      //     alert(err)
-      //   });
-      // } else {
-      //   this.storage.clear();
-      //   this.nav.setRoot('WelcomePage');
-      // }
-
-
-      this.storage.clear();
-      this.nav.setRoot('WelcomePage');
+      if (val == 'facebook') {
+        this.facebook.logout().then(() => {
+          // FOR FURTURE, INSTEAD OF CLEARING ALL CLEAR ONLY NEEDED STORAGE PARAMETERS
+          this.storage.clear();
+          this.nav.setRoot('WelcomePage');
+        }, (err)=> {
+          alert(err)
+        });
+      } else {
+        this.storage.clear();
+        this.nav.setRoot('WelcomePage');
+      }
     });
 
     this.notificationBar.notificationbarTask('You have logged out!', 3000, 'bottom');

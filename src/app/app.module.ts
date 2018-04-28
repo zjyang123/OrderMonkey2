@@ -91,7 +91,7 @@ export function provideSettings(storage: Storage) {
     Geolocation,
     NotificationBarService,
     DeviceService,
-    Facebook
+    Facebook    
   ]
 })
 export class AppModule { }
