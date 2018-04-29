@@ -1,10 +1,10 @@
 <ion-menu type="overlay" [content]="content">
     <ion-content>
         <ion-list>
-            <button menuClose ion-item *ngFor="let m of menuList" (click)="openMenu(m.title, m.component)">
+            <!-- <button menuClose ion-item *ngFor="let m of menuList" (click)="openMenu(m.title, m.component)">
                 {{m.title}}
             </button>
-            <p>-----james----</p>
+            <p>james</p> -->
             <button menuClose ion-item *ngFor="let m of menuList" (click)="openPage(m)">
                 {{m.title}}
             </button>

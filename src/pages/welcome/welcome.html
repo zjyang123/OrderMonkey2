@@ -24,6 +24,8 @@
           <ion-icon style="padding-right: 5px;" name="qr-scanner"></ion-icon>
           {{ 'QRSCANNER' | translate }}
         </button>
+        <button ion-button block (click)="tabs()">
+        </button>
         <!-- <button ion-button block (click)="test()" class="login">test</button> -->
         <div *ngIf="!isLoggedIn">
           <button ion-button block (click)="login()" class="login">

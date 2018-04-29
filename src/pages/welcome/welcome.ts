@@ -134,4 +134,7 @@ export class WelcomePage {
     });
   }
 
+  tabs() {
+    this.navCtrl.push('TabsPage',{},{animate:false});
+  }
 }

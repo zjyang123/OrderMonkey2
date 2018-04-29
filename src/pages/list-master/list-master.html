@@ -35,14 +35,13 @@
       </ion-item-options>
     </ion-item-sliding> -->
 
-    <div class="recipe-card" style="border-width: 1px; border-style:solid;" *ngFor="let item of currentItems">
+    <div class="recipe-card" style="border-width: 1px; border-style:solid;" *ngFor="let item of currentItems" (click)="openItem(item)">
       <aside>
         <img [src]="item.profilePic" alt="Chai Oatmeal" />
     
-        <a href="#" class="button"><span class="icon icon-play"></span></a>
+        <a class="button"><span class="icon icon-play"></span></a>
       </aside>
       <article>
-    
         <h1>{{item.name}}</h1>
     
         <ul>

@@ -59,6 +59,9 @@ export class QrcodePage {
             // camera permission was granted
             // start scanning
             let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+              this.hideCamera();
+              this.qrScanner.hide(); // hide camera preview
+              scanSub.unsubscribe(); // stop scanning
               this.geolocation.getCurrentPosition().then((resp) => {
                 this.scanResponse = text;
                 const qrcode = this.scanResponse.split('/')[0];
@@ -82,21 +85,14 @@ export class QrcodePage {
       
                   this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
                     if (distance > 120) {
-                      this.navCtrl.pop({animate:false});
-                      this.qrScanner.hide(); // hide camera preview
-                      scanSub.unsubscribe(); // stop scanning
                       this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
+                      this.navCtrl.pop({animate:false});
                     } else {
                       if (this.responseData.tableExist) {
-                        this.qrScanner.hide(); // hide camera preview
-                        scanSub.unsubscribe(); // stop scanning
                         this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
-                        
                       } else {
                         this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
                         this.navCtrl.pop({animate:false});
-                        this.qrScanner.hide(); // hide camera preview
-                        scanSub.unsubscribe(); // stop scanning
                       }
                     }
 
@@ -168,6 +164,7 @@ export class QrcodePage {
 
   ionViewWillLeave() {
     this.hideCamera();
+    this.qrScanner.destroy();
   }
 
 }

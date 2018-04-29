@@ -49,12 +49,12 @@ export class MyApp {
 
     this.logoutButton = { title: 'Logout', component: 'LogoutPage' };
     this.menuList = [
-      { title: 'Tutorial', component: 'TutorialPage' },
-      { title: 'Breakfast Menu', component: 'BreakfastPage' }, // will be removed
-      { title: 'Lunch Menu', component: 'LunchPage' },
-      { title: 'Dinner', component: 'DinnerPage' },
-      { title: 'Drinks and Dessert', component: 'DrinksPage' },
-      { title: 'Search', component: 'SearchPage' },
+      // { title: 'Tutorial', component: 'TutorialPage' },
+      // { title: 'Breakfast Menu', component: 'BreakfastPage' },
+      // { title: 'Lunch Menu', component: 'LunchPage' },
+      // { title: 'Dinner', component: 'DinnerPage' },
+      // { title: 'Drinks and Dessert', component: 'DrinksPage' },
+      // { title: 'Search', component: 'SearchPage' },
       { title: 'Account Settings', component: 'AccountPage' },
       { title: 'Tabs', component: 'TabsPage' }
     ];
