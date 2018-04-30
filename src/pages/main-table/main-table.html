@@ -6,8 +6,7 @@
     <ion-buttons end>
       <!-- <button ion-button icon-only (click)="addItem()"> -->
         <!-- <ion-icon name="add"></ion-icon> -->
-
-      </button>
+      <!-- </button> -->
       Table # 3
     </ion-buttons>
     <ion-title>
@@ -16,7 +15,7 @@
   </ion-navbar>
 </ion-header>
  
-<ion-content padding no-bounce>
+<ion-content no-bounce>
   <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
     <li class="cards__item" (click)="tableDetails(table)" *ngFor="let table of tableInfoDetail">
       <div class="card">

@@ -53,75 +53,75 @@ export class QrcodePage {
   }
 
   ionViewDidLoad() {
-      this.qrScanner.prepare()
-        .then((status: QRScannerStatus) => {
-          if (status.authorized) {
-            // camera permission was granted
-            // start scanning
-            let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-              this.hideCamera();
-              this.qrScanner.hide(); // hide camera preview
-              scanSub.unsubscribe(); // stop scanning
-              this.geolocation.getCurrentPosition().then((resp) => {
-                this.scanResponse = text;
-                const qrcode = this.scanResponse.split('/')[0];
-                const clientID = this.scanResponse.split('/')[1];
-                this.scanSendResponse.qrcode = qrcode;
-                this.scanSendResponse.clientID = clientID;
-                this.geoCordLong = resp.coords.longitude;
-                this.geoCordLat = resp.coords.latitude;
-      
-                // this.geoCordLat = 50.900444// test cords
-                // this.geoCordLong = -114.085056// test cords
-      
-                const testLat = 50.885800// test cords
-                const testLong = -114.089385// test cords
-      
-                this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
-                  this.responseData = result;
-                  const geoCordReturn = this.responseData.geocord;
-                  const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
-                  const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
-      
-                  this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
-                    if (distance > 120) {
-                      this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
-                      this.navCtrl.pop({animate:false});
-                    } else {
-                      if (this.responseData.tableExist) {
-                        this.storage.set('table_data', this.scanSendResponse);
-                        this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
-                      } else {
-                        this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
-                        this.navCtrl.pop({animate:false});
-                      }
-                    }
+    this.qrScanner.prepare()
+      .then((status: QRScannerStatus) => {
+        if (status.authorized) {
+          // camera permission was granted
+          // start scanning
+          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+            this.hideCamera();
+            this.qrScanner.hide(); // hide camera preview
+            scanSub.unsubscribe(); // stop scanning
+            this.geolocation.getCurrentPosition().then((resp) => {
+              this.scanResponse = text;
+              const qrcode = this.scanResponse.split('/')[0];
+              const clientID = this.scanResponse.split('/')[1];
+              this.scanSendResponse.qrcode = qrcode;
+              this.scanSendResponse.clientID = clientID;
+              this.geoCordLong = resp.coords.longitude;
+              this.geoCordLat = resp.coords.latitude;
 
-                  });
-                }, (err) => {
-                  this.notificationBar.notificationbarTask(err, 1500, 'bottom');
-                  //write something for error conditions
+              // this.geoCordLat = 50.900444// test cords
+              // this.geoCordLong = -114.085056// test cords
+
+              const testLat = 50.885800// test cords
+              const testLong = -114.089385// test cords
+
+              this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+                this.responseData = result;
+                const geoCordReturn = this.responseData.geocord;
+                const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
+                const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
+
+                this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
+                  if (distance > 120) {
+                    this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
+                    this.navCtrl.pop({ animate: false });
+                  } else {
+                    if (this.responseData.tableExist) {
+                      this.storage.set('table_data', this.scanSendResponse);
+                      this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                    } else {
+                      this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
+                      this.navCtrl.pop({ animate: false });
+                    }
+                  }
+
                 });
-      
-              }).catch((error) => {
-                this.responseData = error;
-                this.notificationBar.notificationbarTask(error, 1500, 'bottom');
+              }, (err) => {
+                this.notificationBar.notificationbarTask(err, 1500, 'bottom');
+                //write something for error conditions
               });
+
+            }).catch((error) => {
+              this.responseData = error;
+              this.notificationBar.notificationbarTask(error, 1500, 'bottom');
             });
-  
-            // show camera preview
-            this.qrScanner.show();
-  
-            // wait for user to scan something, then the observable callback will be called
-          } else if (status.denied) {
-            // camera permission was permanently denied
-            // you must use QRScanner.openSettings() method to guide the user to the settings page
-            // then they can grant the permission from there
-          } else {
-            // permission was denied, but not permanently. You can ask for permission again at a later time.
-          }
-        })
-        .catch((e: any) => console.log('Error is', e));
+          });
+
+          // show camera preview
+          this.qrScanner.show();
+
+          // wait for user to scan something, then the observable callback will be called
+        } else if (status.denied) {
+          // camera permission was permanently denied
+          // you must use QRScanner.openSettings() method to guide the user to the settings page
+          // then they can grant the permission from there
+        } else {
+          // permission was denied, but not permanently. You can ask for permission again at a later time.
+        }
+      })
+      .catch((e: any) => console.log('Error is', e));
   }
 
   ionViewDidEnter() {
