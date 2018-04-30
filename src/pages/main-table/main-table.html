@@ -4,7 +4,7 @@
       <ion-icon color="primary" name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
+      <!-- <button ion-button icon-only (click)="addItem()"> -->
         <!-- <ion-icon name="add"></ion-icon> -->
 
       </button>
@@ -15,8 +15,8 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
+ 
+<ion-content padding no-bounce>
   <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
     <li class="cards__item" (click)="tableDetails(table)" *ngFor="let table of tableInfoDetail">
       <div class="card">
