@@ -23,6 +23,7 @@ export class WelcomePage {
     qrcode: '',
     clientID: ''
   };
+
   isLoggedIn: boolean = false;
 
   constructor(
@@ -134,7 +135,12 @@ export class WelcomePage {
     });
   }
 
-  tabs() {
-    this.navCtrl.push('TabsPage',{},{animate:false});
-  }
+  // tabs() {
+  //   this.scanSendResponse.qrcode = '87AE33DA4057BE65F2C450913663D261B0A442085BC4F2995AEB6BD4EF510C4A';
+  //   this.scanSendResponse.clientID = '1';
+  //   this.storage.set('table_data', this.scanSendResponse);
+  //   this.navCtrl.push('TabsPage',{
+  //     tableData: this.scanSendResponse
+  //   },{animate:false});
+  // }
 }

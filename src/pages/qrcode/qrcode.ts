@@ -89,6 +89,7 @@ export class QrcodePage {
                       this.navCtrl.pop({animate:false});
                     } else {
                       if (this.responseData.tableExist) {
+                        this.storage.set('table_data', this.scanSendResponse);
                         this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
                       } else {
                         this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');

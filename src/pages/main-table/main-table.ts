@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MenuControllerService } from '../../app/service/menu-controller.service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the MainTablePage page.
@@ -14,16 +16,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'main-table.html',
 })
 export class MainTablePage {
+  public tableInfo;
+  public tableInfoDetail;
+  public menuIsSet = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private menuService: MenuControllerService,
+    private storage: Storage
+  ) {
+    this.tableInit();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainTablePage');
+
   }
 
-  tableDetails(page: any) {
-    this.navCtrl.push('TableDetailPage');
+  tableDetails(menu: any) {
+      this.navCtrl.push('TableDetailPage', {
+        menu: menu
+      });
   }
 
+  tableInit() {
+    this.storage.get('table_data').then((val) => {
+      this.menuService.getMenuCatagory(val).then((result) => {
+        this.tableInfo = result;
+        this.menuIsSet = this.tableInfo.clientMenuSet;
+        if (this.tableInfo.clientMenuSet) {
+          this.tableInfoDetail = this.tableInfo.result;
+
+        } else {
+          console.log('empty')
+        }
+
+      }, (err) => {
+
+      });
+    });
+  }
 }

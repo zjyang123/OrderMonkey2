@@ -22,6 +22,7 @@ import { DeviceService } from './service/device.service';
 import { LoginService } from './service/login.service';
 import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
+import { MenuControllerService } from './service/menu-controller.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -84,6 +85,7 @@ export function provideSettings(storage: Storage) {
     TapticEngine,
     LoginService,
     UserCommunication,
+    MenuControllerService,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },

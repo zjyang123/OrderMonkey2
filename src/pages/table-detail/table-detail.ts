@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'table-detail.html',
 })
 export class TableDetailPage {
+  public menu;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.menu = navParams.get('menu');
   }
 
   ionViewDidLoad() {
