@@ -1,4 +1,4 @@
-<ion-header no-shadow no-border>
+<ion-header no-shadow no-border style="padding-top:18px;">
   <ion-navbar transparent>
     <button menuToggle ion-button round icon-only>
       <ion-icon color="primary" name="menu"></ion-icon>
@@ -17,8 +17,8 @@
  
 <ion-content no-bounce>
   <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
-    <li class="cards__item" (click)="tableDetails(table)" *ngFor="let table of tableInfoDetail">
-      <div class="card">
+    <li class="cards__item" *ngFor="let table of tableInfoDetail">
+      <div class="card" (click)="tableDetails(table)">
         <div class="card__image" [ngStyle]="{'background-image': 'url(' + table.menu_image + ')' }"></div>
         <div class="card__content">
           <div class="card__title">{{ table.menu_name }}</div>

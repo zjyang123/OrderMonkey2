@@ -23,6 +23,7 @@ import { LoginService } from './service/login.service';
 import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
 import { MenuControllerService } from './service/menu-controller.service';
+import { SuperTabsModule } from 'ionic2-super-tabs';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -68,7 +69,8 @@ export function provideSettings(storage: Storage) {
         }
       }
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    SuperTabsModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

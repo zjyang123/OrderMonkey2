@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { Storage } from '@ionic/storage';
 
@@ -24,6 +24,7 @@ export class MainTablePage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public menuCtrl: MenuController,
     private menuService: MenuControllerService,
     private storage: Storage
   ) {

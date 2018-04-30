@@ -10,7 +10,7 @@ import { MainTablePage } from './main-table';
   ],
   imports: [
     IonicPageModule.forChild(MainTablePage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
   ],
 })
 export class MainTablePageModule {}

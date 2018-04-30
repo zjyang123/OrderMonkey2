@@ -1,7 +1,7 @@
 page-main-table {
 
     img {
-        height: auto;
+        // height: auto;
         max-width: 100%;
         vertical-align: middle;
       }
@@ -93,5 +93,16 @@ page-main-table {
         margin-bottom: 1.25rem;
       }
       
-  
+      .card__image--flowers {
+        background-image: url(https://unsplash.it/800/600?image=82);
+      }
+      .card__image--river {
+        background-image: url(https://unsplash.it/800/600?image=11);
+      }
+      .card__image--record {
+        background-image: url(https://unsplash.it/800/600?image=39);
+      }
+      .card__image--fence {
+        background-image: url(https://unsplash.it/800/600?image=59);
+      }
 }
