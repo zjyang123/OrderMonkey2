@@ -44,7 +44,7 @@ export class WelcomePage {
       content: ''
     });
     loading.present().then(() => {
-      this.qrScanner.prepare();
+      // this.qrScanner.prepare();
       this.geolocation.getCurrentPosition();
       this.getLoginStatus();
       loading.dismiss();

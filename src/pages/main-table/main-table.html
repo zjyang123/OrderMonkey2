@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
  
-<ion-content no-bounce>
+<ion-content>
   <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
     <li class="cards__item" *ngFor="let table of tableInfoDetail">
       <div class="card" (click)="tableDetails(table)">
