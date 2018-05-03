@@ -13,36 +13,25 @@
         <!-- <button ion-button icon-only (click)="addItem()"> -->
           <!-- <ion-icon name="add"></ion-icon> -->
         <!-- </button> -->
-        Table # 3
+        Table 3
       </ion-buttons>
       <ion-title>
-        Menue title
+        Menu title
       </ion-title>
     </ion-navbar>
   </ion-header>
 
 
 <ion-content>
-    <!-- <div class="recipe-card" style="border-width: 1px; border-style:solid;" (click)="openItem(item)">
-        <aside>
-          <img [src]="item.profilePic" alt="Chai Oatmeal" />
-      
-          <a class="button"><span class="icon icon-play"></span></a>
-        </aside>
-        <article>
-          <h1>{{item.name}}</h1>
-      
-          <ul>
-            <li><span class="icon icon-users"></span><span>1</span></li>
-            <li><span class="icon icon-clock"></span><span>15 min</span></li>
-            <li><span class="icon icon-level"></span><span>Beginner level</span></li>
-            <li><span class="icon icon-calories"></span><span>248</span></li>
-          </ul>
-      
-          <p>{{item.about}}</p>
-      
-        </article>
-      
-      </div> -->
+  <ion-card *ngFor="let item of itemDetailArray">
+    <div class="col-xs-3">
+      <!-- <img href="{{item.itemURL}}"> -->
+    </div>
+    <div class="col-xs-9">
+        <ion-card-header>{{item.itemName}}</ion-card-header>
+        <ion-card-content>{{item.itemDesc}}</ion-card-content>
+    </div>
+
+  </ion-card>
       Menu ID #: {{ menu.id }}
 </ion-content>
