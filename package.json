@@ -21,6 +21,7 @@
     "@angular/http": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
+    "@ionic-native/background-mode": "^4.7.0",
     "@ionic-native/barcode-scanner": "^4.6.0",
     "@ionic-native/camera": "4.3.3",
     "@ionic-native/core": "4.6.0",
@@ -37,6 +38,7 @@
     "@ngx-translate/http-loader": "^2.0.0",
     "cordova-android": "7.1.0",
     "cordova-ios": "4.5.4",
+    "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "^2.0.1",
@@ -79,7 +81,8 @@
         "APP_ID": "215438025885995",
         "APP_NAME": "OrderMonkey",
         "ANDROID_SDK_VERSION": "4.+"
-      }
+      },
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "ios",

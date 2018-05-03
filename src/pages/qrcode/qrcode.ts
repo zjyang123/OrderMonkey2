@@ -66,42 +66,48 @@ export class QrcodePage {
               this.scanResponse = text;
               const qrcode = this.scanResponse.split('/')[0];
               const clientID = this.scanResponse.split('/')[1];
-              this.scanSendResponse.qrcode = qrcode;
-              this.scanSendResponse.clientID = clientID;
-              this.geoCordLong = resp.coords.longitude;
-              this.geoCordLat = resp.coords.latitude;
 
-              // this.geoCordLat = 50.900444// test cords
-              // this.geoCordLong = -114.085056// test cords
-
-              const testLat = 50.885800// test cords
-              const testLong = -114.089385// test cords
-
-              this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
-                this.responseData = result;
-                const geoCordReturn = this.responseData.geocord;
-                const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
-                const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
-
-                this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
-                  if (distance < 120) {
-                    this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
-                    this.navCtrl.pop({ animate: false });
-                  } else {
-                    if (this.responseData.tableExist) {
-                      this.storage.set('table_data', this.scanSendResponse);
-                      this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
-                    } else {
-                      this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
+              if (this.scanResponse.split('/').length != 2) {
+                this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
+                this.navCtrl.pop({ animate: false });
+              } else {
+                this.scanSendResponse.qrcode = qrcode;
+                this.scanSendResponse.clientID = clientID;
+                this.geoCordLong = resp.coords.longitude;
+                this.geoCordLat = resp.coords.latitude;
+  
+                this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
+                  this.responseData = result;
+                  const geoCordReturn = this.responseData.geocord;
+                  const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
+                  const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
+  
+                  this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
+                    if (distance > 120) {
+                      this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
                       this.navCtrl.pop({ animate: false });
+                    } else {
+                      if (this.responseData.tableExist) {
+                        let loading = this.loadingCtrl.create({
+                          content: ''
+                        });
+                        loading.present().then(() => {
+                          this.storage.set('table_data', this.scanSendResponse);
+                          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                          loading.dismiss();
+                        });
+                      } else {
+                        this.notificationBar.notificationbarTask('Table Doesn\'t Exist', 1500, 'bottom');
+                        this.navCtrl.pop({ animate: false });
+                      }
                     }
-                  }
-
+  
+                  });
+                }, (err) => {
+                  this.notificationBar.notificationbarTask(err, 1500, 'bottom');
+                  //write something for error conditions
                 });
-              }, (err) => {
-                this.notificationBar.notificationbarTask(err, 1500, 'bottom');
-                //write something for error conditions
-              });
+              }
 
             }).catch((error) => {
               this.responseData = error;

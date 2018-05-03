@@ -108,7 +108,5 @@
         <variable name="APP_NAME" value="OrderMonkey" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
-    <allow-navigation href="http://192.168.0.14:8100" />
-    <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="7.1.0" />
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
 </widget>
