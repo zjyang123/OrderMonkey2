@@ -46,9 +46,12 @@ export class WelcomePage {
     loading.present().then(() => {
       // this.qrScanner.prepare();
       this.geolocation.getCurrentPosition();
-      this.getLoginStatus();
+
       loading.dismiss();
     })
+  }
+  ionViewWillEnter() {
+    this.getLoginStatus();
   }
 
   getLoginStatus() {
@@ -94,8 +97,8 @@ export class WelcomePage {
     let loading = this.loadingCtrl.create({
       content: ''
     });
-    loading.present().then(()=> {
-      this.navCtrl.push('QrcodePage',{},{animate:false});
+    loading.present().then(() => {
+      this.navCtrl.push('QrcodePage', {}, { animate: false });
       loading.dismiss();
     })
   }
@@ -120,6 +123,7 @@ export class WelcomePage {
 
         } else {
           if (this.responseData.tableExist) {
+            this.storage.set('table_data', this.scanSendResponse);
             this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
           } else {
             let toast = this.toastCtrl.create({
@@ -137,12 +141,4 @@ export class WelcomePage {
     });
   }
 
-  // tabs() {
-  //   this.scanSendResponse.qrcode = '87AE33DA4057BE65F2C450913663D261B0A442085BC4F2995AEB6BD4EF510C4A';
-  //   this.scanSendResponse.clientID = '1';
-  //   this.storage.set('table_data', this.scanSendResponse);
-  //   this.navCtrl.push('TabsPage',{
-  //     tableData: this.scanSendResponse
-  //   },{animate:false});
-  // }
 }

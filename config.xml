@@ -110,4 +110,5 @@
         <variable name="APP_NAME" value="OrderMonkey" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
 </widget>
