@@ -16,22 +16,23 @@
         Table 3
       </ion-buttons>
       <ion-title>
-        Menu title
+        {{menu.menu_name}}
       </ion-title>
     </ion-navbar>
   </ion-header>
 
 
 <ion-content>
-  <ion-card *ngFor="let item of itemDetailArray">
-    <div class="col-xs-3">
-      <!-- <img href="{{item.itemURL}}"> -->
-    </div>
-    <div class="col-xs-9">
-        <ion-card-header>{{item.itemName}}</ion-card-header>
-        <ion-card-content>{{item.itemDesc}}</ion-card-content>
-    </div>
-
-  </ion-card>
+<ion-list no-lines>
+  <div *ngFor="let item of itemDetailArray">
+    <ion-item (click)="itemDetails(item)">
+        <ion-thumbnail item-start>
+            <img src="{{item.product_image}}" alt="item_image">
+        </ion-thumbnail>
+        <h2>{{item.product_name}}</h2>
+        <p>{{item.product_description}}</p>
+    </ion-item>
+  </div>
+</ion-list>
       Menu ID #: {{ menu.id }}
 </ion-content>

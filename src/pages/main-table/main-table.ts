@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { Storage } from '@ionic/storage';
+import { NotificationBarService } from '../../app/service/notificationbar.service';
 
 /**
  * Generated class for the MainTablePage page.
@@ -19,6 +20,7 @@ export class MainTablePage {
   public tableInfo;
   public tableInfoDetail;
   public menuIsSet = true;
+  public notificationBar: NotificationBarService;
 
 
   constructor(
@@ -39,6 +41,7 @@ export class MainTablePage {
       this.navCtrl.push('TableDetailPage', {
         menu: menu
       });
+      this.notificationBar.notificationbarTask(menu, 1500, 'bottom');
   }
 
   tableInit() {

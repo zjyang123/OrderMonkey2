@@ -8,11 +8,27 @@
 
 
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div>
+  <ion-card>
+    <img src="{{item.product_image}}">
+    <ion-card-header>
+        <h2>{{item.product_name}}</h2>
+    </ion-card-header>
+    <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+    </div> -->
 
-  <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
-  </div>
+    <ion-card-content>
+      <p>{{item.product_description}}</p>
+      <ion-list no-lines>
+        <ion-list-header>
+          Your Choices
+        </ion-list-header>
+          <ion-item *ngFor="let option of item.has_options" >
+            <ion-label>{{option}}</ion-label>
+            <ion-radio value="option"></ion-radio>
+          </ion-item>
+        </ion-list>
+    </ion-card-content>
+  
+  </ion-card>
+  <button ion-button full clear>Add to order</button>
 </ion-content>
