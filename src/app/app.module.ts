@@ -24,7 +24,6 @@ import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
 import { MenuControllerService } from './service/menu-controller.service';
 import { SuperTabsModule } from 'ionic2-super-tabs';
-import { BackgroundMode } from '@ionic-native/background-mode';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -96,8 +95,7 @@ export function provideSettings(storage: Storage) {
     Geolocation,
     NotificationBarService,
     DeviceService,
-    Facebook,
-    BackgroundMode
+    Facebook
   ]
 })
 export class AppModule { }
