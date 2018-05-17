@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
-import { BackgroundMode } from '@ionic-native/background-mode';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
@@ -41,8 +40,7 @@ export class MyApp {
     private screenOrientation: ScreenOrientation,
     public storage: Storage,
     public facebook: Facebook,
-    public notificationBar: NotificationBarService,
-    private backgroundMode: BackgroundMode
+    public notificationBar: NotificationBarService
   ) {
 
     // Set orientation to portrait only works in productio mode-->>>>>> disable when develope mode
@@ -64,7 +62,6 @@ export class MyApp {
     this.splashScreen.show();
 
     platform.ready().then(() => {
-      this.backgroundMode.enable();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();

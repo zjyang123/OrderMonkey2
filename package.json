@@ -38,10 +38,9 @@
     "@ngx-translate/http-loader": "^2.0.0",
     "cordova-android": "7.1.0",
     "cordova-ios": "4.5.4",
-    "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-facebook4": "^2.0.1",
+    "cordova-plugin-facebook4": "^2.1.0",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -81,12 +80,11 @@
         "APP_ID": "215438025885995",
         "APP_NAME": "OrderMonkey",
         "ANDROID_SDK_VERSION": "4.+"
-      },
-      "cordova-plugin-background-mode": {}
+      }
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
