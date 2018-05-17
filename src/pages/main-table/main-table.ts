@@ -41,7 +41,6 @@ export class MainTablePage {
       this.navCtrl.push('TableDetailPage', {
         menu: menu
       });
-      this.notificationBar.notificationbarTask(menu, 1500, 'bottom');
   }
 
   tableInit() {
