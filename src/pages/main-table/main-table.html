@@ -19,12 +19,10 @@
   <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
     <li class="cards__item" *ngFor="let table of tableInfoDetail">
       <div class="card" (click)="tableDetails(table)">
-        <img class="card_image" [src]="table.menu_image " alt="">
-        <!-- <div class="card__image" [ngStyle]="{'background-image': 'url(' + table.menu_image + ')' }"></div> -->
+        <!-- <img class="card__image" [src]="table.menu_image " alt=""> -->
+        <div class="card__image" [ngStyle]="{'background-image': 'url(' + table.menu_image + ')' }"></div>
         <div class="card__content">
           <div class="card__title">{{ table.menu_name }}</div>
-          <!-- <p class="card__text">This is the shorthand for flex-grow, flex- </p> -->
-          <!-- <button class="btn btn--block card__btn">Button</button> -->
         </div>
       </div>
     </li>

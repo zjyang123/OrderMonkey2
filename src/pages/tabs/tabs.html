@@ -3,3 +3,20 @@
   <super-tab [root]="tab2Root" icon="search"></super-tab>
   <super-tab [root]="tab3Root" icon="cog"></super-tab>
 </super-tabs>
+<!-- <ion-tabs>
+  <ion-tab [root] = "tab1Root" tabTitle = "Tab1"></ion-tab>
+  <ion-tab [root] = "tab2Root" tabTitle = "Tab2"></ion-tab>
+  <ion-tab [root] = "tab3Root" tabTitle = "Tab3"></ion-tab>
+</ion-tabs> -->
+<ion-split-pane when="(min-width: 320px)">
+    <ion-menu id="tableMenu" type="overlay" [content]="content">
+        <ion-content>
+            <h1>Table Menu</h1>
+            <ion-list>
+              <p>okay</p>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+
+    <ion-nav #content [root]="rootPage" main></ion-nav>
+</ion-split-pane>

@@ -37,14 +37,15 @@ export class WelcomePage {
     public userCommunication: UserCommunication,
     public notificationBar: NotificationBarService,
     public loadingCtrl: LoadingController,
-    private qrScanner: QRScanner
+    private qrScanner: QRScanner,
   ) {
     this.menuCtrl.swipeEnable(false);
+    this.menuCtrl.enable(false, 'welcomeMenu'); // Enables WelcomePage dedicated menu
+    this.menuCtrl.enable(false, 'tableMenu'); // Disables Table Pages Menu
     let loading = this.loadingCtrl.create({
       content: ''
     });
     loading.present().then(() => {
-      // this.qrScanner.prepare();
       this.geolocation.getCurrentPosition();
 
       loading.dismiss();
@@ -52,6 +53,7 @@ export class WelcomePage {
   }
   ionViewWillEnter() {
     this.getLoginStatus();
+
   }
 
   getLoginStatus() {
@@ -62,6 +64,7 @@ export class WelcomePage {
             this.responseData = result;
             this.isLoggedIn = this.responseData.data.is_valid;
             if (this.isLoggedIn) {
+              this.menuCtrl.enable(true, 'welcomeMenu');
               this.menuCtrl.swipeEnable(true);
             }
           }, (err) => {
@@ -75,6 +78,7 @@ export class WelcomePage {
             this.responseData = result;
             this.isLoggedIn = this.responseData.loginCheck;
             if (this.isLoggedIn) {
+              this.menuCtrl.enable(true, 'welcomeMenu');
               this.menuCtrl.swipeEnable(true);
             }
           }, (err) => {

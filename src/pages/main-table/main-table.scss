@@ -1,5 +1,4 @@
 page-main-table {
-
     img {
         // height: auto;
         max-width: 100%;
@@ -49,9 +48,9 @@ page-main-table {
                 filter: contrast(100%);
       }
       .card__content {
-        // display: flex;
-        // flex: 1 1 auto;
-        // flex-direction: column;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
         padding: 1rem;
       }
       .card__image {
@@ -60,8 +59,8 @@ page-main-table {
         background-size: cover;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
-        -webkit-filter: contrast(70%);
-                filter: contrast(70%);
+        -webkit-filter: contrast(65%);
+                filter: contrast(65%);
         overflow: hidden;
         position: relative;
         transition: -webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
@@ -73,11 +72,11 @@ page-main-table {
         display: block;
         padding-top: 56.25%;
       }
-      @media (min-width: 40rem) {
-        .card__image::before {
-          padding-top: 66.6%;
-        }
-      }
+      // @media (min-width: 40rem) {
+      //   .card__image::before {
+      //     padding-top: 66.6%;
+      //   }
+      // }
 
       .card__title {
         color: #696969;
@@ -86,23 +85,6 @@ page-main-table {
         letter-spacing: 2px;
         text-transform: uppercase;
       }
-      .card__text {
-        flex: 1 1 auto;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        margin-bottom: 1.25rem;
-      }
       
-      .card__image--flowers {
-        background-image: url(https://unsplash.it/800/600?image=82);
-      }
-      .card__image--river {
-        background-image: url(https://unsplash.it/800/600?image=11);
-      }
-      .card__image--record {
-        background-image: url(https://unsplash.it/800/600?image=39);
-      }
-      .card__image--fence {
-        background-image: url(https://unsplash.it/800/600?image=59);
-      }
+      
 }
