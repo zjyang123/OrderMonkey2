@@ -30,11 +30,11 @@ export class MainTablePage {
     private menuService: MenuControllerService,
     private storage: Storage
   ) {
-    
-  }
-
-  ionViewWillEnter() {
     this.tableInit();
+  }
+  
+  ionViewDidlEnter() {
+
   }
 
   tableDetails(menu: any) {
