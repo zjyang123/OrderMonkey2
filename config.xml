@@ -3,7 +3,7 @@
     <name>Order Monkey</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.77:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -11,6 +11,10 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
@@ -84,17 +88,7 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>Order Monkey Requires Your Location!</string>
     </edit-config>
-    <allow-navigation href="http://192.168.1.75:8100" />
-    <allow-navigation href="http://192.168.1.77:8100" />
-    <allow-navigation href="http://169.254.197.83:8100" />
-    <allow-navigation href="http://169.254.58.112:8100" />
-    <allow-navigation href="http://169.254.77.12:8100" />
-    <allow-navigation href="http://169.254.186.26:8100" />
-    <allow-navigation href="http://169.254.201.39:8100" />
-    <allow-navigation href="http://169.254.73.247:8100" />
-    <allow-navigation href="http://192.168.0.14:8100" />
-    <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="4.5.4" />
+    <allow-navigation href="*" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
@@ -111,4 +105,6 @@
         <variable name="APP_NAME" value="OrderMonkey" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
+    <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>
