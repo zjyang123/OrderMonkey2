@@ -3,3 +3,27 @@
   <super-tab [root]="tab2Root" icon="search"></super-tab>
   <super-tab [root]="tab3Root" icon="cog"></super-tab>
 </super-tabs>
+
+<ion-fab right bottom class="fab-button-position">
+  <button ion-fab color="primary">
+      <ion-icon name="restaurant"></ion-icon>
+  </button>
+
+  <ion-fab-list side="top">
+    <button ion-fab  color="primary" (click)="openSocial('facebook', fab3)">
+        <ion-icon name="clipboard"></ion-icon>
+    </button>
+    <button ion-fab (click)="openSocial('vimeo', fab3)">
+        <ion-icon name="checkmark"></ion-icon>
+    </button>
+    <button ion-fab (click)="openSocial('googleplus', fab3)">
+      <ion-icon name="contacts"></ion-icon>
+    </button>
+  </ion-fab-list>
+
+</ion-fab>
+<!-- <ion-tabs>
+  <ion-tab [root] = "tab1Root" tabTitle = "Tab1"></ion-tab>
+  <ion-tab [root] = "tab2Root" tabTitle = "Tab2"></ion-tab>
+  <ion-tab [root] = "tab3Root" tabTitle = "Tab3"></ion-tab>
+</ion-tabs> -->

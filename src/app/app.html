@@ -1,10 +1,7 @@
-<ion-menu type="overlay" [content]="content">
+<ion-menu id="welcomeMenu" type="overlay" [content]="content">
     <ion-content>
+        <h1>Welcome Menu</h1>
         <ion-list>
-            <!-- <button menuClose ion-item *ngFor="let m of menuList" (click)="openMenu(m.title, m.component)">
-                {{m.title}}
-            </button>
-            <p>james</p> -->
             <button menuClose ion-item *ngFor="let m of menuList" (click)="openPage(m)">
                 {{m.title}}
             </button>
@@ -14,5 +11,4 @@
         </ion-list>
     </ion-content>
 </ion-menu>
-
-<ion-nav #content [root]="rootPage"></ion-nav>
+<ion-nav #content [root]="rootPage" main></ion-nav>

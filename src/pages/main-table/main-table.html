@@ -1,38 +1,33 @@
-<ion-header no-shadow no-border style="padding-top:18px;">
+<ion-header no-shadow style="padding-top:18px;">
   <ion-navbar transparent>
     <button menuToggle ion-button round icon-only>
       <ion-icon color="primary" name="menu"></ion-icon>
     </button>
     <ion-buttons end>
       <!-- <button ion-button icon-only (click)="addItem()"> -->
-        <!-- <ion-icon name="add"></ion-icon> -->
+      <!-- <ion-icon name="add"></ion-icon> -->
       <!-- </button> -->
-      Table #3
+      Table # 3
     </ion-buttons>
     <ion-title>
       Restaurant Menu
     </ion-title>
   </ion-navbar>
 </ion-header>
- 
 <ion-content>
-  <ul class="cards" *ngIf="menuIsSet; else emptyMenu">
-    <li class="cards__item" *ngFor="let table of tableInfoDetail">
-      <div class="card" (click)="tableDetails(table)">
-        <img class="card_image" [src]="table.menu_image " alt="">
-        <!-- <div class="card__image" [ngStyle]="{'background-image': 'url(' + table.menu_image + ')' }"></div> -->
-        <div class="card__content">
-          <div class="card__title">{{ table.menu_name }}</div>
-          <!-- <p class="card__text">This is the shorthand for flex-grow, flex- </p> -->
-          <!-- <button class="btn btn--block card__btn">Button</button> -->
-        </div>
+  <div *ngIf="menuIsSet; else emptyMenu">
+    <div class="blog-card" style="padding-top:7px;" *ngFor="let table of tableInfoDetail" (click)="tableDetails(table)">
+      <img class="photo" [src]="table.menu_image">
+      <div class="description">
+        <h1 style="padding-top:25px;">{{ table.menu_name }}</h1>
+        <hr>
+        <h2>Sample Text Here</h2>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
   <ng-template #emptyMenu>
     <div style="text-align: center;">
       <p>This menu is empty!</p>
-
     </div>
   </ng-template>
 </ion-content>

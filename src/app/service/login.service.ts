@@ -71,7 +71,6 @@ export class LoginService {
     
     authTokenCheckFacebook(token) {
         return new Promise((resolve, reject) => {
-            const headers = new Headers();
             this.http.get('https://graph.facebook.com/debug_token?input_token=' + token + '&access_token=' + this.appID + '|' + this.appSecret)
                 .subscribe(res => {
                     resolve(res.json());
