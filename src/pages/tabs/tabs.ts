@@ -26,8 +26,7 @@ export class TabsPage {
       this.tab2Title = values['TAB2_TITLE'];
       this.tab3Title = values['TAB3_TITLE'];
 
-      this.menuCtrl.enable(false, 'welcomeMenu'); // Enables WelcomePage dedicated menu
-      this.menuCtrl.enable(true, 'tableMenu'); // Disables Table Pages Menu
+      this.menuCtrl.enable(true, 'welcomeMenu'); // Enables WelcomePage dedicated menu
     });
   }
 }

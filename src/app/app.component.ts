@@ -1,4 +1,4 @@
-import { animate, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Facebook } from '@ionic-native/facebook';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,7 +37,6 @@ export class MyApp {
     private config: Config, 
     private statusBar: StatusBar, 
     public splashScreen: SplashScreen, 
-    private screenOrientation: ScreenOrientation,
     public storage: Storage,
     public facebook: Facebook,
     public notificationBar: NotificationBarService

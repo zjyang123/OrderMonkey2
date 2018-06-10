@@ -105,6 +105,10 @@
         <variable name="APP_NAME" value="OrderMonkey" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
+    <allow-navigation href="http://192.168.1.80:8100" />
+    <allow-navigation href="http://169.254.117.215:8100" />
+    <allow-navigation href="http://169.254.140.141:8100" />
+    <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="4.5.4" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

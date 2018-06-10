@@ -29,7 +29,6 @@ export class WelcomePage {
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
-    // private barcodeScanner: BarcodeScanner,
     private geolocation: Geolocation,
     private toastCtrl: ToastController,
     public loginService: LoginService,
@@ -41,7 +40,6 @@ export class WelcomePage {
   ) {
     this.menuCtrl.swipeEnable(false);
     this.menuCtrl.enable(false, 'welcomeMenu'); // Enables WelcomePage dedicated menu
-    this.menuCtrl.enable(false, 'tableMenu'); // Disables Table Pages Menu
     let loading = this.loadingCtrl.create({
       content: ''
     });

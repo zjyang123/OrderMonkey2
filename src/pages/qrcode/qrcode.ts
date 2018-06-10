@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Storage } from '@ionic/storage';
 import { IonicPage, LoadingController, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { LoginService } from '../../app/service/login.service';
 import { NotificationBarService } from '../../app/service/notificationbar.service';
@@ -46,6 +47,7 @@ export class QrcodePage {
     public storage: Storage,
     public userCommunication: UserCommunication,
     public notificationBar: NotificationBarService,
+    private nativePageTransitions: NativePageTransitions
   ) {
     //默认为false
     this.light = false;
@@ -93,7 +95,7 @@ export class QrcodePage {
                         });
                         loading.present().then(() => {
                           this.storage.set('table_data', this.scanSendResponse);
-                          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'flip' });
                           loading.dismiss();
                         });
                       } else {
@@ -172,6 +174,20 @@ export class QrcodePage {
   ionViewWillLeave() {
     this.hideCamera();
     this.qrScanner.destroy();
+
+    let options: NativeTransitionOptions = {
+      direction: 'up',
+      duration: 1000,
+      slowdownfactor: 3,
+      slidePixels: 20,
+      iosdelay: 100,
+      androiddelay: 150,
+      fixedPixelsTop: 0,
+      fixedPixelsBottom: 60
+     };
+  
+   this.nativePageTransitions.curl(options)
+
   }
 
 }
