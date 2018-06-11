@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
+import { Item } from '../../models/item';
+import { Items } from '../../providers/providers';
 /**
  * Generated class for the TableDetailPage page.
  *
@@ -15,6 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TableDetailPage {
   public menu;
+  currentItems: Item[];
 
   itemDetailArray = [
     {
@@ -49,8 +53,9 @@ export class TableDetailPage {
 
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) {
     this.menu = navParams.get('menu');
+    this.currentItems = this.items.query();
   }
 
   itemDetails(item:any) {

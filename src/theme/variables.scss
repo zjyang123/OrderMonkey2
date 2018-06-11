@@ -3,7 +3,7 @@
 $font-path: "../assets/fonts";
 
 @import "ionic.globals";
-
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text|Nunito|Open+Sans');
 
 // Shared Variables
 // --------------------------------------------------
@@ -16,6 +16,7 @@ $text-color:        rgb(14, 14, 14);
 $background-color:  #fff;
 
 .toastStyle{
+  font-family: 'Nunito', sans-serif;
   text-align: center;
 }
 

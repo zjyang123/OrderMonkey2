@@ -1,6 +1,4 @@
 page-main-table {
-
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700);
 $green: #75d13b;
 $grey: #e9e9e9;
 
@@ -16,6 +14,7 @@ $grey: #e9e9e9;
 	border-radius: 3px;
 	box-shadow: 0 3px 7px -3px rgba(0, 0, 0, 0.3);
 	margin: 0 auto 1.6%;
+	padding: 0px 0px 0px 5px;
 	overflow: hidden;
 	position: relative;
 	font-size: 14px;
@@ -59,19 +58,19 @@ $grey: #e9e9e9;
 		position: relative;
 
 		h1 {
-			font-family: "Roboto";
+			font-family: 'Crimson Text', serif;
+			font-size: 2.2em;
 			line-height: 1em;
 			margin: 0 0 10px 0;
 		}
 
 		h2 {
 			color: $grey / 1.5;
-			font-family: "Open Sans";
-			line-height: 1.2em;
-			text-transform: uppercase;
-			font-size: 1em;
+			font-family: 'Open Sans', sans-serif;
+			line-height: 1em;
+			font-size: 14px;
 			font-weight: 400;
-			margin: 1.2% 0;
+			margin: 1.1% 0;
 		}
 
 		p {
@@ -117,16 +116,16 @@ $grey: #e9e9e9;
 
 @media screen and (min-width: 240px) {
 	.blog-card {
-		height: 150px;
+		height: 125px;
 		max-width: 600px;
 
 		&:hover {
 			.photo {
-				transform: rotate(5deg) scale(1.3);
+				transform: rotate(0deg) scale(1.0);
 			}
 
 			&.alt .photo {
-				transform: rotate(-5deg) scale(1.3);
+				transform: rotate(-0deg) scale(1.0);
 			}
 		}
 
@@ -155,7 +154,7 @@ $grey: #e9e9e9;
 			object-fit: cover;
 			float: left;
 			height: 100%;
-      width: 40%;
+      		width: 39%;
 		}
 
 		.details {
@@ -164,12 +163,12 @@ $grey: #e9e9e9;
 
 		.description {
 			float: right;
-			width: 60%;
+			width: 61%;
 			height: 100%;
-      z-index: 0;
+      		z-index: 0;
 
 			&:before {
-				// transform: skewX(5deg);
+				transform: skewX(-10deg);
 				content: "";
 				background: #fff;
 				width: 100%;
@@ -184,8 +183,4 @@ $grey: #e9e9e9;
 		}
 	}
 }
-
-
-
-
 }

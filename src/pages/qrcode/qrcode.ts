@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Storage } from '@ionic/storage';
@@ -34,6 +34,7 @@ export class QrcodePage {
     qrcode: '',
     clientID: ''
   };
+  tableSuccess;
 
   constructor(
     private navCtrl: NavController,
@@ -47,7 +48,8 @@ export class QrcodePage {
     public storage: Storage,
     public userCommunication: UserCommunication,
     public notificationBar: NotificationBarService,
-    private nativePageTransitions: NativePageTransitions
+    private nativePageTransitions: NativePageTransitions,
+    private el: ElementRef
   ) {
     //默认为false
     this.light = false;
@@ -94,8 +96,9 @@ export class QrcodePage {
                           content: ''
                         });
                         loading.present().then(() => {
+                          this.tableSuccess = true;
                           this.storage.set('table_data', this.scanSendResponse);
-                          this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'flip' });
+                          this.navCtrl.setRoot('TabsPage', {}, { animate: true });
                           loading.dismiss();
                         });
                       } else {
@@ -172,21 +175,23 @@ export class QrcodePage {
   }
 
   ionViewWillLeave() {
+    if (this.tableSuccess) {
+      let options: NativeTransitionOptions = {
+        direction: 'down',
+        duration: 500,
+        slowdownfactor: 3,
+        slidePixels: 20,
+        iosdelay: 100,
+        androiddelay: 150,
+        fixedPixelsTop: 0,
+        fixedPixelsBottom: 60
+       };
+       this.nativePageTransitions.flip(options)
+     }
     this.hideCamera();
     this.qrScanner.destroy();
 
-    let options: NativeTransitionOptions = {
-      direction: 'up',
-      duration: 1000,
-      slowdownfactor: 3,
-      slidePixels: 20,
-      iosdelay: 100,
-      androiddelay: 150,
-      fixedPixelsTop: 0,
-      fixedPixelsBottom: 60
-     };
-  
-   this.nativePageTransitions.curl(options)
+    
 
   }
 
