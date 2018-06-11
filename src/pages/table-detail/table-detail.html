@@ -5,34 +5,47 @@
   Ionic pages and navigation.
 -->
 <ion-header no-shadow no-border style="padding-top:18px;">
-    <ion-navbar transparent>
-      <button menuToggle ion-button round icon-only>
-        <ion-icon color="primary" name="menu"></ion-icon>
-      </button>
-      <ion-buttons end>
-        <!-- <button ion-button icon-only (click)="addItem()"> -->
-          <!-- <ion-icon name="add"></ion-icon> -->
-        <!-- </button> -->
-        Table 3
-      </ion-buttons>
-      <ion-title>
-        {{menu.menu_name}}
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar transparent>
+    <button menuToggle ion-button round icon-only>
+      <ion-icon color="primary" name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <!-- <button ion-button icon-only (click)="addItem()"> -->
+      <!-- <ion-icon name="add"></ion-icon> -->
+      <!-- </button> -->
+      Table 3
+    </ion-buttons>
+    <ion-title>
+      {{menu.menu_name}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content>
-<ion-list no-lines>
-  <div *ngFor="let item of itemDetailArray">
-    <ion-item (click)="itemDetails(item)">
-        <ion-thumbnail item-start>
-            <img src="{{item.product_image}}" alt="item_image">
-        </ion-thumbnail>
-        <h2>{{item.product_name}}</h2>
-        <p>{{item.product_description}}</p>
-    </ion-item>
-  </div>
-</ion-list>
-      Menu ID #: {{ menu.id }}
+    <ion-list>
+
+        <div class="recipe-card" style="border-width: 1px; border-style:solid;" *ngFor="let item of currentItems" (click)="openItem(item)">
+          <aside>
+            <img [src]="item.profilePic" alt="Chai Oatmeal" />
+        
+            <a class="button"><span class="icon icon-play"></span></a>
+          </aside>
+          <article>
+            <h1>{{item.name}}</h1>
+        
+            <ul>
+              <li><span class="icon icon-users"></span><span>1</span></li>
+              <li><span class="icon icon-clock"></span><span>15 min</span></li>
+              <li><span class="icon icon-level"></span><span>Beginner level</span></li>
+              <li><span class="icon icon-calories"></span><span>248</span></li>
+            </ul>
+        
+            <p>{{item.about}}</p>
+        
+          </article>
+        
+        </div>
+      </ion-list>
+
 </ion-content>

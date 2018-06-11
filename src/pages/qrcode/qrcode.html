@@ -1,18 +1,25 @@
 <ion-header no-shadow no-border>
-  <ion-navbar>
-      <ion-title>Scanning for Table QR...</ion-title>
-  </ion-navbar>
+    <ion-navbar transparent class="camera-title">
+        <ion-title>
+            <span class="title-headers camera-title-color">
+                Scanning...
+            </span>
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content no-scroll class="qrscanner" no-bounce>
-  <div class="qrscanner-area">    
-  </div> 
-   <div class="through-line"></div>
-  <div class="button-bottom">
-      <button (click)="toggleLight()" ion-fab class="icon-camera" margin-right>
-          <ion-icon name="flash"></ion-icon>                  
-      </button>
-      <button (click)="toggleCamera()" ion-fab class="icon-camera">
-          <ion-icon name="reverse-camera"></ion-icon>                  
-      </button>
-  </div>    
+    <div class="qrscanner-area">
+    </div>
+    <div class="through-line"></div>
+    <div class="camera-switch-btn">
+        <button (click)="toggleCamera()" ion-fab class="icon-camera">
+            <ion-icon name="reverse-camera"></ion-icon>
+        </button>
+    </div>
+
+    <div class="light-btn">
+        <button (click)="toggleLight()" ion-fab class="icon-camera" margin-right>
+            <ion-icon name="flash"></ion-icon>
+        </button>
+    </div>
 </ion-content>
