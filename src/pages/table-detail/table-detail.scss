@@ -1,131 +1,150 @@
 page-table-detail {
-  img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: bottom;
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 2.2em;
+    line-height: 1em;
+    margin: 0 0 10px 0;
   }
   
-  .recipe-card {
-    background: #fff;
-    border-color: #c9c9c9;
-    border-width: thin;
-    box-shadow: 1px 2px #a5a5a5;
-    margin: 4em auto;
-    width: 90%;
-    max-width: 496px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+  .wrap
+  {
+    margin:0px 15px 0 0;
+    width:100%;
+    display:flex;
+    align-items:space-around;
+    max-width:1200px;
+    
   }
-  .recipe-card aside {
-    position: relative;
+  .tile
+  {
+    width: 100%;
+    height: 75vw;
+    margin: -9px 15px 22px 0px;
+    background-color:#5c5c5c;
+    display:inline-block;
+    background-size:cover;
+    position:relative;
+    transition: all 0.4s ease-out;
+    box-shadow: 0px 30px 40px -17px rgba(0,0,0,0.44);
+    overflow:hidden;
+    color:white;
+    font-family:'Roboto';
+  
+    
   }
-  .recipe-card aside img {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  .tile img
+  {
+    height:100%;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:0;
+    transition: all 0.4s ease-out;
+          object-fit: cover;
   }
-  .recipe-card aside .button {
-    background: #d69346;
-    display: inline-block;
-    position: absolute;
-    top: 80%;
-    right: 3%;
-    width: 4.0625em;
-    height: 4.0625em;
-    border-radius: 4.0625em;
-    line-height: 4.0625em;
-    text-align: center;
+  .tile .text
+  {
+  /*   z-index:99; */
+    position:absolute;
+    padding:30px;
+    height:calc(100% - 60px);
   }
-  .recipe-card aside .button .icon {
-    vertical-align: middle;
+  .tile h1
+  {
+   
+    font-weight:300;
+    margin:0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
   }
-  .recipe-card article {
-    padding: 1.25em 1.5em;
+  .tile h2
+  {
+    font-weight:100;
+    margin:20px 0 0 0;
+    font-style:italic;
+     transform: translateX(200px);
   }
-  .recipe-card article ul {
-    list-style: none;
-    margin: 0.5em 0 0;
-    padding: 0;
+  .tile p
+  {
+    font-weight:300;
+    margin:20px 0 0 0;
+    line-height: 25px;
+  /*   opacity:0; */
+    transform: translateX(-200px);
+    transition-delay: 0.2s;
   }
-  .recipe-card article ul li {
-    display: inline-block;
-    margin-left: 1em;
-    line-height: 1em;
+  .animate-text
+  {
+    opacity:0;
+    transition: all 0.6s ease-in-out;
   }
-  .recipe-card article ul li:first-child {
-    margin-left: 0;
+  .tile:active
+  {
+  /*   background-color:#99aeff; */
+  box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
+    transform:scale(1.05);
   }
-  .recipe-card article ul li .icon {
-    vertical-align: bottom;
+  .tile:active img
+  {
+    opacity: 0.2;
   }
-  .recipe-card article ul li span:nth-of-type(2) {
-    margin-left: 0.5em;
-    font-size: 0.8em;
-    font-weight: 300;
-    vertical-align: middle;
-    color: #838689;
+  .tile:active .animate-text
+  {
+    transform:translateX(0);
+    opacity:1;
   }
-  .recipe-card article h2,
-  .recipe-card article h3 {
-    margin: 0;
-    font-weight: 300;
+  .dots
+  {
+    position:absolute;
+    bottom:20px;
+    right:30px;
+    margin: 0 auto;
+    width:30px;
+    height:30px;
+    color:currentColor;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-around;
+    
   }
-  .recipe-card article h2 {
-    font-size: 1.75em;
-    color: #222222;
+  
+  .dots span
+  {
+      width: 5px;
+      height:5px;
+      background-color: currentColor;
+      border-radius: 50%;
+      display:block;
+    opacity:0;
+    transition: transform 0.4s ease-out, opacity 0.5s ease;
+    transform: translateY(30px);
+   
   }
-  .recipe-card article h3 {
-    font-size: 0.9375em;
-    color: #838689;
+  
+  .tile:active span
+  {
+    opacity:1;
+    transform:translateY(0px);
   }
-  .recipe-card article p {
-    margin: 1.25em 0;
-    font-size: 0.8125em;
-    font-weight: 400;
-    color: #222222;
+  
+  .dots span:nth-child(1)
+  {
+     transition-delay: 0.05s;
   }
-  .recipe-card article p span {
-    font-weight: 700;
-    color: #000000;
+  .dots span:nth-child(2)
+  {
+     transition-delay: 0.1s;
   }
-  .recipe-card article .ingredients {
-    margin: 2em 0 0.5em;
+  .dots span:nth-child(3)
+  {
+     transition-delay: 0.15s;
   }
-  .recipe-card .icon {
-    display: inline;
-    display: inline-block;
-    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/203277/recipe-card-icons.svg);
-    background-repeat: no-repeat;
-  }
-  .recipe-card .icon-calories,
-  .recipe-card .icon-calories\:regular {
-    background-position: 0 0;
-    width: 16px;
-    height: 19px;
-  }
-  .recipe-card .icon-clock,
-  .recipe-card .icon-clock\:regular {
-    background-position: 0 -19px;
-    width: 20px;
-    height: 20px;
-  }
-  .recipe-card .icon-level,
-  .recipe-card .icon-level\:regular {
-    background-position: 0 -39px;
-    width: 16px;
-    height: 19px;
-  }
-  .recipe-card .icon-play,
-  .recipe-card .icon-play\:regular {
-    background-position: 0 -58px;
-    width: 21px;
-    height: 26px;
-  }
-  .recipe-card .icon-users,
-  .recipe-card .icon-users\:regular {
-    background-position: 0 -84px;
-    width: 18px;
-    height: 18px;
+  
+  @media (max-width: 1000px) {
+    .wrap {
+     flex-direction: column;
+    }
+   
   }
 }
