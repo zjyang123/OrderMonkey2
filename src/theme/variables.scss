@@ -3,7 +3,7 @@
 $font-path: "../assets/fonts";
 
 @import "ionic.globals";
-@import url('https://fonts.googleapis.com/css?family=Crimson+Text|Nunito|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Nunito:600|Open+Sans|Raleway');
 
 // Shared Variables
 // --------------------------------------------------
@@ -41,7 +41,7 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  transparent: #ffffff,
+  transparent: #d8955a,
   facebook: #4166b2
 );
 
