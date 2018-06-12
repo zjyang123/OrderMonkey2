@@ -22,7 +22,7 @@ $grey: #e9e9e9;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	&:hover {
+	&:active {
 		.photo {
 			-webkit-filter: contrast(85%) blur(2px) saturate(90%); /* Safari 6.0 - 9.0 */
 			filter: contrast(85%) blur(2px) saturate(90%);
@@ -106,7 +106,7 @@ $grey: #e9e9e9;
 				vertical-align: middle;
 			}
 
-			&:hover:after {
+			&:focus:after {
 				margin-left: 5px;
 				opacity: 1;
 			}
@@ -119,7 +119,7 @@ $grey: #e9e9e9;
 		height: 125px;
 		max-width: 600px;
 
-		&:hover {
+		&:focus {
 			.photo {
 				transform: rotate(0deg) scale(1.0);
 			}

@@ -63,8 +63,7 @@ export class QrcodePage {
           // camera permission was granted
           // start scanning
           let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            this.hideCamera();
-            this.qrScanner.hide(); // hide camera preview
+            // this.hideCamera();
             scanSub.unsubscribe(); // stop scanning
             this.geolocation.getCurrentPosition().then((resp) => {
               this.scanResponse = text;
@@ -79,13 +78,13 @@ export class QrcodePage {
                 this.scanSendResponse.clientID = clientID;
                 this.geoCordLong = resp.coords.longitude;
                 this.geoCordLat = resp.coords.latitude;
-  
+
                 this.userCommunication.userCommunicationService(this.scanSendResponse, 'welcomeScan').then((result) => {
                   this.responseData = result;
                   const geoCordReturn = this.responseData.geocord;
                   const clientLatCord = geoCordReturn.split(',')[0]; // Latitude
                   const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
-  
+
                   this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
                     if (distance > 5000) {
                       this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
@@ -106,7 +105,7 @@ export class QrcodePage {
                         this.navCtrl.pop({ animate: false });
                       }
                     }
-  
+
                   });
                 }, (err) => {
                   this.notificationBar.notificationbarTask(err, 1500, 'bottom');
@@ -185,14 +184,15 @@ export class QrcodePage {
         androiddelay: 150,
         fixedPixelsTop: 0,
         fixedPixelsBottom: 60
-       };
-       this.nativePageTransitions.flip(options)
-     }
+      };
+      this.nativePageTransitions.flip(options)
+    }
+
     this.hideCamera();
     this.qrScanner.destroy();
-
-    
-
+  }
+  
+  ioncViewDidLeave() {
   }
 
 }
