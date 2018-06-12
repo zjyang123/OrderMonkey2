@@ -87,7 +87,7 @@ export class QrcodePage {
                   const clientLongCord = geoCordReturn.split(',')[1]; // Longitude
   
                   this.userCommunication.geolocationService(this.geoCordLat, this.geoCordLong, clientLatCord, clientLongCord).then((distance) => {
-                    if (distance > 120) {
+                    if (distance > 5000) {
                       this.notificationBar.notificationbarTask('Oops! Something went wrong!', 1500, 'bottom');
                       this.navCtrl.pop({ animate: false });
                     } else {
