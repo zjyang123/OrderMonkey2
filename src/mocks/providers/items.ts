@@ -16,39 +16,124 @@ export class Items {
   constructor() {
     let items = [
       {
-        "name": "Burt Bear",
-        "profilePic": "assets/img/speakers/bear.jpg",
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
         "about": "Burt is a Bear."
       },
       {
-        "name": "Charlie Cheetah",
-        "profilePic": "assets/img/speakers/cheetah.jpg",
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
         "about": "Charlie is a Cheetah."
       },
       {
-        "name": "Donald Duck",
-        "profilePic": "assets/img/speakers/duck.jpg",
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
         "about": "Donald is a Duck."
       },
       {
-        "name": "Eva Eagle",
-        "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
       },
       {
-        "name": "Ellie Elephant",
-        "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
       },
       {
-        "name": "Molly Mouse",
-        "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
       },
       {
-        "name": "Paul Puppy",
-        "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
+      },
+      {
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
+      },
+      {
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
+      },
+      {
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
+      },
+      {
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
+      }
+      ,      {
+        "name": "Crusted Pizza",
+        "profilePic": "https://media1.popsugar-assets.com/files/thumbor/D0OYajmdcatHUC1-b4Axbf-uNxo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/02/08/859/n/1922195/a7a42800589b73af54eda9.99423697_edit_img_image_43136859_1486581354/i/KFC-Fried-Chicken-Pizza.jpg",
+        "about": "Burt is a Bear."
+      },
+      {
+        "name": "Cheese Burger",
+        "profilePic": "https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg",
+        "about": "Charlie is a Cheetah."
+      },
+      {
+        "name": "Calimari",
+        "profilePic": "https://img.sndimg.com/food/image/upload/w_896,h_504,c_fill,fl_progressive,q_80/v1/img/recipes/15/25/8/xQIJfbS2TQ65n58K9Q45_breaded-calamari-rings-4809.jpg",
+        "about": "Donald is a Duck."
       }
     ];
 
