@@ -25,17 +25,16 @@
 
 <ion-content padding>
   <div class="wrap">
-    <span class="tile" *ngFor="let item of currentItems" (click)="openItem(item)">
-      <img [src]="item.profilePic" />
-      <span class="text">
-        <h1>{{item.name}}</h1>
-        <h2 class="animate-text">More lorem ipsum bacon ipsum.</h2>
-        <p class="animate-text">Bacon ipsum dolor amet pork belly tri-tip turducken, pancetta bresaola pork chicken meatloaf. Flank sirloin strip
-          steak prosciutto kevin turducken. </p>
-        <span class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
+    <span *ngFor="let item of currentItems" id="item.name">
+      <span class="tile">
+        <img [src]="item.profilePic" (press)="itemDetails(item)" />
+        <span class="text h1-position">
+          <h1>{{item.name}}</h1>
+        </span>
+        <span class="text button-position">
+          <button color="danger" ion-button round small icon-only>
+            <ion-icon color="transparent" name="add"></ion-icon>
+          </button>
         </span>
       </span>
     </span>
