@@ -26,17 +26,21 @@
 <ion-content padding>
   <div class="wrap">
     <span *ngFor="let item of currentItems" id="item.name">
-      <span class="tile">
-        <img [src]="item.profilePic" (press)="itemDetails(item)" />
-        <span class="text h1-position">
-          <h1>{{item.name}}</h1>
+      <ion-row>
+        <span class="tile">
+          <span (press)="itemDetails(item)">
+            <img [src]="item.profilePic"  />
+            <span class="text h1-position">
+              <h1>{{item.name}}</h1>
+            </span>
+          </span>
         </span>
         <span class="text button-position">
-          <button color="danger" ion-button round small icon-only>
+          <button color="danger" ion-button round small icon-only (click)="itemDetails(item)">
             <ion-icon color="transparent" name="add"></ion-icon>
           </button>
         </span>
-      </span>
+      </ion-row>
     </span>
   </div>
 </ion-content>
