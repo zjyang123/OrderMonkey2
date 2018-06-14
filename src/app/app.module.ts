@@ -10,7 +10,7 @@ import { QRScanner } from '@ionic-native/qr-scanner';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TapticEngine } from '@ionic-native/taptic-engine';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -25,7 +25,6 @@ import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
 import { MenuControllerService } from './service/menu-controller.service';
 import { SuperTabsModule } from 'ionic2-super-tabs';
-
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {

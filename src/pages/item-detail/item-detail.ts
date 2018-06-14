@@ -15,4 +15,7 @@ export class ItemDetailPage {
     this.item = navParams.get('item') || items.defaultItem;
   }
 
+  close() {
+    this.navCtrl.pop();
+  }
 }
