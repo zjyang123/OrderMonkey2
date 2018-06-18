@@ -2,7 +2,7 @@
   <ion-navbar transparent style="padding-top:20px;">
     <div *ngIf="isLoggedIn">
       <button menuToggle style="opacity: 0.5;" ion-button round icon-only>
-        <ion-icon color="light" name="menu"></ion-icon>
+        <ion-icon color="primary" name="menu"></ion-icon>
       </button>
     </div>
     <ion-title>
@@ -10,30 +10,42 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-bounce class="default-text">
-    <div class="splash-bg">
-      <div class="layer"></div>
-    </div>
-    <div class="splash-info">
-      <div class="splash-logo"></div>
-      <div class="splash-intro" style="padding: 40px;">
-        {{ 'ORDER_MONKEY_WELCOME_INTRO' | translate }}
-      </div>
-      <div style="padding: 20px;">
-        <button ion-button full (click)="qrScan()">
-          <ion-icon style="padding-right: 5px;" name="qr-scanner"></ion-icon>
-          {{ 'QRSCANNER' | translate }}
-        </button>
-        <!-- <button ion-button block (click)="test()" class="login">test</button> -->
-        <div *ngIf="!isLoggedIn">
-          <button ion-button full (click)="login()" class="login">
-            <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
-            {{ 'ACCOUNT_LOGIN' | translate }}
+<ion-content no-bounce center text-center class="default-text">
+  <div class="splash-bg">
+    <div class="layer"></div>
+  </div>
+  <ion-grid>
+    <ion-row center>
+      <div class="splash-info">
+        <div class="splash-logo"></div>
+        <div class="splash-intro" style="padding-top: 2%; margin-bottom: 10%;">
+          {{ 'ORDER_MONKEY_WELCOME_INTRO' | translate }}
+        </div>
+        <div style="padding: 20px;">
+          <button ion-button full (click)="qrScan()">
+            <ion-icon style="padding-right: 5px;" name="qr-scanner" class="qrscan"></ion-icon>
+            {{ 'QRSCANNER' | translate }}
           </button>
+          <!-- <button ion-button full (click)="test()">
+            <ion-icon style="padding-right: 5px;" name="qr-scanner" class="qrscan"></ion-icon>
+            Test
+          </button> -->
+          <div *ngIf="!isLoggedIn">
+            <button ion-button full (click)="login()" class="login">
+              <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
+              {{ 'ACCOUNT_LOGIN' | translate }}
+            </button>
+          </div>
         </div>
       </div>
-      <p style="color:white;">
-        <a (click)="terms()">{{ 'TERMS_PRIVACY1' | translate }}</a>
-      </p>
-    </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-footer no-shadow no-border>
+    <ion-toolbar>
+      <ion-title>
+        <a (click)="terms()" style="font-size: 12px;">{{ 'TERMS_PRIVACY1' | translate }}</a>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
