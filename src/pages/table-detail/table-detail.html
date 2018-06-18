@@ -25,7 +25,7 @@
     <span *ngFor="let item of subMenuItems">
       <ion-row>
         <span class="tile">
-          <span (press)="pressItemDetails(item)">
+          <span (click)="pressItemDetails(item)">
             <img [src]="item.product_image" />
             <span class="text h1-position">
               <h1>{{item.product_name}}</h1>
