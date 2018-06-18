@@ -34,12 +34,13 @@
               <h1>{{item.name}}</h1>
             </span>
           </span>
+          <span class="buttonAlign">
+            <button class="tableButton" ion-button round small icon-only (click)="itemDetails(item)">
+              <ion-icon color="transparent" class="tableAdd" name="add"></ion-icon>
+            </button>
+          </span>
         </span>
-        <span class="text button-position">
-          <button color="danger" ion-button round small icon-only (click)="itemDetails(item)">
-            <ion-icon color="transparent" name="add"></ion-icon>
-          </button>
-        </span>
+        
       </ion-row>
     </span>
   </div>
