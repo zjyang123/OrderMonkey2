@@ -41,30 +41,12 @@
 
 <ion-content class="common-bg">
     <!--slides-->
-    <ion-slides class="to-top text-center" pager>
-      <!-- <ion-slide *ngFor="let image of item.product_image">
+    <!-- <ion-slides class="to-top text-center" pager>
+      <ion-slide *ngFor="let image of item.product_image">
         <img [src]="image" alt="">
-      </ion-slide> -->
-      <img [src]="item.product_image" alt="" style="height: 540px; object-fit: cover;">
-    </ion-slides>
-  
-    <!--services-->
-    <ion-grid class="border-bottom dark-bg">
-      <ion-row>
-        <ion-col text-center>
-          <div class="text-sm">
-            <div>
-              <ion-icon name="time" class="text-white"></ion-icon>
-              <span ion-text color="light">{{ item.time }}</span>
-              <ion-icon name="checkbox-outline" margin-left class="text-white" *ngIf="item.free_cancellation"></ion-icon>
-              <span ion-text color="light" *ngIf="item.free_cancellation">Free cancellation</span>
-              <ion-icon name="list-box" margin-left class="text-white" *ngIf="item.electric_voucher"></ion-icon>
-              <span ion-text color="light" *ngIf="item.electric_voucher">Electronic voucher</span>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      </ion-slide>
+    </ion-slides> -->
+    <img [src]="item.product_image" alt="">
   
     <!--high light-->
     <div class="border-bottom" padding>
