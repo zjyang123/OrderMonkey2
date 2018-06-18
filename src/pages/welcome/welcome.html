@@ -1,7 +1,7 @@
 <ion-header no-shadow no-border>
   <ion-navbar transparent style="padding-top:20px;">
     <div *ngIf="isLoggedIn">
-      <button menuToggle style="opacity: 0.5;" ion-button round icon-only>
+      <button menuToggle ion-button round icon-only>
         <ion-icon color="primary" name="menu"></ion-icon>
       </button>
     </div>
@@ -23,7 +23,7 @@
         </div>
         <div style="padding: 20px;">
           <button ion-button full (click)="qrScan()">
-            <ion-icon style="padding-right: 5px;" name="qr-scanner" class="qrscan"></ion-icon>
+            <ion-icon style="padding-right: 5px;" ios="ios-qr-scanner" md="md-qr-scanner" class="qrscan"></ion-icon>
             {{ 'QRSCANNER' | translate }}
           </button>
           <!-- <button ion-button full (click)="test()">
@@ -42,7 +42,7 @@
   </ion-grid>
 
   <ion-footer no-shadow no-border>
-    <ion-toolbar>
+    <ion-toolbar transparent>
       <ion-title>
         <a (click)="terms()" style="font-size: 12px;">{{ 'TERMS_PRIVACY1' | translate }}</a>
       </ion-title>
