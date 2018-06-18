@@ -21,14 +21,14 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="wrap">
-    <span *ngFor="let item of currentItems" id="item.name">
+  <div *ngIf="menuNotEmpty; else empty" class="wrap">
+    <span *ngFor="let item of subMenuItems">
       <ion-row>
         <span class="tile">
-          <span (press)="itemDetails(item)">
-            <img [src]="item.profilePic"  />
+          <span (press)="pressItemDetails(item)">
+            <img [src]="item.product_image" />
             <span class="text h1-position">
-              <h1>{{item.name}}</h1>
+              <h1>{{item.product_name}}</h1>
             </span>
           </span>
           <span class="buttonAlign">
@@ -41,4 +41,11 @@
       </ion-row>
     </span>
   </div>
+
+  <ng-template #empty>
+    <div style="text-align: center;">
+      <p>Menu is Empty!</p>
+    </div>
+  </ng-template>
+
 </ion-content>

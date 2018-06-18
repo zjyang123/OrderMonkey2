@@ -1,13 +1,14 @@
-<ion-header no-shadow >
+<ion-header no-shadow>
   <ion-navbar transparent>
-    <button (click)="close()" icon-only>
+    <!-- <button (click)="close()" icon-only>
       <a color="primary">Close</a>
-    </button>
-    <ion-buttons end>
+    </button> -->
+    <ion-buttons front style="padding-left:1%">
+        <a color="primary" (click)="close()">Close</a>
     </ion-buttons>
     <ion-title>
       <span class="title-headers">
-        {{item.name}}
+        {{item.product_name}}
       </span>
     </ion-title>
   </ion-navbar>
@@ -15,9 +16,9 @@
 
 <ion-content>
   <ion-card>
-    <img [src]="item.profilePic">
+    <img [src]="item.product_image">
     <ion-card-header>
-      <h2>{{item.name}}</h2>
+      <h2>{{item.product_name}}</h2>
     </ion-card-header>
     <ion-card-content>
       <p>{{item.product_description}}</p>
@@ -26,14 +27,14 @@
         <ion-list-header>
           Your Choices
         </ion-list-header>
-        <ion-item *ngFor="let option of item.has_options">
+        <!-- <ion-item *ngFor="let option of item.has_options">
           <ion-label>{{option}}</ion-label>
           <ion-radio value="option"></ion-radio>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
     </ion-card-content>
     <div padding>
-      <button type="submit" ion-button color="primary" full >Add to Order</button>
+      <button type="submit" ion-button color="primary" full>Add to Order</button>
     </div>
   </ion-card>
 </ion-content>

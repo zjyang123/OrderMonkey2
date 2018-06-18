@@ -22,14 +22,14 @@
           {{ 'ORDER_MONKEY_WELCOME_INTRO' | translate }}
         </div>
         <div style="padding: 20px;">
-          <button ion-button full (click)="qrScan()">
+          <!-- <button ion-button full (click)="qrScan()">
             <ion-icon style="padding-right: 5px;" ios="ios-qr-scanner" md="md-qr-scanner" class="qrscan"></ion-icon>
             {{ 'QRSCANNER' | translate }}
-          </button>
-          <!-- <button ion-button full (click)="test()">
+          </button> -->
+          <button ion-button full (click)="test()">
             <ion-icon style="padding-right: 5px;" name="qr-scanner" class="qrscan"></ion-icon>
             Test
-          </button> -->
+          </button>
           <div *ngIf="!isLoggedIn">
             <button ion-button full (click)="login()" class="login">
               <ion-icon style="padding-right: 5px;" name="person"></ion-icon>

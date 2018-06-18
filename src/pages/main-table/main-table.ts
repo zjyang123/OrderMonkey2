@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { Storage } from '@ionic/storage';
 import { NotificationBarService } from '../../app/service/notificationbar.service';
@@ -24,26 +24,31 @@ export class MainTablePage {
 
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
     private menuService: MenuControllerService,
-    private storage: Storage
+    private storage: Storage,
+    public loadingCtrl: LoadingController
   ) {
     this.tableInit();
   }
-  
+
   ionViewDidlEnter() {
 
   }
 
   tableDetails(menu: any) {
-      this.navCtrl.push('TableDetailPage', {
-        menu: menu
-      });
+    this.navCtrl.push('TableDetailPage', {
+      menu: menu
+    });
   }
 
   tableInit() {
+    let loading = this.loadingCtrl.create({
+      content: ''
+    });
+    loading.present();
     this.storage.get('table_data').then((val) => {
       this.menuService.getMenuCatagory(val).then((result) => {
         this.tableInfo = result;
@@ -54,9 +59,9 @@ export class MainTablePage {
         } else {
           console.log('empty')
         }
-
+        loading.dismiss();
       }, (err) => {
-
+        loading.dismiss();
       });
     });
   }
