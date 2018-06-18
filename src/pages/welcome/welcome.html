@@ -20,13 +20,13 @@
         {{ 'ORDER_MONKEY_WELCOME_INTRO' | translate }}
       </div>
       <div style="padding: 20px;">
-        <button ion-button block (click)="qrScan()">
+        <button ion-button full (click)="qrScan()">
           <ion-icon style="padding-right: 5px;" name="qr-scanner"></ion-icon>
           {{ 'QRSCANNER' | translate }}
         </button>
         <!-- <button ion-button block (click)="test()" class="login">test</button> -->
         <div *ngIf="!isLoggedIn">
-          <button ion-button block (click)="login()" class="login">
+          <button ion-button full (click)="login()" class="login">
             <ion-icon style="padding-right: 5px;" name="person"></ion-icon>
             {{ 'ACCOUNT_LOGIN' | translate }}
           </button>
