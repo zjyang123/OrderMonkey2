@@ -1,7 +1,7 @@
 page-welcome {
   .splash-bg {
-    position: relative;
-    background: url('../assets/img/welcome.jpg') no-repeat transparent;
+    position: fixed;
+    // background: url('../assets/img/welcome.jpg') no-repeat transparent;
     background-color: rgba(83, 83, 83, 0.2);
     background-size: cover;
     height: 100%;
@@ -28,20 +28,20 @@ page-welcome {
   .splash-info {
     position: relative;
     z-index: 2;
-    margin-top: -560px;
+    margin-top: 20%;
     text-align: center;
   }
   .splash-logo {
     margin: auto;
-    background: url('../assets/img/appicon.png') repeat transparent;
+    background: url('../assets/img/logo2.png')  no-repeat transparent;
     background-size: 100%;
-    width: 128px;
-    height: 128px;
+    width: 200px;
+    height: 200px;
   }
   .splash-intro {
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: rgb(70, 68, 68);
     max-width: 80%;
     margin: auto;
   }
@@ -56,16 +56,30 @@ page-welcome {
     }
   }
 
+  button.qrscan {
+    margin-top: 15px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2) !important;
+    color: #333;
+
+    &.activated {
+      background-color: rgb(220, 220, 220);
+    }
+  }
+
   .scroll-content {
-    background: #1e1e1e;
+    background: #fff6e9;
   }
 
   ion-navbar .toolbar-background {
       background: transparent;
   }
 
+  ion-footer .toolbar-background {
+    background: transparent;
+  }
+  
   ion-content .scroll-content {
-      margin-top:0px !important;
+      margin-top:0 !important;
   }
 
   ion-title {
@@ -75,4 +89,5 @@ page-welcome {
   .button-color { 
     color: #1e1e1e
   }
+
 }
