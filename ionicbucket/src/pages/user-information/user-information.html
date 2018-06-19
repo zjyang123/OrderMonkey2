@@ -1,0 +1,68 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- User Information Page -->
+
+<ion-header no-border>
+  <ion-navbar color="orange" hideBackButton>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>{{'USER_INFORMATION.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img class="logo animated fadeInDown" src="assets/imgs/logo-icon.png">
+  <div class="animated fadeInUp">
+    <p class="title1">{{'USER_INFORMATION.WELCOME' | translate}}</p>
+    <p class="title2">{{'USER_INFORMATION.SUBTITLE' | translate}}</p>
+  </div>
+
+  <form [formGroup]="UserInfoForm" novalidate class="animated zoomInUp">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+
+          <!-- Full Name -->
+          <ion-item>
+            <ion-input type="text" formControlName="fullname" placeholder="Full Name*" [(ngModel)]="UserInfoForm.fullname"></ion-input>
+          </ion-item>
+
+          <!-- Email Address -->
+          <ion-item>
+            <ion-input type="email" formControlName="email" placeholder="Email Address*" [(ngModel)]="UserInfoForm.email"></ion-input>
+          </ion-item>
+
+          <!-- Mobile Number -->
+          <ion-item>
+            <ion-input type="number" formControlName="mobile" placeholder="Mobile Number*" [(ngModel)]="UserInfoForm.mobile"></ion-input>
+          </ion-item>
+
+          <!-- Time -->
+          <ion-item>
+            <ion-datetime formControlName="time" displayFormat="h:mm:a" placeholder="Time*" [(ngModel)]="UserInfoForm.time"></ion-datetime>
+          </ion-item>
+
+          <!-- Date  -->
+          <ion-item>
+            <ion-datetime formControlName="date" displayFormat="DDDD MMM, YYYY" placeholder="Date*" [(ngModel)]="UserInfoForm.date"></ion-datetime>
+          </ion-item>
+
+          <!-- Location Address  -->
+          <ion-item>
+            <ion-input type="text" formControlName="locationAddress" placeholder="Location Address*" [(ngModel)]="UserInfoForm.locationAddress"></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button round color="orange" (click)="gotoMenuCategoryPage()">{{'SECOND_LANDING_PAGE.BUTTON' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

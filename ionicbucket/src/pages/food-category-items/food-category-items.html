@@ -1,0 +1,56 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Food Category Item Page -->
+
+<ion-header no-border>
+  <ion-navbar color="orange" hideBackButton>
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{'FOOD_ITEMS.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="background">
+    <div class="page-title">
+      <h1>{{categoryName}}</h1>
+    </div>
+  </div>
+
+  <ion-list padding>
+    <ion-item class="animated bounceInLeft" text-wrap *ngFor="let item of foodItems; let i = index">
+
+      <ion-thumbnail item-start (click)="gotoItemDetails()">
+        <img src="assets/imgs/{{categoryName}}.png">
+      </ion-thumbnail>
+
+      <h2 (click)="gotoItemDetails()">{{'FOOD_ITEMS.'+ categoryName + '.' + i + '.NAME' | translate}}</h2>
+      <p (click)="gotoItemDetails()">{{'FOOD_ITEMS.'+ categoryName + '.' + i + '.DESCRIPTION' | translate}}</p>
+      <ion-badge item-end color="orange">{{'FOOD_ITEMS.'+ categoryName + '.' + i + '.PRICE' | translate}}</ion-badge>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+            <button ion-button clear item-end color="orange" [disabled]="!foodItems[i].quantity" (click)="minusQuantity(item, i)">
+              <ion-icon name="remove" style="zoom:1.8;"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-2 padding-top text-center>
+            <span>{{foodItems[i].quantity}}</span>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-button clear item-end color="orange" (click)="addQuantity(item, i)">
+              <ion-icon name="add" style="zoom:1.8;"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

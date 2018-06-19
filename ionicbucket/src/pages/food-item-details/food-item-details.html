@@ -1,0 +1,50 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Food Item Details Page -->
+
+<ion-header>
+  <ion-navbar color="orange">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list text-center padding>
+    <img src="assets/imgs/food.jpg">
+    <h2>Double Cheese Burger (Beef)</h2>
+    <ion-badge color="orange" item-center>$200</ion-badge>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+      dummy text ever since the 1500s.
+    </p>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2></ion-col>
+        <ion-col col-2>
+          <button ion-button round class='qtyminus' color="orange">
+            <ion-icon name="remove"></ion-icon>
+         </button>
+        </ion-col>
+        <ion-col col-4>
+          <ion-input type='number' name='quantity' text-center value="1" class='qty'></ion-input>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button round class='qtyminus' color="orange">
+            <ion-icon name="add"></ion-icon>
+         </button>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row>
+        <button ion-button full round color="orange">{{'ITEM_DETAILS.BUTTON' | translate}}</button>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

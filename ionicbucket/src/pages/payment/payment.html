@@ -1,0 +1,74 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Payment Page -->
+
+<ion-header no-border>
+  <ion-navbar color="orange" hideBackButton>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>{{'PAYMENT.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list radio-group>
+    <p class="tag">Select Payment Method</p>
+    <ion-item>
+      <ion-label>Credit Card</ion-label>
+      <ion-radio checked="true" value="CREDIT CARD"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Paypal</ion-label>
+      <ion-radio value="PAYPAL"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group>
+    <p class="tag">Select Credit Card</p>
+    <ion-item>
+      <button class="card-img" ion-button clear color="orange">
+        <img src="assets/imgs/mastercard.png">
+      </button>
+      <button class="card-img" ion-button clear color="orange">
+        <img src="assets/imgs/PayPalCard.png">
+      </button>
+      <button class="card-img" ion-button clear color="orange">
+        <img src="assets/imgs/visa.png">
+      </button>
+      <button class="card-img" ion-button clear color="orange">
+        <img src="assets/imgs/amex.png">
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <form [formGroup]="PaymentForm" novalidate class="animated zoomInUp">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-input type="text" formControlName="cardName" placeholder="Card Name*" [(ngModel)]="PaymentForm.cardName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" formControlName="cardNumber" placeholder="Card Number*" [(ngModel)]="PaymentForm.cardNumber"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" formControlName="expireDate" placeholder="Expire Date*" [(ngModel)]="PaymentForm.expireDate"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" formControlName="cvcType" placeholder="CVC*" [(ngModel)]="PaymentForm.cvcType"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button round color="orange">{{'PAYMENT.BUTTON' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

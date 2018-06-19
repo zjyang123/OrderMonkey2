@@ -1,0 +1,79 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Food Categories Page -->
+
+<ion-header no-border>
+  <ion-navbar color="orange" hideBackButton>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>{{'FOOD_CATEGORIES.TITLE' | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotoCartPage()">
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="background">
+    <div class="page-title">
+      <h1>THE MENU</h1>
+      <p>Easy on time, Full on Flavor</p>
+    </div>
+  </div>
+  <ion-list padding>
+    <ion-item class="animated bounceInLeft" (click)="gotoCategoryItemList('BURGER')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/BURGER.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.BURGER' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInRight" (click)="gotoCategoryItemList('CHINESS')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/CHINESS.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.CHINESS' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInLeft" (click)="gotoCategoryItemList('COFFEE')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/COFFEE.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.COFFEE' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInRight" (click)="gotoCategoryItemList('DESSERTS')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/DESSERTS.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.DESSERTS' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInLeft" (click)="gotoCategoryItemList('ICECREAMS')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/ICECREAMS.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.ICECREAMS' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInRight" (click)="gotoCategoryItemList('PIZZA')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/PIZZA.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.PIZZA' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInLeft" (click)="gotoCategoryItemList('SALADS')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/SALADS.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.SALADS' | translate}}</h2>
+    </ion-item>
+    <ion-item class="animated bounceInRight" (click)="gotoCategoryItemList('SNACKS')">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/SNACKS.png">
+      </ion-thumbnail>
+      <h2>{{'FOOD_CATEGORIES.SNACKS' | translate}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>
