@@ -111,7 +111,7 @@
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <allow-navigation href="http://169.254.229.216:8100" />
     <allow-navigation href="http://169.254.133.167:8100" />
+    <allow-navigation href="http://192.168.1.77:8100" />
     <engine name="android" spec="7.1.0" />
     <engine name="ios" spec="^4.5.4" />
-    <allow-navigation href="http://192.168.0.13:8100" />
 </widget>

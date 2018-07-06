@@ -16,9 +16,9 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content padding>
   <div *ngIf="menuIsSet; else emptyMenu">
-    <div class="blog-card" style="padding-top:7px;" *ngFor="let table of tableInfoDetail" (click)="tableDetails(table)">
+    <div class="blog-card" *ngFor="let table of tableInfoDetail" (click)="tableDetails(table)">
       <img class="photo" [src]="table.menu_image">
       <div class="description">
         <h1 style="padding-top:25px;">{{ table.menu_name }}</h1>

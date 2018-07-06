@@ -35,6 +35,7 @@ export class TableDetailPage {
     
   ) {
     this.menu = navParams.get('menu');
+    console.log(this.menu);
     this.getMenuDetail.clientID = this.menu.client_id;
     this.getMenuDetail.menuID = this.menu.id;
     this.subMenuDetails();
@@ -71,4 +72,6 @@ export class TableDetailPage {
     let profileModal = this.modalCtrl.create('ItemDetailPage', {item: item});
     profileModal.present();
   }
+
+
 }
