@@ -14,50 +14,43 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list text-center>
-    <img [src]="item.product_image">
-    <span padding>
-      <ion-badge color="orange" item-center>${{ item.price }}</ion-badge>
-      <p>{{ item.product_description }}</p>
+<ion-content text-center>
+  <img [src]="item.product_image">
+  <ion-badge color="orange" item-center>${{ item.price }}</ion-badge>
+  <ion-list padding>
+    <p>{{ item.product_description }}</p>
 
-      <h2>Toppings</h2>
-      <div class="inputGroup">
-        <input id="option1" name="option1" type="checkbox" />
-        <label for="option1">Option One</label>
+    <span *ngIf="hasOptions">
+      <h2>Select your options!</h2>
+  
+      <div class="inputGroup" *ngFor="let option of hasCheckbox; let i = index;">
+        <input id="option{{i}}" name="option{{i}}" type="checkbox" (click)="checkBoxEvent($event)" />
+        <label for="option{{i}}">{{ option.options_name }}</label>
       </div>
-
-      <div class="inputGroup">
-        <input id="option2" name="option2" type="checkbox" />
-        <label for="option2">Option Two</label>
-      </div>
-
-      <h2>Radio Buttons</h2>
-      <div class="inputGroup">
-        <input id="radio1" name="radio" type="radio" />
-        <label for="radio1">Yes</label>
-      </div>
-      <div class="inputGroup">
-        <input id="radio2" name="radio" type="radio" />
-        <label for="radio2">No</label>
-      </div>
-
-      <ion-grid>
-        <ion-row>
-          <div class="quantity buttons_added">
-            <input type="button" value="-" class="minus">
-            <input type="tel" pattern="\d*" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text"
-              size="4" pattern="" inputmode="">
-            <input type="button" value="+" class="plus">
-          </div>
-        </ion-row>
-        <ion-row>
-          <button type="submit" ion-button color="primary" full>
-            <ion-icon style="padding-right: 5px;" name="add-circle"></ion-icon>
-            Add This!
-          </button>
-        </ion-row>
-      </ion-grid>
+  
+      <ion-item>
+        <ion-label>Select</ion-label>
+        <ion-select [(ngModel)]="selectOptionItem" (ionChange)="checkBoxEvent($event)" okText="Confirm" cancelText="Dismiss" multiple="false">
+          <ion-option *ngFor="let option of hasSelect; let i = index;" [value]="option.id">{{ option.options_name }}</ion-option>
+        </ion-select>
+      </ion-item>
     </span>
+
+    <ion-grid>
+      <ion-row>
+        <div class="quantity buttons_added">
+          <input type="button" value="-" class="minus">
+          <input type="tel" pattern="\d*" step="1" min="1" max="" name="quantity" value="1" class="input-text qty text" size="4" pattern=""
+            inputmode="">
+          <input type="button" value="+" class="plus">
+        </div>
+      </ion-row>
+      <ion-row>
+        <button type="submit" ion-button color="primary" full>
+          <ion-icon style="padding-right: 5px;" name="add-circle"></ion-icon>
+          Add This!
+        </button>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 </ion-content>

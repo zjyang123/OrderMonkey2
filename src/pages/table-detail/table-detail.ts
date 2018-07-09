@@ -35,7 +35,6 @@ export class TableDetailPage {
     
   ) {
     this.menu = navParams.get('menu');
-    console.log(this.menu);
     this.getMenuDetail.clientID = this.menu.client_id;
     this.getMenuDetail.menuID = this.menu.id;
     this.subMenuDetails();
@@ -59,7 +58,7 @@ export class TableDetailPage {
   }
 
   itemDetails(item:any) {
-    if (item.has_options == 1) {
+    if (item.has_options == 0) {
       const message = 'Item added to your cart!';
       this.notificationBar.notificationbarTask(message, 3000, 'bottom');
     } else {

@@ -6,15 +6,15 @@ import { Headers, Http } from '@angular/http';
 @Injectable()
 export class MenuControllerService {
     public menuCatagory = 'http://ordermonkey.healthsupplementsplus.com/userapp/general/';
-    constructor (
+    constructor(
         public http: Http
-    ) {}
+    ) { }
 
     getMenuCatagory(credentials) {
         return new Promise((resolve, reject) => {
             const header = new Headers();
             this.http.post(this.menuCatagory + 'menuInit', JSON.stringify(credentials), { headers: header })
-                .subscribe( res => {
+                .subscribe(res => {
                     resolve(res.json());
                 }, (err) => {
                     reject(err);
@@ -26,7 +26,19 @@ export class MenuControllerService {
         return new Promise((resolve, reject) => {
             const header = new Headers();
             this.http.post(this.menuCatagory + 'subMenuInit', JSON.stringify(menuData), { headers: header })
-                .subscribe( res => {
+                .subscribe(res => {
+                    resolve(res.json());
+                }, (err) => {
+                    reject(err);
+                });
+        })
+    }
+
+    getMenuItemOptions(menuData) {
+        return new Promise((resolve, reject) => {
+            const header = new Headers();
+            this.http.post(this.menuCatagory + 'menuItemOptions', JSON.stringify(menuData), { headers: header })
+                .subscribe(res => {
                     resolve(res.json());
                 }, (err) => {
                     reject(err);

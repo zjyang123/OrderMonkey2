@@ -12,8 +12,8 @@ page-table-detail {
     color: white;
     text-align: center;
     background: #c48956;
-    padding: 3px 100% 3px 100%;
-    opacity: 0.75;
+    padding: 9px 14px 9px 14px;
+    opacity: 0.80;
     h1 {
         font-family: 'Raleway', sans-serif;
         margin: 0;
@@ -109,27 +109,27 @@ page-table-detail {
     opacity:0;
     transition: all 0.6s ease-in-out;
   }
-  .tile:active
-  {
-  /*   background-color:#99aeff; */
-  box-shadow: 0px 20px 20px -17px rgba(0,0,0,0.64);
+  // .tile:active
+  // {
+  // /*   background-color:#99aeff; */
+  // box-shadow: 0px 20px 20px -17px rgba(0,0,0,0.64);
 
-  }
-  .tile:active img
-  {
-    opacity: 0.65;
-  }
-  .tile:active .animate-text
-  {
-    transform:translateX(0);
-    opacity:1;
-  }
+  // }
+  // .tile:active img
+  // {
+  //   opacity: 0.65;
+  // }
+  // .tile:active .animate-text
+  // {
+  //   transform:translateX(0);
+  //   opacity:1;
+  // }
 
-  .tile:active span
-  {
-    opacity:1;
-    transform:translateY(0px);
-  }
+  // .tile:active span
+  // {
+  //   opacity:1;
+  //   transform:translateY(0px);
+  // }
   
   @media (max-width: 1000px) {
     .wrap {
