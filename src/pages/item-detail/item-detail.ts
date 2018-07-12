@@ -15,7 +15,8 @@ import { OptionsNode } from '../../models/menuOptions';
 export class ItemDetailPage {
   item: any;
   userDevice: any;
-  optionList: OptionsNode;
+  // ItemOptionDetail: OptionsNode;
+  itemOptionDetail;
   returnResult: any;
   hasOptions: any;
   optionType: any;
@@ -37,15 +38,19 @@ export class ItemDetailPage {
   ionViewWillEnter() {
     this.menuController.getMenuItemOptions(this.item).then((val) => {
       this.returnResult = val;
-      this.optionList = this.returnResult.options;
+      this.itemOptionDetail = this.returnResult.output;
       this.hasOptions = this.returnResult.hasOptions;
-      if (this.hasOptions) {
-        const grouped = this.groupBy(this.optionList, key => key.option_type);
-        this.hasCheckbox = grouped.get('checkbox');
-        this.hasSelect = grouped.get('select');
-        console.log(this.hasCheckbox);
-        console.log(this.hasSelect);
-      }
+      console.log(this.itemOptionDetail)
+      // if (this.hasOptions) {
+        // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
+
+      //   this.hasCheckbox = grouped.get('checkbox');
+      //   this.hasSelect = grouped.get('select');
+      //   console.log(this.optionList)
+      //   console.log(grouped)
+      //   console.log(this.hasCheckbox);
+      //   console.log(this.hasSelect);
+      // }
     });
   }
 
