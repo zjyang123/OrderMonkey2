@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OrderPipe } from 'ngx-order-pipe';
 
 import { DeviceService } from '../../app/service/device.service';
 import { TapticEngine } from '@ionic-native/taptic-engine';
@@ -15,8 +16,7 @@ import { OptionsNode } from '../../models/menuOptions';
 export class ItemDetailPage {
   item: any;
   userDevice: any;
-  // ItemOptionDetail: OptionsNode;
-  itemOptionDetail;
+  itemOptionDetail: OptionsNode;
   returnResult: any;
   hasOptions: any;
   optionType: any;
@@ -30,7 +30,8 @@ export class ItemDetailPage {
     navParams: NavParams,
     public deviceService: DeviceService,
     private iOSTaptic: TapticEngine,
-    public menuController: MenuControllerService
+    public menuController: MenuControllerService,
+    private orderPipe: OrderPipe
   ) {
     this.item = navParams.get('item');
   }
@@ -40,6 +41,8 @@ export class ItemDetailPage {
       this.returnResult = val;
       this.itemOptionDetail = this.returnResult.output;
       this.hasOptions = this.returnResult.hasOptions;
+
+      this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'option_type', true);
       console.log(this.itemOptionDetail)
       // if (this.hasOptions) {
         // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
@@ -77,19 +80,19 @@ export class ItemDetailPage {
 
   }
 
-  groupBy(list, keyGetter) {
-    const map = new Map();
-    list.forEach((item) => {
-        const key = keyGetter(item);
-        const collection = map.get(key);
-        if (!collection) {
-            map.set(key, [item]);
-        } else {
-            collection.push(item);
-        }
-    });
-    return map;
-  }
+  // groupBy(list, keyGetter) {
+  //   const map = new Map();
+  //   list.forEach((item) => {
+  //       const key = keyGetter(item);
+  //       const collection = map.get(key);
+  //       if (!collection) {
+  //           map.set(key, [item]);
+  //       } else {
+  //           collection.push(item);
+  //       }
+  //   });
+  //   return map;
+  // }
 
   close() {
     this.navCtrl.pop();
