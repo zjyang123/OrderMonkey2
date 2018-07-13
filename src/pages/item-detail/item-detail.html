@@ -9,11 +9,9 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
-
   <div class="product-header" [ngStyle]="{'background-image': 'url(' + item.product_image + ')'}">
-    <h2 class="product-name "> {{item.product_name}}</h2>
+    <h1 class="product-name"> {{item.product_name}}</h1>
     <div class="product-price ">${{ item.price }}</div>
   </div>
 
