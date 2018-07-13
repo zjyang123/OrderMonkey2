@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, Pipe } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
@@ -25,6 +25,7 @@ import { NotificationBarService } from './service/notificationbar.service';
 import { UserCommunication } from './service/usercom.service';
 import { MenuControllerService } from './service/menu-controller.service';
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import { OrderModule } from 'ngx-order-pipe';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -54,6 +55,7 @@ export function provideSettings(storage: Storage) {
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    OrderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
