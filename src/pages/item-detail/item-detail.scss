@@ -1,19 +1,4 @@
 page-item-detail {
-  /* Container holding the image and the text */
-.container {
-  position: relative;
-}
-
-/* Bottom right text */
-.text-block {
-  position: absolute;
-  bottom: 20px;
-
-  background-color: rgba(0, 0, 0, 0.37);
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-}
   .inputGroup {
     background-color: rgb(240, 201, 150);
     display: block;
@@ -99,64 +84,97 @@ page-item-detail {
     padding-bottom: 10px;
   }
   
-    /* -- quantity box -- */
+  
+  .content{
+      background-color: #eee;
+  }
+  .scroll-content{
+      margin-top: 0 !important;
+      padding-top: 44px;
+  }
 
-  .quantity {
-    display: inline-block; 
-    margin-left: auto;
-    margin-right: auto;
+  .item.item-ios .checkbox-ios {
+      margin: 10px 16px 8px 2px !important;
   }
-  
-  .quantity .input-text.qty {
-    width: 35px;
-    height: 39px;
-    padding: 0 5px;
-    text-align: center;
-    background-color: transparent;
-    border: 1px solid #efefef;
+  .item.item-md .checkbox-md {
+      margin: 14px 30px 9px 4px;
   }
-  
-  .quantity.buttons_added {
-    text-align: left;
-    position: relative;
-    white-space: nowrap;
-    vertical-align: top; }
-  
-  .quantity.buttons_added input {
-    display: inline-block;
-    margin: 0;
-    vertical-align: top;
-    box-shadow: none;
+  .card .note-md {
+      font-size: 18px;
+      // color: color($colors, green);
+      font-weight: 500;
   }
-  
-  .quantity.buttons_added .minus,
-  .quantity.buttons_added .plus {
-    padding: 7px 10px 8px;
-    height: 41px;
-    background-color: #ffffff;
-    border: 1px solid #efefef;
-    cursor:pointer;}
-  
-  .quantity.buttons_added .minus {
-    border-right: 0; }
-  
-  .quantity.buttons_added .plus {
-    border-left: 0; }
-  
-  .quantity.buttons_added .minus:active,
-  .quantity.buttons_added .plus:active {
-    background: #eeeeee; }
-  
-  .quantity input::-webkit-outer-spin-button,
-  .quantity input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin: 0; }
-    
-    .quantity.buttons_added .minus:active,
-  .quantity.buttons_added .plus:active {
-    outline: none; }
-  
-  
+  .card .note-ios {
+      font-size: 18px;
+      // color: color($colors, green);
+      font-weight: 400;
+  }
+
+
+  ion-navbar{
+      transition: all .5s;
+      .back-button,.bar-button{
+          color: #fff;
+      }
+  }
+  .header-md::after{
+      background-image: none;
+  }
+
+  .product-header:before {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      // background-color: rgba(0, 0, 0, 0.3);
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 68%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 68%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  rgba(0,0,0,0) 68%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+  }
+  .product-header {
+      position: relative;
+      height: 300px;
+      background: url(img/1.jpg) no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+  }
+
+  .product-header .product-name {
+      font-size: 22px;
+      font-weight: normal;
+      color: #FFFFFF;
+      position: absolute;
+      left: 20px;
+      bottom: 43px;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  .product-header .product-price {
+      // color: color($colors, lightgreen);
+      font-size: 24px;
+      font-weight: bold;
+      color: #db9e59;
+      position: absolute;
+      left: 20px;
+      bottom: 17px;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+
+
+  //************ Fading header  **********//
+  .show-background{
+      border-style: none;
+      // background : color($colors, green)
+  }
+  .transition{
+      transition: background-size .3s ease-in;
+  }
+  .toolbar-title {
+      color:#FFFFFF;
+  }
 
 }

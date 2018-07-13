@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrderPipe } from 'ngx-order-pipe';
 
@@ -23,7 +23,12 @@ export class ItemDetailPage {
   hasCheckbox: any;
   hasSelect: any;
 
-  selectOptionItem: string = '';
+  //*********** Variables for fading header **************//
+  showToolbar:boolean = false;
+  transition:boolean = false;
+  headerImgSize:string = '100%';
+  headerImgUrl:string = '';
+  //****************************//
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +36,8 @@ export class ItemDetailPage {
     public deviceService: DeviceService,
     private iOSTaptic: TapticEngine,
     public menuController: MenuControllerService,
-    private orderPipe: OrderPipe
+    private orderPipe: OrderPipe,
+    public ref: ChangeDetectorRef
   ) {
     this.item = navParams.get('item');
   }
@@ -93,6 +99,19 @@ export class ItemDetailPage {
   //   });
   //   return map;
   // }
+  
+  onScroll($event: any){
+    let scrollTop = $event.scrollTop;
+    this.showToolbar = scrollTop >= 100;
+    if(scrollTop < 0){
+        this.transition = false;
+        this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
+    }else{
+        this.transition = true;
+        this.headerImgSize = '100%'
+    }
+    this.ref.detectChanges();
+}
 
   close() {
     this.navCtrl.pop();
