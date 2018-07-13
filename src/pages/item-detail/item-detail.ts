@@ -42,7 +42,7 @@ export class ItemDetailPage {
       this.itemOptionDetail = this.returnResult.output;
       this.hasOptions = this.returnResult.hasOptions;
 
-      this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'option_type', true);
+      this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'order_place', false);
       console.log(this.itemOptionDetail)
       // if (this.hasOptions) {
         // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);

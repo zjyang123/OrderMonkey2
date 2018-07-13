@@ -1,4 +1,19 @@
 page-item-detail {
+  /* Container holding the image and the text */
+.container {
+  position: relative;
+}
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 20px;
+
+  background-color: rgba(0, 0, 0, 0.37);
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
   .inputGroup {
     background-color: rgb(240, 201, 150);
     display: block;
