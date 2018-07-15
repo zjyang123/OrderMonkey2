@@ -6,7 +6,7 @@ import { DeviceService } from '../../app/service/device.service';
 import { TapticEngine } from '@ionic-native/taptic-engine';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { OptionsNode } from '../../models/menuOptions';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -24,6 +24,7 @@ export class ItemDetailPage {
   hasCheckbox: any;
   hasSelect: any;
   optionListForm: FormGroup;
+  footerAddToCartButton = false;
 
   //*********** Variables for fading header **************//
   showToolbar: boolean = false;
@@ -39,13 +40,13 @@ export class ItemDetailPage {
     private iOSTaptic: TapticEngine,
     public menuController: MenuControllerService,
     private orderPipe: OrderPipe,
-    public ref: ChangeDetectorRef
+    public ref: ChangeDetectorRef,
+    public fb: FormBuilder
   ) {
     this.item = navParams.get('itemData');
-
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.menuController.getMenuItemOptions(this.item).then((val) => {
       this.returnResult = val;
       this.itemOptionDetail = this.returnResult.output;
@@ -53,25 +54,13 @@ export class ItemDetailPage {
 
       this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'order_place', false);
 
-      this.optionListForm = new FormGroup({
-        optionListArray: new FormArray([])
-      })
-
-      for (let i = 0; i < this.returnResult.output.length; i++) {
-        const controlRequired = new FormControl(null, Validators.required);
-        const controlNotRequired = new FormControl(null);
-        if (this.returnResult.output[i].required) {
-          (<FormArray>this.optionListForm.get('optionListArray')).push(controlRequired);
-        } else {
-          (<FormArray>this.optionListForm.get('optionListArray')).push(controlNotRequired);
+      if (this.hasOptions) {
+        this.createForm(this.itemOptionDetail);
+        if (this.optionListForm.valid) {
+          // check first initialized form if its valid, we allow cart button to be pressed
+          this.footerAddToCartButton = true;
         }
       }
-
-      // const optionArrayControls = <FormArray>this.optionListForm.controls['optionListArray'];
-      // this.returnResult.output.forEach(() => {
-      //     optionArrayControls.push();
-      //     console.log(optionArrayControls);
-      // });
       // if (this.hasOptions) {
       // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
 
@@ -83,8 +72,62 @@ export class ItemDetailPage {
       //   console.log(this.hasSelect);
       // }
     });
+
   }
 
+  public createForm(data) {
+    var arr = [];
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].option_type == 'checkbox') {
+        for (let j = 0; j < data[i].option_list.length; j++) {
+          arr.push(this.buildOptionCheckbox(data[i].option_list[j], data[i]));
+        }
+      } else {
+        arr.push(this.buildOptionSelect(data[i]));
+      }
+    }
+    this.optionListForm = this.fb.group({
+      optionSelect: this.fb.array(arr)
+    })
+  }
+  buildOptionCheckbox(data, generalData) {
+    // looping for checkbox options under general table -> list option table coming from data base
+    if (generalData.required) {
+      return this.fb.group({
+        isSelected: ['', Validators.required],
+        tag: [data.options_name],
+        tag_id: [data.id],
+        type: [generalData.option_type]
+      })
+    } else {
+      return this.fb.group({
+        isSelected: [''],
+        tag: [data.options_name],
+        tag_id: [data.id],
+        type: [generalData.option_type]
+      })
+    }
+  }
+
+  buildOptionSelect(data) {
+    // looping for select boxes coming from data base
+    if (data.required) {
+      return this.fb.group({
+        isSelected: ['', Validators.required],
+        tag: [data.option_group_name],
+        tag_id: [data.id],
+        type: [data.option_type]
+      })
+    } else {
+      return this.fb.group({
+        isSelected: [''],
+        tag: [data.option_group_name],
+        tag_id: [data.id],
+        type: [data.option_type]
+      })
+    }
+  }
 
   ionViewDidLoad() {
     this.deviceService.userDevice().then((val) => {
@@ -100,7 +143,11 @@ export class ItemDetailPage {
 
   }
 
-  checkBoxEvent(event, i) {
+  checkBoxEvent(event) {
+    if (this.optionListForm.valid) {
+      // update add to cart button status
+      this.footerAddToCartButton = true;
+    }
     if (this.userDevice == 'ios') {
       this.iOSTaptic.impact({ style: 'medium' });
       this.iOSTaptic.selection();

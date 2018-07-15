@@ -3,7 +3,7 @@
     <name>Order Monkey</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.77:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -117,10 +117,10 @@
     <allow-navigation href="http://169.254.229.16:8100" />
     <allow-navigation href="http://169.254.96.141:8100" />
     <allow-navigation href="http://169.254.163.80:8101" />
-    <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="^4.5.4" />
     <allow-navigation href="http://169.254.20.192:8100" />
     <allow-navigation href="http://169.254.9.112:8100" />
     <allow-navigation href="http://169.254.94.235:8100" />
     <allow-navigation href="http://169.254.215.253:8100" />
+    <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>
