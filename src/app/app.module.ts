@@ -16,7 +16,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
 import { DeviceService } from './service/device.service';
@@ -80,7 +79,6 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Api,
-    Items,
     User,
     SplashScreen,
     StatusBar,

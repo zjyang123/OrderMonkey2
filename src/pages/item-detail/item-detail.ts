@@ -6,6 +6,7 @@ import { DeviceService } from '../../app/service/device.service';
 import { TapticEngine } from '@ionic-native/taptic-engine';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { OptionsNode } from '../../models/menuOptions';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -22,12 +23,13 @@ export class ItemDetailPage {
   optionType: any;
   hasCheckbox: any;
   hasSelect: any;
+  optionListForm: FormGroup;
 
   //*********** Variables for fading header **************//
-  showToolbar:boolean = false;
-  transition:boolean = false;
-  headerImgSize:string = '100%';
-  headerImgUrl:string = '';
+  showToolbar: boolean = false;
+  transition: boolean = false;
+  headerImgSize: string = '100%';
+  headerImgUrl: string = '';
   //****************************//
 
   constructor(
@@ -39,7 +41,8 @@ export class ItemDetailPage {
     private orderPipe: OrderPipe,
     public ref: ChangeDetectorRef
   ) {
-    this.item = navParams.get('item');
+    this.item = navParams.get('itemData');
+
   }
 
   ionViewWillEnter() {
@@ -49,9 +52,28 @@ export class ItemDetailPage {
       this.hasOptions = this.returnResult.hasOptions;
 
       this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'order_place', false);
-      console.log(this.itemOptionDetail)
+
+      this.optionListForm = new FormGroup({
+        optionListArray: new FormArray([])
+      })
+
+      for (let i = 0; i < this.returnResult.output.length; i++) {
+        const controlRequired = new FormControl(null, Validators.required);
+        const controlNotRequired = new FormControl(null);
+        if (this.returnResult.output[i].required) {
+          (<FormArray>this.optionListForm.get('optionListArray')).push(controlRequired);
+        } else {
+          (<FormArray>this.optionListForm.get('optionListArray')).push(controlNotRequired);
+        }
+      }
+
+      // const optionArrayControls = <FormArray>this.optionListForm.controls['optionListArray'];
+      // this.returnResult.output.forEach(() => {
+      //     optionArrayControls.push();
+      //     console.log(optionArrayControls);
+      // });
       // if (this.hasOptions) {
-        // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
+      // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
 
       //   this.hasCheckbox = grouped.get('checkbox');
       //   this.hasSelect = grouped.get('select');
@@ -62,6 +84,7 @@ export class ItemDetailPage {
       // }
     });
   }
+
 
   ionViewDidLoad() {
     this.deviceService.userDevice().then((val) => {
@@ -74,16 +97,16 @@ export class ItemDetailPage {
         this.userDevice = 'other';
       }
     });
+
   }
 
-  checkBoxEvent(event) {
+  checkBoxEvent(event, i) {
     if (this.userDevice == 'ios') {
       this.iOSTaptic.impact({ style: 'medium' });
       this.iOSTaptic.selection();
     } else if (this.userDevice == 'android') {
       // haptic feedback for android.......
     }
-
   }
 
   // groupBy(list, keyGetter) {
@@ -99,19 +122,19 @@ export class ItemDetailPage {
   //   });
   //   return map;
   // }
-  
-  onScroll($event: any){
+
+  onScroll($event: any) {
     let scrollTop = $event.scrollTop;
     this.showToolbar = scrollTop >= 100;
-    if(scrollTop < 0){
-        this.transition = false;
-        this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
-    }else{
-        this.transition = true;
-        this.headerImgSize = '100%'
+    if (scrollTop < 0) {
+      this.transition = false;
+      this.headerImgSize = `${Math.abs(scrollTop) / 2 + 100}%`;
+    } else {
+      this.transition = true;
+      this.headerImgSize = '100%'
     }
     this.ref.detectChanges();
-}
+  }
 
   close() {
     this.navCtrl.pop();

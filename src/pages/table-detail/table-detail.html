@@ -27,7 +27,7 @@
     </div>
   </div>
   <div *ngIf="menuNotEmpty; else empty" class="wrap" padding>
-    <span *ngFor="let item of subMenuItems">
+    <span *ngFor="let item of subMenuItems" (click)="itemDetails(item)">
       <ion-row>
         <span class="tile">
           <img [src]="item.product_image" />
@@ -37,11 +37,11 @@
           <span class="text price-position">
             <h2>${{item.price}}</h2>
           </span>
-          <span class="buttonAlign">
+          <!-- <span class="buttonAlign">
             <button class="tableButton" ion-button large icon-only (click)="itemDetails(item)">
               <ion-icon class="tableAdd" name="add"></ion-icon>
             </button>
-          </span>
+          </span> -->
         </span>
 
       </ion-row>

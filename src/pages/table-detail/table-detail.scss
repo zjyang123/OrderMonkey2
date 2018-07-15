@@ -17,7 +17,7 @@ page-table-detail {
     h1 {
         font-family: 'Raleway', sans-serif;
         margin: 0;
-        font-size: 3.2rem;
+        font-size: 3.4rem;
         white-space: nowrap;
     }
     h2 {
@@ -109,27 +109,27 @@ page-table-detail {
     opacity:0;
     transition: all 0.6s ease-in-out;
   }
-  // .tile:active
-  // {
-  // /*   background-color:#99aeff; */
-  // box-shadow: 0px 20px 20px -17px rgba(0,0,0,0.64);
+  .tile:active
+  {
+  /*   background-color:#99aeff; */
+  box-shadow: 0px 20px 20px -17px rgba(0,0,0,0.64);
 
-  // }
-  // .tile:active img
-  // {
-  //   opacity: 0.65;
-  // }
-  // .tile:active .animate-text
-  // {
-  //   transform:translateX(0);
-  //   opacity:1;
-  // }
+  }
+  .tile:active img
+  {
+    opacity: 0.65;
+  }
+  .tile:active .animate-text
+  {
+    transform:translateX(0);
+    opacity:1;
+  }
 
-  // .tile:active span
-  // {
-  //   opacity:1;
-  //   transform:translateY(0px);
-  // }
+  .tile:active span
+  {
+    opacity:1;
+    transform:translateY(0px);
+  }
   
   @media (max-width: 1000px) {
     .wrap {

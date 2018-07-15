@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { NotificationBarService } from '../../app/service/notificationbar.service';
-/**
- * Generated class for the TableDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MenuItemsArray } from '../../models/menuItemsArray';
 
 @IonicPage()
 @Component({
@@ -19,24 +14,23 @@ export class TableDetailPage {
   public menu;
   public subMenuResult;
   public menuNotEmpty = true;
+  public getMenuDetail: MenuItemsArray;
   public subMenuItems;
-  public getMenuDetail = {
-    menuID: '',
-    clientID: ''
-  };
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public modalCtrl: ModalController,
     public menuService: MenuControllerService, // This is for food menu controller service
     public loadingCtrl: LoadingController,
     public notificationBar: NotificationBarService
-    
+
   ) {
     this.menu = navParams.get('menu');
-    this.getMenuDetail.clientID = this.menu.client_id;
-    this.getMenuDetail.menuID = this.menu.id;
+    this.getMenuDetail = {
+      clientID: this.menu.client_id,
+      menuID: this.menu.id
+    }
     this.subMenuDetails();
   }
 
@@ -57,20 +51,18 @@ export class TableDetailPage {
     });
   }
 
-  itemDetails(item:any) {
-    if (item.has_options == 0) {
-      const message = 'Item added to your cart!';
-      this.notificationBar.notificationbarTask(message, 3000, 'bottom');
-    } else {
-      let profileModal = this.modalCtrl.create('ItemDetailPage', {item: item});
-      profileModal.present();
-    }
-  }
-
-  pressItemDetails(item:any) {
-    let profileModal = this.modalCtrl.create('ItemDetailPage', {item: item});
+  itemDetails(item: any) {
+    const itemData = {
+      has_options: item.has_options,
+      id: item.id,
+      price: item.price,
+      product_description: item.product_description,
+      product_image: item.product_image,
+      product_name: item.product_name,
+      client_id: this.menu.client_id,
+      client_menu_id: this.menu.id
+    };
+    let profileModal = this.modalCtrl.create('ItemDetailPage', { itemData: itemData });
     profileModal.present();
   }
-
-
 }

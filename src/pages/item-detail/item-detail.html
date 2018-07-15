@@ -1,12 +1,11 @@
 <ion-header no-shadow>
-    <ion-navbar transparent>
-        <button ion-button front clear icon-left color="light" (click)="close()">
-            <ion-icon name="ios-close"></ion-icon>
-            Close
-          </button>
-        <ion-title>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar transparent [class.show-background]="showToolbar" class="default-text">
+    <button ion-button front clear icon-left color="light" (click)="close()">
+      <ion-icon name="ios-close"></ion-icon>
+      Close
+    </button>
+    <!-- <ion-title color="primary" [hidden]="!showToolbar">{{item.product_name}}</ion-title> -->
+  </ion-navbar>
 </ion-header>
 
 <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
@@ -23,39 +22,39 @@
     <ion-card-content>
       <div [innerHTML]="item.product_description"></div>
     </ion-card-content>
-    <ion-list padding>
-      <span *ngIf="hasOptions">
+    <ion-list padding class="default-text">
+      <span *ngIf="hasOptions" [formGroup]="optionListForm">
         <h1>Pick your options</h1>
         <hr>
-        <span *ngFor="let general of itemOptionDetail; let i = index">
+          <span [formControlName]="i" *ngFor="let general of itemOptionDetail; let i = index">
 
-          <span *ngIf="general.option_type == 'checkbox'">
-            <div class="inputGroup" *ngFor="let option of general.option_list">
-              <input id="option_{{option.id}}" name="option_{{option.id}}" type="checkbox" (click)="checkBoxEvent($event)" />
-              <label for="option_{{option.id}}">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</label>
-            </div>
+            <span *ngIf="general.option_type == 'checkbox'">
+              <div class="inputGroup" *ngFor="let option of general.option_list">
+                <input id="option_{{option.id}}" name="option_{{option.id}}" type="checkbox" (click)="checkBoxEvent($event,i)"/>
+                <label for="option_{{option.id}}">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</label>
+              </div>
+            </span>
+
+            <span *ngIf="general.option_type == 'select'">
+              <ion-item class="select-padding">
+                <ion-label>{{ general.option_group_name }}</ion-label>
+                <ion-select (ionChange)="checkBoxEvent($event,i)" okText="Confirm" cancelText="Dismiss" [multiple]="general.multi_select">
+                  <ion-option *ngFor="let option of general.option_list;" [value]="option.id">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</ion-option>
+                </ion-select>
+              </ion-item>
+            </span>
+
           </span>
-
-          <span *ngIf="general.option_type == 'select'">
-            <ion-item class="select-padding">
-              <ion-label>{{ general.option_group_name }}</ion-label>
-              <ion-select (ionChange)="checkBoxEvent($event)" okText="Confirm" cancelText="Dismiss" [multiple]="general.multi_select">
-                <ion-option *ngFor="let option of general.option_list;" [value]="option.id">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</ion-option>
-              </ion-select>
-            </ion-item>
-          </span>
-
-        </span>
       </span>
     </ion-list>
   </ion-card>
 </ion-content>
 
-<ion-footer no-border>
+<ion-footer no-border class="default-text">
   <ion-toolbar color="primary">
-    <button ion-button full clear icon-left color="light">
+    <button ion-button full clear icon-left color="light" [disabled]="addToCartDisabled">
       <ion-icon name="ios-cart"></ion-icon>
-      Add to cart
+      Add to Cart
     </button>
   </ion-toolbar>
 </ion-footer>
