@@ -29,17 +29,17 @@
         <span formArrayName="optionSelect" *ngFor="let general of itemOptionDetail; let i = index">
 
           <span *ngIf="general.option_type == 'checkbox'" [formGroupName]="i">
-            <div class="inputGroup" *ngFor="let option of general.option_list">
-              <input id="option_{{option.id}}" name="option_{{option.id}}" formControlName="isSelected" type="checkbox" value="option_{{option.id}}"
-                (click)="checkBoxEvent($event)" />
-              <label for="option_{{option.id}}">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</label>
+            <div class="inputGroup" *ngFor="let option of general.option_list; let j = index" > 
+                <input id="option_{{option.id}}" formControlName="isSelected" type="checkbox" 
+                  (click)="checkBoxEvent()" />
+                <label for="option_{{option.id}}">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</label>
             </div>
           </span>
 
           <span *ngIf="general.option_type == 'select'" [formGroupName]="i">
             <ion-item class="select-padding">
               <ion-label>{{ general.option_group_name }}</ion-label>
-              <ion-select (ionChange)="checkBoxEvent($event)" formControlName="isSelected" okText="Confirm" cancelText="Dismiss" [multiple]="general.multi_select">
+              <ion-select (ionChange)="checkBoxEvent()" formControlName="isSelected" okText="Confirm" cancelText="Dismiss" [multiple]="general.multi_select">
                 <ion-option *ngFor="let option of general.option_list;" [value]="option.id">{{ option.options_name }} (+{{option.option_price | currency:'CAD':'symbol-narrow'}})</ion-option>
               </ion-select>
             </ion-item>
@@ -53,7 +53,7 @@
 
 <ion-footer no-border class="default-text">
   <ion-toolbar color="primary">
-    <button ion-button full clear icon-left color="light" [disabled]="!footerAddToCartButton">
+    <button ion-button full clear icon-left color="light" [disabled]="!footerAddToCartButton" (click)="addToCart()">
       <ion-icon name="ios-cart"></ion-icon>
       Add to Cart
     </button>

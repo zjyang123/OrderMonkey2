@@ -6,7 +6,7 @@ import { DeviceService } from '../../app/service/device.service';
 import { TapticEngine } from '@ionic-native/taptic-engine';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { OptionsNode } from '../../models/menuOptions';
-import { FormGroup, FormArray, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -25,6 +25,9 @@ export class ItemDetailPage {
   hasSelect: any;
   optionListForm: FormGroup;
   footerAddToCartButton = false;
+  objectName: any;
+
+  changedItemOptionArray = [];
 
   //*********** Variables for fading header **************//
   showToolbar: boolean = false;
@@ -60,28 +63,26 @@ export class ItemDetailPage {
           // check first initialized form if its valid, we allow cart button to be pressed
           this.footerAddToCartButton = true;
         }
+      } else {
+        this.footerAddToCartButton = true;
       }
       // if (this.hasOptions) {
       // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
 
       //   this.hasCheckbox = grouped.get('checkbox');
       //   this.hasSelect = grouped.get('select');
-      //   console.log(this.optionList)
-      //   console.log(grouped)
-      //   console.log(this.hasCheckbox);
-      //   console.log(this.hasSelect);
       // }
     });
 
   }
 
-  public createForm(data) {
+  createForm(data) {
     var arr = [];
-
     for (let i = 0; i < data.length; i++) {
       if (data[i].option_type == 'checkbox') {
         for (let j = 0; j < data[i].option_list.length; j++) {
-          arr.push(this.buildOptionCheckbox(data[i].option_list[j], data[i]));
+          // passes current option list item , general option data and option list item index
+          arr.push(this.buildOptionCheckbox(data[i].option_list[j], data[i], j)); 
         }
       } else {
         arr.push(this.buildOptionSelect(data[i]));
@@ -91,7 +92,8 @@ export class ItemDetailPage {
       optionSelect: this.fb.array(arr)
     })
   }
-  buildOptionCheckbox(data, generalData) {
+
+  buildOptionCheckbox(data, generalData, index) {
     // looping for checkbox options under general table -> list option table coming from data base
     if (generalData.required) {
       return this.fb.group({
@@ -108,6 +110,7 @@ export class ItemDetailPage {
         type: [generalData.option_type]
       })
     }
+
   }
 
   buildOptionSelect(data) {
@@ -143,11 +146,14 @@ export class ItemDetailPage {
 
   }
 
-  checkBoxEvent(event) {
+  checkBoxEvent() {
     if (this.optionListForm.valid) {
       // update add to cart button status
       this.footerAddToCartButton = true;
     }
+
+    // TODO: change price of item when options are selected
+
     if (this.userDevice == 'ios') {
       this.iOSTaptic.impact({ style: 'medium' });
       this.iOSTaptic.selection();
@@ -181,6 +187,45 @@ export class ItemDetailPage {
       this.headerImgSize = '100%'
     }
     this.ref.detectChanges();
+  }
+
+  addToCart() {
+    const optionArray = [];
+    if (this.hasOptions) {
+      for (let i= 0; i < this.optionListForm.value.optionSelect.length; i++) {
+        if (this.optionListForm.value.optionSelect[i]['isSelected'] != '' && this.optionListForm.value.optionSelect[i]['type'] == 'select') {
+          const selectArrayLength = this.optionListForm.value.optionSelect[i]['isSelected'].length;
+          if (selectArrayLength > 0) {
+            for (let j = 0; j < selectArrayLength; j++) {
+              optionArray.push({
+                itemOptionID: this.optionListForm.value.optionSelect[i]['isSelected'][j]
+              });
+            }
+          } else {
+            optionArray.push({
+              itemOptionID: this.optionListForm.value.optionSelect[i]['isSelected']
+            });
+          }
+        } else if (this.optionListForm.value.optionSelect[i]['isSelected'] == true && this.optionListForm.value.optionSelect[i]['type'] == 'checkbox') {
+          optionArray.push({
+            itemOptionID: this.optionListForm.value.optionSelect[i]['tag_id']
+          });
+        }
+        
+      }
+    }
+
+    const addCartItem = {
+      itemID: this.item.id,
+      itemPrice: this.item.price,
+      itemName: this.item.product_name,
+      itemImage: this.item.product_image,
+      optionItemID: optionArray
+    }
+
+    // TODO: push thios 
+
+    console.log(addCartItem)
   }
 
   close() {
