@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { OrderPipe } from 'ngx-order-pipe';
 
 import { DeviceService } from '../../app/service/device.service';
@@ -26,8 +26,10 @@ export class ItemDetailPage {
   optionListForm: FormGroup;
   footerAddToCartButton = false;
   objectName: any;
-
-  changedItemOptionArray = [];
+  itemPriceGlobal: any;
+  loadingWait = false;
+  itemOptionList = []; // THE GRAND MAMA OPTION LIST TO SEARCH FROM
+  selectedItemOptionList = [];
 
   //*********** Variables for fading header **************//
   showToolbar: boolean = false;
@@ -44,7 +46,8 @@ export class ItemDetailPage {
     public menuController: MenuControllerService,
     private orderPipe: OrderPipe,
     public ref: ChangeDetectorRef,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public events: Events
   ) {
     this.item = navParams.get('itemData');
   }
@@ -57,8 +60,18 @@ export class ItemDetailPage {
 
       this.itemOptionDetail = this.orderPipe.transform(this.itemOptionDetail, 'order_place', false);
 
+      // set a viewable item price
+      this.itemPriceGlobal = Number(this.item.price);
+
       if (this.hasOptions) {
         this.createForm(this.itemOptionDetail);
+        // list out all associated item options to be searchable later
+        for (let i = 0; i < this.returnResult.output.length; i++) {
+          const tempLength = this.returnResult.output[i].option_list.length;
+          for (let j = 0; j < tempLength; j++) {
+            this.itemOptionList.push(this.returnResult.output[i].option_list[j])
+          }
+        }
         if (this.optionListForm.valid) {
           // check first initialized form if its valid, we allow cart button to be pressed
           this.footerAddToCartButton = true;
@@ -66,6 +79,9 @@ export class ItemDetailPage {
       } else {
         this.footerAddToCartButton = true;
       }
+
+
+
       // if (this.hasOptions) {
       // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
 
@@ -82,7 +98,7 @@ export class ItemDetailPage {
       if (data[i].option_type == 'checkbox') {
         for (let j = 0; j < data[i].option_list.length; j++) {
           // passes current option list item , general option data and option list item index
-          arr.push(this.buildOptionCheckbox(data[i].option_list[j], data[i], j)); 
+          arr.push(this.buildOptionCheckbox(data[i].option_list[j], data[i]));
         }
       } else {
         arr.push(this.buildOptionSelect(data[i]));
@@ -93,7 +109,7 @@ export class ItemDetailPage {
     })
   }
 
-  buildOptionCheckbox(data, generalData, index) {
+  buildOptionCheckbox(data, generalData) {
     // looping for checkbox options under general table -> list option table coming from data base
     if (generalData.required) {
       return this.fb.group({
@@ -138,7 +154,6 @@ export class ItemDetailPage {
         this.userDevice = 'ios';
       } else if (val == 'Android') {
         this.userDevice = 'android';
-        alert(val)
       } else {
         this.userDevice = 'other';
       }
@@ -146,20 +161,42 @@ export class ItemDetailPage {
 
   }
 
-  checkBoxEvent() {
+  checkBoxEvent($event) {
     if (this.optionListForm.valid) {
       // update add to cart button status
       this.footerAddToCartButton = true;
     }
 
-    // TODO: change price of item when options are selected
+    this.optionListForm.valueChanges.subscribe(val => {
+      if (this.userDevice == 'ios') {
+        this.iOSTaptic.impact({ style: 'medium' });
+        this.iOSTaptic.selection();
+      } else if (this.userDevice == 'android') {
+        // haptic feedback for android.......
+      }
 
-    if (this.userDevice == 'ios') {
-      this.iOSTaptic.impact({ style: 'medium' });
-      this.iOSTaptic.selection();
-    } else if (this.userDevice == 'android') {
-      // haptic feedback for android.......
-    }
+      this.itemPriceGlobal = Number(this.item.price);
+      this.selectedItemOptionList = [];
+      const optionSelected = this.optionListForm.value.optionSelect;
+      for (let i = 0; i < optionSelected.length; i++) {
+        if (optionSelected[i].type == 'select' && optionSelected[i].isSelected != '') {
+          for (let j = 0; j < optionSelected[i].isSelected.length; j++) {
+            this.selectedItemOptionList.push(optionSelected[i].isSelected[j]);
+          }
+        } else if (optionSelected[i].type == 'checkbox' && optionSelected[i].isSelected == true) {
+          this.selectedItemOptionList.push(optionSelected[i].tag_id);
+        }
+      }
+
+      for (let i = 0; i < this.selectedItemOptionList.length; i++) {
+        for (let j = 0; j < this.itemOptionList.length; j++) {
+          if (this.itemOptionList[j]['id'] == this.selectedItemOptionList[i]) {
+            this.itemPriceGlobal += Number(this.itemOptionList[j].option_price);
+          }
+        }
+      }
+    })
+
   }
 
   // groupBy(list, keyGetter) {
@@ -190,42 +227,50 @@ export class ItemDetailPage {
   }
 
   addToCart() {
+    this.loadingWait = true;
+    this.footerAddToCartButton = false;
     const optionArray = [];
     if (this.hasOptions) {
-      for (let i= 0; i < this.optionListForm.value.optionSelect.length; i++) {
+      for (let i = 0; i < this.optionListForm.value.optionSelect.length; i++) {
         if (this.optionListForm.value.optionSelect[i]['isSelected'] != '' && this.optionListForm.value.optionSelect[i]['type'] == 'select') {
           const selectArrayLength = this.optionListForm.value.optionSelect[i]['isSelected'].length;
           if (selectArrayLength > 0) {
             for (let j = 0; j < selectArrayLength; j++) {
-              optionArray.push({
-                itemOptionID: this.optionListForm.value.optionSelect[i]['isSelected'][j]
-              });
+              optionArray.push(
+                this.optionListForm.value.optionSelect[i]['isSelected'][j]
+              );
             }
           } else {
-            optionArray.push({
-              itemOptionID: this.optionListForm.value.optionSelect[i]['isSelected']
-            });
+            optionArray.push(
+              this.optionListForm.value.optionSelect[i]['isSelected']
+            );
           }
         } else if (this.optionListForm.value.optionSelect[i]['isSelected'] == true && this.optionListForm.value.optionSelect[i]['type'] == 'checkbox') {
-          optionArray.push({
-            itemOptionID: this.optionListForm.value.optionSelect[i]['tag_id']
-          });
+          optionArray.push(
+            this.optionListForm.value.optionSelect[i]['tag_id']
+          );
         }
-        
+
       }
     }
 
     const addCartItem = {
       itemID: this.item.id,
-      itemPrice: this.item.price,
+      itemPrice: this.itemPriceGlobal,
       itemName: this.item.product_name,
       itemImage: this.item.product_image,
       optionItemID: optionArray
     }
 
-    // TODO: push thios 
+    // TODO: push addCartItem variable to cartService and subscribe to it from Tabs page 
 
-    console.log(addCartItem)
+    // console.log(addCartItem)
+    setTimeout(() => {
+      this.loadingWait = false;
+      this.events.publish('cartItem:added', addCartItem);
+      this.navCtrl.pop();
+      
+    }, 899);
   }
 
   close() {

@@ -121,7 +121,7 @@
     <allow-navigation href="http://169.254.9.112:8100" />
     <allow-navigation href="http://169.254.94.235:8100" />
     <allow-navigation href="http://169.254.215.253:8100" />
+    <allow-navigation href="http://169.254.147.156:8100" />
     <engine name="android" spec="7.1.0" />
     <engine name="ios" spec="^4.5.4" />
-    <allow-navigation href="http://169.254.147.156:8100" />
 </widget>
