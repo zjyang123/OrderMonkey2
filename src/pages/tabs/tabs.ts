@@ -35,11 +35,7 @@ export class TabsPage {
 
       events.subscribe('cartItem:added', (addCartItem) => {
         this.itemCartNumber++;
-        // user and time are the same arguments passed in `events.publish(user, time)`
-        console.log(addCartItem);
-
-
-        
+        console.log(addCartItem)
       });
 
       this.menuCtrl.enable(true, 'welcomeMenu'); // Enables WelcomePage dedicated menu

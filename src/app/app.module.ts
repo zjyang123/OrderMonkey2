@@ -25,6 +25,7 @@ import { UserCommunication } from './service/usercom.service';
 import { MenuControllerService } from './service/menu-controller.service';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { OrderModule } from 'ngx-order-pipe';
+import { AddToCartService } from './service/cart.service';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -38,12 +39,12 @@ export function provideSettings(storage: Storage) {
    * You can add new settings options at any time. Once the settings are saved,
    * these values will not overwrite the saved values (this can be done manually if desired).
    */
-  return new Settings(storage, {
-    option1: true,
-    option2: 'Ionitron J. Framework',
-    option3: '3',
-    option4: 'Hello'
-  });
+  // return new Settings(storage, {
+  //   option1: true,
+  //   option2: 'Ionitron J. Framework',
+  //   option3: '3',
+  //   option4: 'Hello'
+  // });
 }
 
 @NgModule({
@@ -96,6 +97,7 @@ export function provideSettings(storage: Storage) {
     Geolocation,
     NotificationBarService,
     DeviceService,
+    AddToCartService,
     Facebook
   ]
 })

@@ -7,6 +7,7 @@ import { TapticEngine } from '@ionic-native/taptic-engine';
 import { MenuControllerService } from '../../app/service/menu-controller.service';
 import { OptionsNode } from '../../models/menuOptions';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AddToCartService } from '../../app/service/cart.service';
 
 @IonicPage()
 @Component({
@@ -42,8 +43,9 @@ export class ItemDetailPage {
     public navCtrl: NavController,
     navParams: NavParams,
     public deviceService: DeviceService,
-    private iOSTaptic: TapticEngine,
     public menuController: MenuControllerService,
+    public addToCartService: AddToCartService,
+    private iOSTaptic: TapticEngine,
     private orderPipe: OrderPipe,
     public ref: ChangeDetectorRef,
     public fb: FormBuilder,
@@ -76,11 +78,10 @@ export class ItemDetailPage {
           // check first initialized form if its valid, we allow cart button to be pressed
           this.footerAddToCartButton = true;
         }
+        this.checkBoxEvent();
       } else {
         this.footerAddToCartButton = true;
       }
-
-
 
       // if (this.hasOptions) {
       // this.itemOptionGeneralGrouped = this.groupBy(this.itemOptionGeneral, key => key.option_group_name);
@@ -161,7 +162,7 @@ export class ItemDetailPage {
 
   }
 
-  checkBoxEvent($event) {
+  checkBoxEvent() {
     if (this.optionListForm.valid) {
       // update add to cart button status
       this.footerAddToCartButton = true;
@@ -177,7 +178,7 @@ export class ItemDetailPage {
 
       this.itemPriceGlobal = Number(this.item.price);
       this.selectedItemOptionList = [];
-      const optionSelected = this.optionListForm.value.optionSelect;
+      const optionSelected = val.optionSelect;
       for (let i = 0; i < optionSelected.length; i++) {
         if (optionSelected[i].type == 'select' && optionSelected[i].isSelected != '') {
           for (let j = 0; j < optionSelected[i].isSelected.length; j++) {
@@ -262,15 +263,19 @@ export class ItemDetailPage {
       optionItemID: optionArray
     }
 
+    this.addToCartService.addToCart(addCartItem).then((val) => {
+      console.log(val)
+
+        this.loadingWait = false;
+        this.events.publish('cartItem:added', addCartItem);
+        this.navCtrl.pop();
+        
+    }, (err) => {
+      // do something if error happens
+    });
     // TODO: push addCartItem variable to cartService and subscribe to it from Tabs page 
 
     // console.log(addCartItem)
-    setTimeout(() => {
-      this.loadingWait = false;
-      this.events.publish('cartItem:added', addCartItem);
-      this.navCtrl.pop();
-      
-    }, 899);
   }
 
   close() {
