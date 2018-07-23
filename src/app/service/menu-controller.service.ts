@@ -5,7 +5,7 @@ import { Headers, Http } from '@angular/http';
 
 @Injectable()
 export class MenuControllerService {
-    public menuCatagory = 'http://ordermonkey.healthsupplementsplus.com/userapp/general/';
+    public menuCatagory = 'https://ordermonkey.app/service.ordermonkey.app/userapp/general/';
     constructor(
         public http: Http
     ) { }

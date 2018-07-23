@@ -5,7 +5,7 @@ import { Headers, Http } from '@angular/http';
 
 @Injectable()
 export class UserCommunication {
-    public URL = 'http://ordermonkey.healthsupplementsplus.com/userapp/general/';
+    public URL = 'https://ordermonkey.app/service.ordermonkey.app/userapp/general/';
     constructor (
         public http: Http
     ) {}

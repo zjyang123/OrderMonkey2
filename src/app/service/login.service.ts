@@ -5,10 +5,10 @@ import { Headers, Http } from '@angular/http';
 
 @Injectable()
 export class LoginService {
-    public loginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/';
-    public signupUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/signupNative';
-    public facebookLoginUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/facebookLogin';
-    public authTokenCheckUrl = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/authTokenCheckNative';
+    public loginUrl = 'https://ordermonkey.app/service.ordermonkey.app/userapp/login/';
+    public signupUrl = 'https://ordermonkey.app/service.ordermonkey.app/userapp/login/signupNative';
+    public facebookLoginUrl = 'https://ordermonkey.app/service.ordermonkey.app/userapp/login/facebookLogin';
+    public authTokenCheckUrl = 'https://ordermonkey.app/service.ordermonkey.app/userapp/login/authTokenCheckNative';
     private appSecret = '82099123889ef2f8b5c556aaff9070f5';
     private appID = '215438025885995';
     constructor (
@@ -41,7 +41,10 @@ export class LoginService {
                 });
 
         })
+
     }
+
+
 
     facebookLoginPost(fb_data) {
         return new Promise((resolve, reject) => {

@@ -264,8 +264,6 @@ export class ItemDetailPage {
     }
 
     this.addToCartService.addToCart(addCartItem).then((val) => {
-      console.log(val)
-
         this.loadingWait = false;
         this.events.publish('cartItem:added', addCartItem);
         this.navCtrl.pop();

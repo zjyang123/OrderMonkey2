@@ -35,10 +35,14 @@ export class TabsPage {
 
       events.subscribe('cartItem:added', (addCartItem) => {
         this.itemCartNumber++;
-        console.log(addCartItem)
+      });
+
+      events.subscribe('removeIndex:subtract', (val) => {
+        this.itemCartNumber--;
       });
 
       this.menuCtrl.enable(true, 'welcomeMenu'); // Enables WelcomePage dedicated menu
     });
   }
+
 }

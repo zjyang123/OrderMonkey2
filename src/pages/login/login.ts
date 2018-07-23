@@ -76,6 +76,7 @@ export class LoginPage {
       this.nativeUserData.token = this.token;
       this.nativeUserData.user_id = this.userID;
       if (this.userData != false) {
+        console.log(result)
         this.storage.set('accountType', 'native');
         this.storage.set('native_data', this.nativeUserData);
         this.navCtrl.setRoot('WelcomePage', {}, { animate: true, direction: 'forward' });
