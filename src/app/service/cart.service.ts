@@ -22,10 +22,10 @@ export class AddToCartService {
         })
     }
 
-    getCartInfo() {
+    getCartInfo(credentials) {
         return new Promise((resolve, reject) => {
             const header = new Headers();
-            this.http.post(this.URL + 'getCartInfo', JSON.stringify('itemInfo'), { headers: header })
+            this.http.post(this.URL + 'getCartInfo', JSON.stringify(credentials), { headers: header })
                 .subscribe(res => {
                     resolve(res.json());
                 }, (err) => {

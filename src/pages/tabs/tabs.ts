@@ -4,6 +4,8 @@ import { IonicPage, MenuController, NavController, Events } from 'ionic-angular'
 
 import { Tab1Root, Tab2Root, Tab3Root } from '../pages';
 import { SuperTabsController } from 'ionic2-super-tabs';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -26,7 +28,9 @@ export class TabsPage {
     public translateService: TranslateService, 
     public menuCtrl: MenuController, 
     public events: Events,
-    public superTabsCtrl: SuperTabsController
+    public superTabsCtrl: SuperTabsController,
+    public uniqueDeviceID: UniqueDeviceID,
+    private storage: Storage
   ) {
     translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE']).subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];
@@ -43,6 +47,12 @@ export class TabsPage {
 
       this.menuCtrl.enable(true, 'welcomeMenu'); // Enables WelcomePage dedicated menu
     });
+
+    // grabs the cellphone unique ID and sets it in Ionic Storage
+    this.uniqueDeviceID.get().then((uuid: any) => {
+        this.storage.set('unique_device_id', uuid);
+      }).catch((error: any) => console.log(error));
+
   }
 
 }

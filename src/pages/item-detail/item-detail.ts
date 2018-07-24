@@ -8,6 +8,7 @@ import { MenuControllerService } from '../../app/service/menu-controller.service
 import { OptionsNode } from '../../models/menuOptions';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AddToCartService } from '../../app/service/cart.service';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -31,6 +32,8 @@ export class ItemDetailPage {
   loadingWait = false;
   itemOptionList = []; // THE GRAND MAMA OPTION LIST TO SEARCH FROM
   selectedItemOptionList = [];
+  addCartItem;
+  userID;
 
   //*********** Variables for fading header **************//
   showToolbar: boolean = false;
@@ -49,7 +52,8 @@ export class ItemDetailPage {
     private orderPipe: OrderPipe,
     public ref: ChangeDetectorRef,
     public fb: FormBuilder,
-    public events: Events
+    public events: Events,
+    private storage: Storage
   ) {
     this.item = navParams.get('itemData');
   }
@@ -254,8 +258,11 @@ export class ItemDetailPage {
 
       }
     }
-
-    const addCartItem = {
+    this.addCartItem = {
+      clientID: this.item.client_id,
+      isLoggedin: false,
+      userID: null,
+      deviceID: null,
       itemID: this.item.id,
       itemPrice: this.itemPriceGlobal,
       itemName: this.item.product_name,
@@ -263,16 +270,51 @@ export class ItemDetailPage {
       optionItemID: optionArray
     }
 
-    this.addToCartService.addToCart(addCartItem).then((val) => {
-        this.loadingWait = false;
-        this.events.publish('cartItem:added', addCartItem);
-        this.navCtrl.pop();
-        
-    }, (err) => {
-      // do something if error happens
-    });
-    // TODO: push addCartItem variable to cartService and subscribe to it from Tabs page 
+    this.storage.get('unique_device_id').then((uuid) => {
+      this.storage.get('accountType').then((accountType) => {
+        if (accountType == null) { //if user is not loggedin
+          this.addCartItem.deviceID = uuid;
+          this.addToCartService.addToCart(this.addCartItem).then((val) => {
+            this.loadingWait = false;
+            this.events.publish('cartItem:added', this.addCartItem);
+            this.navCtrl.pop();
+  
+          }, (err) => {
+            // do something if error happens
+          });
+        } else if (accountType == "facebook") {
+          this.storage.get('fb_data').then((fb_data) => {
+            this.addCartItem.userID = fb_data.user_id;
+            this.addCartItem.deviceID = uuid;
+            this.addCartItem.isLoggedin = true;
 
+            this.addToCartService.addToCart(this.addCartItem).then((val) => {
+              this.loadingWait = false;
+              this.events.publish('cartItem:added', this.addCartItem);
+              this.navCtrl.pop();
+    
+            }, (err) => {
+              // do something if error happens
+            });
+          });
+        } else if (accountType == "native") {
+          this.storage.get('native_data').then((native_data) => {
+            this.addCartItem.userID = native_data.user_id
+            this.addCartItem.deviceID = uuid;
+            this.addCartItem.isLoggedin = true;
+            this.addToCartService.addToCart(this.addCartItem).then((val) => {
+              this.loadingWait = false;
+              this.events.publish('cartItem:added', this.addCartItem);
+              this.navCtrl.pop();
+            }, (err) => {
+              // do something if error happens
+            });
+          });
+        }
+      });
+      // this.returnResult = val;
+      // this.cartItemArray = this.returnResult.return_result;
+    });
     // console.log(addCartItem)
   }
 

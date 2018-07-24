@@ -42,7 +42,6 @@ export class TableDetailPage {
     });
     loading.present();
     this.menuService.getSubMenu(this.getMenuDetail).then((val) => {
-      console.log(val)
       this.subMenuResult = val;
       this.menuNotEmpty = this.subMenuResult.subMenuSet;
       if (this.menuNotEmpty) {

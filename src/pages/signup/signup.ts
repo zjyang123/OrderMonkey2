@@ -101,7 +101,7 @@ export class SignupPage {
   }
 
   emailCheckDatabase(control: FormControl): Promise<any> | Observable<any> {
-    const url = 'http://ordermonkey.healthsupplementsplus.com/userapp/login/emailCheck';
+    const url = 'https://ordermonkey.app/service.ordermonkey.app/userapp/login/emailCheck';
     this.emailCheckData.email = control.value;
     const promise = new Promise<any>((resolve, reject) => {
       const header = new Headers();

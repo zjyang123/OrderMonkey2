@@ -15,6 +15,7 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { Api, Settings, User } from '../providers/providers';
 import { MyApp } from './app.component';
@@ -98,7 +99,8 @@ export function provideSettings(storage: Storage) {
     NotificationBarService,
     DeviceService,
     AddToCartService,
-    Facebook
+    Facebook,
+    UniqueDeviceID
   ]
 })
 export class AppModule { }
