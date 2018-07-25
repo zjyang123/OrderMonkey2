@@ -9,6 +9,7 @@ import { OptionsNode } from '../../models/menuOptions';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AddToCartService } from '../../app/service/cart.service';
 import { Storage } from '@ionic/storage';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 @IonicPage()
 @Component({
@@ -53,7 +54,8 @@ export class ItemDetailPage {
     public ref: ChangeDetectorRef,
     public fb: FormBuilder,
     public events: Events,
-    private storage: Storage
+    private storage: Storage,
+    public uniqueDeviceID: UniqueDeviceID
   ) {
     this.item = navParams.get('itemData');
   }
@@ -270,7 +272,7 @@ export class ItemDetailPage {
       optionItemID: optionArray
     }
 
-    this.storage.get('unique_device_id').then((uuid) => {
+    this.uniqueDeviceID.get().then((uuid: any) => {
       this.storage.get('accountType').then((accountType) => {
         if (accountType == null) { //if user is not loggedin
           this.addCartItem.deviceID = uuid;
@@ -287,7 +289,7 @@ export class ItemDetailPage {
             this.addCartItem.userID = fb_data.user_id;
             this.addCartItem.deviceID = uuid;
             this.addCartItem.isLoggedin = true;
-
+  
             this.addToCartService.addToCart(this.addCartItem).then((val) => {
               this.loadingWait = false;
               this.events.publish('cartItem:added', this.addCartItem);
@@ -312,10 +314,8 @@ export class ItemDetailPage {
           });
         }
       });
-      // this.returnResult = val;
-      // this.cartItemArray = this.returnResult.return_result;
-    });
-    // console.log(addCartItem)
+    }).catch((error: any) => console.log(error));
+
   }
 
   close() {

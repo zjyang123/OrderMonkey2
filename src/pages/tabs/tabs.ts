@@ -24,9 +24,9 @@ export class TabsPage {
   itemCartNumber = 0;
 
   constructor(
-    public navCtrl: NavController, 
-    public translateService: TranslateService, 
-    public menuCtrl: MenuController, 
+    public navCtrl: NavController,
+    public translateService: TranslateService,
+    public menuCtrl: MenuController,
     public events: Events,
     public superTabsCtrl: SuperTabsController,
     public uniqueDeviceID: UniqueDeviceID,
@@ -46,13 +46,16 @@ export class TabsPage {
       });
 
       this.menuCtrl.enable(true, 'welcomeMenu'); // Enables WelcomePage dedicated menu
-      // grabs the cellphone unique ID and sets it in Ionic Storage
-      this.uniqueDeviceID.get().then((uuid: any) => {
-          this.storage.set('unique_device_id', uuid);
-        }).catch((error: any) => console.log(error));
+
+
     });
+  }
 
-
+  ngOnInit() {
+    // grabs the cellphone unique ID and sets it in Ionic Storage
+    this.uniqueDeviceID.get().then((uuid: any) => {
+      this.storage.set('unique_device_id', uuid);
+    }).catch((error: any) => console.log(error));
   }
 
 }
