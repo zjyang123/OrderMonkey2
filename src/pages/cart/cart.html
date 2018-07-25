@@ -57,8 +57,8 @@
       </ion-thumbnail>
       <h2>{{cartItem.itemName}}</h2>
 
-      <button ion-button clear item-end color="orange">
-        <ion-icon name="close" style="zoom:1.8;"></ion-icon>
+      <button ion-button clear item-end color="orange" (click)="delete(i)">
+        <ion-icon name="trash" style="zoom:1.8;"></ion-icon>
       </button>
       <ion-grid>
         <ion-row>

@@ -34,4 +34,16 @@ export class AddToCartService {
         })
     }
 
+    deleteFromCart(credentials) {
+        return new Promise((resolve, reject) => {
+            const header = new Headers();
+            this.http.post(this.URL + 'deleteFromCart', JSON.stringify(credentials), { headers: header })
+                .subscribe(res => {
+                    resolve(res.json());
+                }, (err) => {
+                    reject(err);
+                });
+        })
+    }
+
 }

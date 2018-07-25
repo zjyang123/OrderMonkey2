@@ -41,6 +41,10 @@ export class TabsPage {
         this.itemCartNumber++;
       });
 
+      events.subscribe('initialCartCount', (cartItemCount) => {
+        this.itemCartNumber = cartItemCount;
+      });
+
       events.subscribe('removeIndex:subtract', (val) => {
         this.itemCartNumber--;
       });
