@@ -21,8 +21,9 @@ import { NotificationBarService } from '../../app/service/notificationbar.servic
 export class CartPage {
   public cartOrderCredentialsInitialize: CartOrderUser
   public cartItemArray = [];
-  returnResult;
-  deleteResult;
+  public returnResult;
+  public deleteResult;
+  public isCartEmpty: Boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -35,7 +36,13 @@ export class CartPage {
   ) {
     this.cartInitialize();
     events.subscribe('cartItem:added', (addCartItem) => {
-      this.cartItemArray.push(addCartItem);
+      this.isCartEmpty = false;
+      try {
+        this.cartItemArray.push(addCartItem);
+      } catch (err) {
+        this.cartItemArray = [];
+        this.cartItemArray.push(addCartItem);
+      }
     });
   }
 
@@ -56,18 +63,39 @@ export class CartPage {
         if (accountType == null) {
           this.cartService.getCartInfo(this.cartOrderCredentialsInitialize).then((result) => {
             this.returnResult = result;
+            if ((this.returnResult.hasCart && this.returnResult.output == null) || !this.returnResult.hasCart) {
+              this.isCartEmpty = true;
+            } else {
+              this.isCartEmpty = false;
+            }
+            console.log(this.returnResult)
             this.cartItemArray = this.returnResult.output;
-            const cartItemlength = this.cartItemArray.length;
-            this.events.publish('initialCartCount', cartItemlength);
+            try {
+              const cartItemlength = this.cartItemArray.length;
+              this.events.publish('initialCartCount', cartItemlength);
+            } catch (err) {
+              const cartItemlength = 0;
+              this.events.publish('initialCartCount', cartItemlength);
+            }
           });
         } else if (accountType == 'native') {
           this.storage.get('native_data').then((nativeData) => {
             this.cartOrderCredentialsInitialize.userID = nativeData.user_id;            
             this.cartService.getCartInfo(this.cartOrderCredentialsInitialize).then((result) => {
               this.returnResult = result;
+              if ((this.returnResult.hasCart && this.returnResult.output == null) || !this.returnResult.hasCart) {
+                this.isCartEmpty = true;
+              } else {
+                this.isCartEmpty = false;
+              }
               this.cartItemArray = this.returnResult.output;
-              const cartItemlength = this.cartItemArray.length;
-              this.events.publish('initialCartCount', cartItemlength);
+              try {
+                const cartItemlength = this.cartItemArray.length;
+                this.events.publish('initialCartCount', cartItemlength);
+              } catch (err) {
+                const cartItemlength = 0;
+                this.events.publish('initialCartCount', cartItemlength);
+              }
             });
           });
         } else if (accountType == 'facebook') {
@@ -75,9 +103,19 @@ export class CartPage {
             this.cartOrderCredentialsInitialize.userID = fbData.user_id;
             this.cartService.getCartInfo(this.cartOrderCredentialsInitialize).then((result) => {
               this.returnResult = result;
+              if ((this.returnResult.hasCart && this.returnResult.output == null) || !this.returnResult.hasCart) {
+                this.isCartEmpty = true;
+              } else {
+                this.isCartEmpty = false;
+              }
               this.cartItemArray = this.returnResult.output;
-              const cartItemlength = this.cartItemArray.length;
-              this.events.publish('initialCartCount', cartItemlength);
+              try {
+                const cartItemlength = this.cartItemArray.length;
+                this.events.publish('initialCartCount', cartItemlength);
+              } catch (err) {
+                const cartItemlength = 0;
+                this.events.publish('initialCartCount', cartItemlength);
+              }
             });
           });
         }
@@ -90,18 +128,29 @@ export class CartPage {
   }
 
   delete(itemToDelete) {
+    const itemName = this.cartItemArray[itemToDelete].itemName;
     this.cartService.deleteFromCart(this.cartItemArray[itemToDelete]).then((val) => {
       this.deleteResult = val;
+      console.log(val)
       if (this.deleteResult.isDeleted) {
         // make sure all string english text get put in translate function for spanish later on
-        const message = this.cartItemArray[itemToDelete].itemName + ' has been deleted from your cart!';
+        const message = itemName + ' has been deleted from your cart!';
         this.notificationBar.notificationbarTask(message, 2000, 'bottom');
       } else {
-
+        // make sure all string english text get put in translate function for spanish later on
+        const message = 'Oops, something went wrong!';
+        this.notificationBar.notificationbarTask(message, 2000, 'bottom');
       }
     });
+
     this.cartItemArray.splice(itemToDelete, 1);
     this.events.publish('removeIndex:subtract', 1);
+
+    if (this.cartItemArray.length == 0) {
+      this.isCartEmpty = true;
+    } else {
+      this.isCartEmpty = false;
+    }
   }
 
 }
